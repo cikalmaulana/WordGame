@@ -32,10 +32,10 @@ class LandingPageActivity: AppCompatActivity() {
             finish()
         }
         val airfool = Typeface.createFromAsset(assets, "font/Airfools.otf")
-        val montserratBold = Typeface.createFromAsset(assets, "font/MontserratBold.ttf")
+        val montserrat= Typeface.createFromAsset(assets, "font/Montserrat.ttf")
         bacabacaTextView1.setTypeface(airfool)
         bacabacaTextView2.setTypeface(airfool)
-        quotesTextView.setTypeface(montserratBold)
+        quotesTextView.setTypeface(montserrat)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

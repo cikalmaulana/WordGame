@@ -27,7 +27,7 @@
                     android:id="@+id/helloTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Good Afternoon,"
+                    android:text="Selamat Sore,"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:layout_marginLeft="20dp"/>
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="Your High Score:"
+                android:text="Skor Tertinggimu:"
                 android:textSize="15dp"
                 android:layout_gravity="center"
                 android:textStyle="bold"
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="1.800pts"
+                android:text="1.800poin"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text=" | "
+                android:text="|"
                 android:textSize="20dp"
                 android:layout_gravity="center"
                 android:textStyle="bold"
@@ -97,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="Rank:"
+                android:text="Peringkat:"
                 android:textSize="15dp"
                 android:layout_gravity="center"
                 android:textStyle="bold"
@@ -143,12 +143,13 @@
                     <TableRow>
                         <TextView
                             android:layout_column="1"
-                            android:text="Rajasa"
+                            android:text="1. RajasaCikal"
                             android:padding="10dp"
                             android:textColor="@color/white"
-                            android:textSize="20dp"/>
+                            android:textSize="20dp"
+                            android:layout_width="100dp"/>
                         <TextView
-                            android:layout_column="1"
+                            android:layout_column="2"
                             android:text="99.999 pts"
                             android:padding="10dp"
                             android:textColor="@color/white"
@@ -158,12 +159,13 @@
                     <TableRow>
                         <TextView
                             android:layout_column="1"
-                            android:text="Cikal"
+                            android:text="2. SteveRogers"
                             android:padding="10dp"
                             android:textColor="@color/white"
-                            android:textSize="20dp"/>
+                            android:textSize="20dp"
+                            android:layout_width="100dp"/>
                         <TextView
-                            android:layout_column="1"
+                            android:layout_column="2"
                             android:text="51.200 pts"
                             android:padding="10dp"
                             android:textColor="@color/white"
@@ -173,10 +175,11 @@
                     <TableRow>
                         <TextView
                             android:layout_column="1"
-                            android:text="Maulana"
+                            android:text="3. Noobmaster69"
                             android:padding="10dp"
                             android:textColor="@color/white"
-                            android:textSize="20dp"/>
+                            android:textSize="20dp"
+                            android:layout_width="100dp"/>
                         <TextView
                             android:layout_column="1"
                             android:text="10.100 pts"
@@ -188,10 +191,11 @@
                     <TableRow>
                         <TextView
                             android:layout_column="1"
-                            android:text="Solihin"
+                            android:text="4. PaperRex"
                             android:padding="10dp"
                             android:textColor="@color/white"
-                            android:textSize="20dp"/>
+                            android:textSize="20dp"
+                            android:layout_width="100dp"/>
                         <TextView
                             android:layout_column="1"
                             android:text="9.249 pts"
@@ -203,10 +207,11 @@
                     <TableRow>
                         <TextView
                             android:layout_column="1"
-                            android:text="Bruce"
+                            android:text="5. BruceBanner"
                             android:padding="10dp"
                             android:textColor="@color/white"
-                            android:textSize="20dp"/>
+                            android:textSize="20dp"
+                            android:layout_width="100dp"/>
                         <TextView
                             android:layout_column="1"
                             android:text="9.100 pts"
@@ -218,7 +223,7 @@
                     <TableRow>
                         <TextView
                             android:layout_column="1"
-                            android:text="Banner"
+                            android:text="6. DonaldTrump"
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -233,7 +238,7 @@
                     <TableRow>
                         <TextView
                             android:layout_column="1"
-                            android:text="Nana"
+                            android:text="7. Bejo"
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -248,7 +253,7 @@
                     <TableRow>
                         <TextView
                             android:layout_column="1"
-                            android:text="Suparman"
+                            android:text="8. SaepulElSavador"
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -263,7 +268,7 @@
                     <TableRow>
                         <TextView
                             android:layout_column="1"
-                            android:text="Supardi"
+                            android:text="9. ClintBarton"
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -278,7 +283,7 @@
                     <TableRow>
                         <TextView
                             android:layout_column="1"
-                            android:text="Sumenep"
+                            android:text="10. AsepProGaming"
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -308,7 +313,7 @@
                 android:layout_width="250dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
-                android:text="Start"
+                android:text="Mulai Bermain!"
                 android:textSize="20sp"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/custom_button"

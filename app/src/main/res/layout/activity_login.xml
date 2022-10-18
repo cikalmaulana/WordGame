@@ -6,12 +6,14 @@
     android:layout_gravity="center_vertical">
 
     <TextView
+        android:id="@+id/loginTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LOGIN!"
         android:layout_gravity="center_horizontal"
-        android:textSize="40dp"
-        android:layout_marginBottom="20dp"/>
+        android:textSize="60dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/blue"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,7 +60,7 @@
         android:layout_width="320dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
-        android:text="Login"
+        android:text="Masuk"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:background="@drawable/custom_button"
@@ -80,7 +82,7 @@
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal"
-        android:text="Register"
+        android:text="Daftar"
         android:background="@drawable/custom_button"
         android:textAllCaps="false"/>
 
