@@ -1,19 +1,27 @@
 package com.example.wordgames
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
-import android.os.Handler
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+
 
 class LandingPageActivity: AppCompatActivity() {
 
     private var pressedTime: Long =0
     lateinit var loginButton: Button
+    lateinit var bacabacaTextView1: TextView
+    lateinit var bacabacaTextView2: TextView
+    lateinit var quotesTextView: TextView
 
     private fun initComponent(){
         loginButton = findViewById(R.id.loginButton)
+        bacabacaTextView1 = findViewById(R.id.bacabacaTextView1)
+        bacabacaTextView2 = findViewById(R.id.bacabacaTextView2)
+        quotesTextView = findViewById(R.id.quotesTextView)
     }
 
     private fun initListener(){
@@ -23,6 +31,11 @@ class LandingPageActivity: AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        val airfool = Typeface.createFromAsset(assets, "font/Airfools.otf")
+        val montserratBold = Typeface.createFromAsset(assets, "font/MontserratBold.ttf")
+        bacabacaTextView1.setTypeface(airfool)
+        bacabacaTextView2.setTypeface(airfool)
+        quotesTextView.setTypeface(montserratBold)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

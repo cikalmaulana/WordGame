@@ -10,4 +10,6 @@
     <color name="red">#eb4034</color>
     <color name="primary">#FFB200</color>
     <color name="background">#F9F9F9</color>
+    <color name="secondary">#B1AFFF</color>
+    <color name="blue">#342193</color>
 </resources>

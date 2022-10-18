@@ -16,6 +16,6 @@ class SplashScreenActivity: AppCompatActivity() {
             val intent = Intent(this@SplashScreenActivity, LandingPageActivity::class.java)
             startActivity(intent)
             finish()
-        },3000)
+        },1500)
     }
 }
