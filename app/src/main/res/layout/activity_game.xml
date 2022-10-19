@@ -80,6 +80,7 @@
             android:layout_alignParentEnd="true">
 
             <ImageView
+                android:id="@+id/enemyHeart6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -89,6 +90,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
             <ImageView
+                android:id="@+id/enemyHeart7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -98,6 +100,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
             <ImageView
+                android:id="@+id/enemyHeart8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -107,6 +110,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
             <ImageView
+                android:id="@+id/enemyHeart9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -116,6 +120,28 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
             <ImageView
+                android:id="@+id/enemyHeart10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:id="@+id/enemyHeart1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -125,6 +151,37 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
             <ImageView
+                android:id="@+id/enemyHeart2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:id="@+id/enemyHeart3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:id="@+id/enemyHeart4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:id="@+id/enemyHeart5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -139,6 +196,14 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/kataKataTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kata kata"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp"/>
+
+    <TextView
         android:id="@+id/countDownTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -146,19 +211,64 @@
         android:layout_gravity="center_horizontal"
         android:textSize="50dp"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tryAgainButton"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
+        android:background="@drawable/custom_button"
+        android:text="Mulai Ulang"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="invisible"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="350dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/dinoImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:src="@drawable/landingpagelogo"
+            android:maxWidth="100dp"
+            android:maxHeight="100dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="20dp"/>
+
+        <ImageView
+            android:id="@+id/enemyImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/landingpagelogo"
+            android:maxWidth="100dp"
+            android:maxHeight="100dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="20dp"/>
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="280dp">
 
         <EditText
             android:layout_width="260dp"
             android:layout_height="45dp"
-            android:hint=""
-            android:padding="20dp"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="20dp"
             android:background="@drawable/input_custom"
-            android:layout_alignParentBottom="true"/>
+            android:hint="Masukkan Jawaban"
+            android:padding="10dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/attackButton"
