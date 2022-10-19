@@ -1,10 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You"
+            android:textSize="30dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enemy"
+            android:textSize="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="1dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp">
+
+            <ImageView
+                android:id="@+id/playerHeart3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:id="@+id/playerHeart2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:id="@+id/playerHeart1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/heart"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <TextView
+        android:id="@+id/countDownTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GAME"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="10"
+        android:layout_gravity="center_horizontal"
+        android:textSize="50dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="350dp">
+
+        <EditText
+            android:layout_width="260dp"
+            android:layout_height="45dp"
+            android:hint=""
+            android:padding="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/input_custom"
+            android:layout_alignParentBottom="true"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/attackButton"
+            android:layout_width="80dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_button"
+            android:text="Kirim"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

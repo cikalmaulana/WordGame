@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initListener(){
         startButton.setOnClickListener {
-            val intent = Intent(this, GameActivity::class.java)
+            val intent = Intent(this, LevelActivity::class.java)
             // start your next activity
             startActivity(intent)
             finish()
