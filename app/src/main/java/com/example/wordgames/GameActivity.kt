@@ -2,11 +2,12 @@ package com.example.wordgames
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.view.animation.TranslateAnimation
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,8 +21,11 @@ class GameActivity: AppCompatActivity() {
     lateinit var countDownTextView: TextView
     lateinit var kataKataTextView: TextView
 
+    lateinit var inputEditText: EditText
+
     lateinit var attackButton: Button
     lateinit var tryAgainButton: Button
+    lateinit var nextGameButton:Button
 
     lateinit var playerHeart1: ImageView
     lateinit var playerHeart2: ImageView
@@ -43,8 +47,11 @@ class GameActivity: AppCompatActivity() {
 
     private var life: Int = 3
     private var isGameRun: Boolean = true
-    private var dead:Boolean = false
     private var attack: Boolean = false
+    private var wrongAnswer: Boolean = false
+    private var enemyHeart: Int = 1
+    private var i: Int = 11
+    private var time: Int = 11
 
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
@@ -53,7 +60,10 @@ class GameActivity: AppCompatActivity() {
         countDownTextView = findViewById(R.id.countDownTextView)
         kataKataTextView = findViewById(R.id.kataKataTextView)
 
+        inputEditText = findViewById(R.id.inputEditText)
+
         tryAgainButton = findViewById(R.id.tryAgainButton)
+        nextGameButton = findViewById(R.id.nextGameButton)
 
         dinoImageView = findViewById(R.id.dinoImageView)
         enemyImageView = findViewById(R.id.enemyImageView)
@@ -95,12 +105,72 @@ class GameActivity: AppCompatActivity() {
     }
 
     private fun initListener(){
+        inputEditText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+
+                val input: String = inputEditText.text.toString().lowercase().replace("\\s".toRegex(), "")
+                val kata: String = kataKataTextView.text.toString().lowercase().replace("\\s".toRegex(), "")
+                var benar = input == kata
+                Log.e("CEKKEBENARAN", kataKataTextView.text.toString().lowercase() + " dan " + inputEditText.text.toString().lowercase()+ " == "+ benar.toString())
+                if(input == kata) attack = true
+                else wrongAnswer = true
+                inputEditText.setText("")
+                return@OnKeyListener true
+            }
+            false
+        })
+
         attackButton.setOnClickListener {
-            attack = true
+            val input: String = inputEditText.text.toString().lowercase().replace("\\s".toRegex(), "")
+            val kata: String = kataKataTextView.text.toString().lowercase().replace("\\s".toRegex(), "")
+            var benar = input == kata
+            Log.e("CEKKEBENARAN", kataKataTextView.text.toString().lowercase() + " dan " + inputEditText.text.toString().lowercase()+ " == "+ benar.toString())
+            if(input == kata) attack = true
+            else wrongAnswer = true
+            inputEditText.setText("")
+        }
+
+        nextGameButton.setOnClickListener {
+            Log.e("NEXTLEVEL","Clicked!")
+            nextGameButton.visibility = View.INVISIBLE
+            kataKataTextView.visibility = View.VISIBLE
+            var playerHeart = 3
+            while(playerHeart>0){
+                openPlayerHeart(playerHeart)
+                playerHeart--
+            }
+
+            var enemyHeart = 10
+            while(enemyHeart>0){
+                openEnemyHeart(enemyHeart)
+                enemyHeart--
+            }
+
+            life = 3
+            isGameRun = true
+            time = 6
+            gameStart()
         }
 
         tryAgainButton.setOnClickListener{
+            Log.e("TRYAGAIN","Clicked!")
+            tryAgainButton.visibility = View.INVISIBLE
 
+            var playerHeart = 3
+            while(playerHeart>0){
+                openPlayerHeart(playerHeart)
+                playerHeart--
+            }
+
+            var enemyHeart = 10
+            while(enemyHeart>0){
+                openEnemyHeart(enemyHeart)
+                enemyHeart--
+            }
+
+            life = 3
+            isGameRun = true
+            gameStart()
         }
     }
 
@@ -115,16 +185,12 @@ class GameActivity: AppCompatActivity() {
         gameStart()
     }
 
-
-
     fun gameStart(){
-        var i = 10
-        var attacking = false
-        var enemyHeart = 10
-        var playerHeart = 3
+        Log.e( "GAMESTART", "Game Start!")
+        var playerHeart = 1
         val objRunnable = java.lang.Runnable {
             try {
-                while(life>0){
+                while(life>0 && isGameRun){
                     runOnUiThread{
                         kataKataTextView.setText("Kata Kata Life ke $life")
                     }
@@ -132,18 +198,18 @@ class GameActivity: AppCompatActivity() {
                         Log.e("WHILE", "While ke $i")
                         Log.e("ATTACK","Attack status $attack")
                         runOnUiThread {
-                            if(attack) countDownTextView.setText("Attack!")
-                            else countDownTextView.setText(i.toString())
+                            val str:Int = i-1
+                            if(attack && !wrongAnswer) countDownTextView.setText("Attack!")
+                            else if(wrongAnswer) countDownTextView.setText("Wrong Answer!!")
+                            else countDownTextView.setText(str.toString())
+                            wrongAnswer = false
                         }
                         sleep(1000)
                         i--
                     }
                     runOnUiThread {
-                        if(attack){
-//                            Cek jawaban disini
-                            countDownTextView.setText("Attack!")
-                            closeEnemyHeart(enemyHeart)
-                            enemyHeart--
+                        if(attack && i>0){
+
                             val animation = TranslateAnimation(
                                 0.0f, 300.0f,
                                 0.0f, 0.0f
@@ -151,15 +217,28 @@ class GameActivity: AppCompatActivity() {
                             animation.setDuration(1000)  // animation duration
                             animation.setRepeatCount(1)  // animation repeat count
                             animation.setRepeatMode(2)
-
                             dinoImageView.startAnimation(animation)
-                            Log.e("ATTACK","Attack status di luar while $attack")
 
+                            if(enemyHeart>=10){
+                                closeEnemyHeart(enemyHeart)
+                                kataKataTextView.visibility = View.INVISIBLE
+                                nextGameButton.visibility = View.VISIBLE
+                                countDownTextView.setText("You Win!")
+                                isGameRun = false
+                            }else{
+                                closeEnemyHeart(enemyHeart)
+                                countDownTextView.setText("Attack!")
+                            }
+
+
+                            Log.e("ATTACK","Attack status di luar while $attack")
+                            enemyHeart++
                         }
                         else {
-                            countDownTextView.setText("You have been hit!")
+                            life--
+                            countDownTextView.setText("OUCH!!")
                             closePlayerHeart(playerHeart)
-                            playerHeart--
+                            playerHeart++
                             val animation = TranslateAnimation(
                                 0.0f, -300.0f,
                                 0.0f, 0.0f
@@ -169,15 +248,21 @@ class GameActivity: AppCompatActivity() {
                             animation.setRepeatMode(2)
 
                             enemyImageView.startAnimation(animation)
-
                         }
                     }
-                    sleep(1000)
+                    sleep(2000)
                     attack = false
                     Log.e("I", "I Sekarang $i")
-                    if(i==0) life--
-                    if(life==0) countDownTextView.setText("Game Over!")
-                    i = 10
+
+                    if(life<=0) {
+//                        Tampilin game over
+                        runOnUiThread {
+                            tryAgainButton.visibility = View.VISIBLE
+                            countDownTextView.setText("Die!")
+                        }
+                        sleep(1000)
+                    }
+                    i = time
                     Log.e("LIFE","Life sekarang $life")
 
                 }
@@ -190,12 +275,20 @@ class GameActivity: AppCompatActivity() {
         objBgThread.start()
     }
 
+    fun openEnemyHeart(heart: Int){
+        enemyHearts.get("enemyHeart$heart")?.visibility = View.VISIBLE
+    }
+
+    fun openPlayerHeart(heart: Int){
+        playerHearts.get("playerHeart$heart")?.visibility = View.VISIBLE
+    }
+
     fun closeEnemyHeart(heart: Int){
-        enemyHearts.get("enemyHeart$heart")?.visibility = View.GONE
+        enemyHearts.get("enemyHeart$heart")?.visibility = View.INVISIBLE
     }
 
     fun closePlayerHeart(heart: Int){
-        playerHearts.get("playerHeart$heart")?.visibility = View.GONE
+        playerHearts.get("playerHeart$heart")?.visibility = View.INVISIBLE
     }
 
 }

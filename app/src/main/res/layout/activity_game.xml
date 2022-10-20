@@ -211,17 +211,36 @@
         android:layout_gravity="center_horizontal"
         android:textSize="50dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/tryAgainButton"
-        android:layout_width="150dp"
-        android:layout_height="65dp"
-        android:background="@drawable/custom_button"
-        android:text="Mulai Ulang"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        android:layout_gravity="center_horizontal"
-        android:visibility="invisible"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tryAgainButton"
+            android:layout_width="150dp"
+            android:layout_height="65dp"
+            android:background="@drawable/custom_button"
+            android:text="Mulai Ulang"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/nextGameButton"
+            android:layout_width="150dp"
+            android:layout_height="65dp"
+            android:background="@drawable/custom_button"
+            android:text="Next Level"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -262,6 +281,7 @@
         android:layout_marginBottom="280dp">
 
         <EditText
+            android:id="@+id/inputEditText"
             android:layout_width="260dp"
             android:layout_height="45dp"
             android:layout_alignParentBottom="true"
