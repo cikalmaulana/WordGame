@@ -1,25 +1,26 @@
 package com.example.wordgames
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
+import android.view.WindowManager
 import android.view.animation.TranslateAnimation
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import kotlinx.coroutines.*
 import java.lang.Thread.sleep
+import kotlin.random.Random
 
 
 class GameActivity: AppCompatActivity() {
 
     lateinit var countDownTextView: TextView
     lateinit var kataKataTextView: TextView
+    lateinit var scoreTextView: TextView
 
     lateinit var inputEditText: EditText
 
@@ -52,13 +53,24 @@ class GameActivity: AppCompatActivity() {
     private var enemyHeart: Int = 1
     private var i: Int = 11
     private var time: Int = 11
+    private var level:Int = 1
+    private var indexArrayKata: Int = 31
+    private var score: Int = 0
 
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
 
+    private var arrKata: ArrayList<String> = arrayListOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
+    "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
+    "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
+
+
+    private var subArrKata: ArrayList<String> = arrayListOf()
+
     private fun initComponent(){
         countDownTextView = findViewById(R.id.countDownTextView)
         kataKataTextView = findViewById(R.id.kataKataTextView)
+        scoreTextView = findViewById(R.id.scoreTextView)
 
         inputEditText = findViewById(R.id.inputEditText)
 
@@ -102,6 +114,20 @@ class GameActivity: AppCompatActivity() {
             "playerHeart3" to playerHeart3,
         )
 
+        //Ambil level dari activity sebelumnya, masukin ke sini
+
+        var index = 0
+        var randI = 30
+
+        while(i<10){
+            val random = Random(randI)
+            val x = random.nextInt()
+            subArrKata[index] = arrKata.get(x)
+            arrKata.removeAt(x)
+            randI--
+            index++
+        }
+        index=0
     }
 
     private fun initListener(){
@@ -132,24 +158,23 @@ class GameActivity: AppCompatActivity() {
 
         nextGameButton.setOnClickListener {
             Log.e("NEXTLEVEL","Clicked!")
-            nextGameButton.visibility = View.INVISIBLE
-            kataKataTextView.visibility = View.VISIBLE
-            var playerHeart = 3
-            while(playerHeart>0){
-                openPlayerHeart(playerHeart)
-                playerHeart--
-            }
+            if (level<3){
+                nextGameButton.visibility = View.INVISIBLE
+                kataKataTextView.visibility = View.VISIBLE
 
-            var enemyHeart = 10
-            while(enemyHeart>0){
-                openEnemyHeart(enemyHeart)
-                enemyHeart--
-            }
+                enemyHeart = 10
+                while(enemyHeart>0){
+                    openEnemyHeart(enemyHeart)
+                    enemyHeart--
+                }
 
-            life = 3
-            isGameRun = true
-            time = 6
-            gameStart()
+                life = 3
+                isGameRun = true
+                enemyHeart = 1
+                level++
+                gameStart()
+            }else kataKataTextView.setText("SELAMAT KAMU MENANG!")
+
         }
 
         tryAgainButton.setOnClickListener{
@@ -162,7 +187,7 @@ class GameActivity: AppCompatActivity() {
                 playerHeart--
             }
 
-            var enemyHeart = 10
+            enemyHeart = 10
             while(enemyHeart>0){
                 openEnemyHeart(enemyHeart)
                 enemyHeart--
@@ -170,6 +195,7 @@ class GameActivity: AppCompatActivity() {
 
             life = 3
             isGameRun = true
+            enemyHeart = 1
             gameStart()
         }
     }
@@ -182,6 +208,8 @@ class GameActivity: AppCompatActivity() {
         initComponent()
         initListener()
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         gameStart()
     }
 
@@ -192,7 +220,15 @@ class GameActivity: AppCompatActivity() {
             try {
                 while(life>0 && isGameRun){
                     runOnUiThread{
-                        kataKataTextView.setText("Kata Kata Life ke $life")
+                        var randI = indexArrayKata
+                        Log.i("RANDI",indexArrayKata.toString())
+                        Log.i("PJGARRAY",arrKata.size.toString())
+                        val randomIndex = Random.nextInt(1,randI)
+                        val kata = arrKata.get(randomIndex)
+                        arrKata.removeAt(randomIndex)
+                        randI--
+                        kataKataTextView.setText(kata)
+                        indexArrayKata--
                     }
                     while(!attack && i>0) {
                         Log.e("WHILE", "While ke $i")
@@ -209,7 +245,8 @@ class GameActivity: AppCompatActivity() {
                     }
                     runOnUiThread {
                         if(attack && i>0){
-
+                            score+=10
+                            scoreTextView.setText(score.toString())
                             val animation = TranslateAnimation(
                                 0.0f, 300.0f,
                                 0.0f, 0.0f
@@ -220,11 +257,14 @@ class GameActivity: AppCompatActivity() {
                             dinoImageView.startAnimation(animation)
 
                             if(enemyHeart>=10){
-                                closeEnemyHeart(enemyHeart)
-                                kataKataTextView.visibility = View.INVISIBLE
-                                nextGameButton.visibility = View.VISIBLE
-                                countDownTextView.setText("You Win!")
-                                isGameRun = false
+                                if(level<3){
+                                    closeEnemyHeart(enemyHeart)
+                                    kataKataTextView.visibility = View.INVISIBLE
+                                    nextGameButton.visibility = View.VISIBLE
+                                    countDownTextView.setText("You Win!")
+                                    isGameRun = false
+                                }else countDownTextView.setText("Level 1 Telah Selesai!")
+
                             }else{
                                 closeEnemyHeart(enemyHeart)
                                 countDownTextView.setText("Attack!")
@@ -257,6 +297,7 @@ class GameActivity: AppCompatActivity() {
                     if(life<=0) {
 //                        Tampilin game over
                         runOnUiThread {
+                            kataKataTextView.visibility = View.INVISIBLE
                             tryAgainButton.visibility = View.VISIBLE
                             countDownTextView.setText("Die!")
                         }
