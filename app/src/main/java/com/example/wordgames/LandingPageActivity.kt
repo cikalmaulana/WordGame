@@ -33,9 +33,11 @@
             }
             val airfool = Typeface.createFromAsset(assets, "font/Airfools.otf")
             val montserrat= Typeface.createFromAsset(assets, "font/Montserrat.ttf")
+            val playfull= Typeface.createFromAsset(assets, "font/playfull.otf")
             bacabacaTextView1.setTypeface(airfool)
             bacabacaTextView2.setTypeface(airfool)
             quotesTextView.setTypeface(montserrat)
+            loginButton.setTypeface(playfull)
         }
 
         override fun onCreate(savedInstanceState: Bundle?) {

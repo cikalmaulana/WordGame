@@ -22,6 +22,7 @@ class HomeActivity: AppCompatActivity() {
     lateinit var userRankTextView: TextView
     lateinit var viewScoreButton: TextView
     lateinit var viewHelpButton: TextView
+    lateinit var usernameTextView: TextView
     lateinit var layoutStartGame: RelativeLayout
 
     private fun initComponent(){
@@ -34,6 +35,7 @@ class HomeActivity: AppCompatActivity() {
         viewScoreButton = findViewById(R.id.viewScoreButton)
         viewHelpButton = findViewById(R.id.viewHelpButton)
         layoutStartGame = findViewById(R.id.layoutStartGame)
+        usernameTextView = findViewById(R.id.usernameTextView)
     }
 
     private fun initListener(){
@@ -45,6 +47,7 @@ class HomeActivity: AppCompatActivity() {
         userRankTextView.setTypeface(playfull)
         viewScoreButton.setTypeface(playfull)
         viewHelpButton.setTypeface(playfull)
+        usernameTextView.setTypeface(playfull)
 
         layoutStartGame.setOnClickListener {
             val intent = Intent(this@HomeActivity, LevelActivity::class.java)

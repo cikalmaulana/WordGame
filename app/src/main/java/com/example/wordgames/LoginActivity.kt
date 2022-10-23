@@ -14,14 +14,24 @@ class LoginActivity: AppCompatActivity() {
     lateinit var loginButton: Button
     lateinit var registerButton: Button
     lateinit var loginTextView: TextView
+    lateinit var usernameTextView: TextView
+    lateinit var passwordTextView: TextView
 
     private fun initComponent(){
         loginButton = findViewById(R.id.loginButton)
         registerButton = findViewById(R.id.registerButton)
         loginTextView = findViewById(R.id.loginTextView)
+        usernameTextView = findViewById(R.id.usernameTextView)
+        passwordTextView = findViewById(R.id.passTextView)
     }
 
     private fun initListener(){
+        val playfull= Typeface.createFromAsset(assets, "font/playfull.otf")
+        loginButton.setTypeface(playfull)
+        registerButton.setTypeface(playfull)
+        usernameTextView.setTypeface(playfull)
+        passwordTextView.setTypeface(playfull)
+
         loginButton.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)

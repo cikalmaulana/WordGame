@@ -1,19 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_img">
+    android:background="@color/background">
 
     <TextView
         android:id="@+id/pilihLevelTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pilih Level-mu!"
+        android:text="Pilih Level!"
         android:textAllCaps="false"
-        android:textSize="40dp"
-        android:layout_margin="20dp"
-        android:textColor="@color/primary"/>
+        android:textSize="45dp"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/primary"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/warningTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selesaikan Level 1 Dahulu"
+        android:textAllCaps="false"
+        android:textSize="25dp"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/primary"
+        android:gravity="center"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginBottom="200dp"
+        android:adjustViewBounds="true"
+        android:maxWidth="280dp"
+        android:maxHeight="280dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/homebg1" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,14 +55,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_alignParentBottom="true">
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/level3Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="60dp"
                     android:text="Level 3"
                     android:layout_marginLeft="20dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="100dp"/>
+                    android:layout_marginBottom="200dp"
+                    android:background="@drawable/btnlayout"
+                    android:textColor="@color/white"/>
             </LinearLayout>
 
             <RelativeLayout
@@ -46,28 +73,32 @@
                 android:layout_marginTop="20dp"
                 android:layout_alignParentBottom="true">
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/level2Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="60dp"
                     android:text="Level 2"
                     android:layout_marginRight="20dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="40dp"/>
+                    android:layout_marginBottom="100dp"
+                    android:background="@drawable/btnlayout"
+                    android:textColor="@color/white"/>
 
             </RelativeLayout>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/level1Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Level 1"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
                 android:layout_marginLeft="20dp"
-                android:layout_alignParentBottom="true"/>
+                android:text="Level 1"
+                android:background="@drawable/btnlayout"
+                android:textColor="@color/white"/>
 
         </RelativeLayout>
 
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

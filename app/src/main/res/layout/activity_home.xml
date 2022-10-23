@@ -8,14 +8,14 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:src="@drawable/homebg1"
+        android:layout_marginBottom="200dp"
+        android:adjustViewBounds="true"
         android:maxWidth="280dp"
         android:maxHeight="280dp"
-        android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="200dp"/>
+        android:src="@drawable/homebg1" />
 
     <ImageView
         android:id="@+id/charImageView"
@@ -39,7 +39,8 @@
         android:textSize="20dp"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="160dp"/>
+        android:layout_marginBottom="160dp"
+        android:textColor="@color/black"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -53,31 +54,23 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/scorebtn"
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:maxWidth="100dp"
                 android:maxHeight="100dp"
+                android:background="@drawable/btnuser"
                 android:layout_marginRight="15dp"
-                android:layout_alignParentRight="true"
                 android:layout_marginLeft="20dp"/>
 
             <TextView
-                android:id="@+id/scoreTextView"
+                android:id="@+id/usernameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:text="SCORE: "
-                android:layout_gravity="center_vertical"/>
-
-            <TextView
-                android:id="@+id/userScoreTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="1.899"
-                android:layout_gravity="center_vertical"/>
+                android:text="Rajasa Cikal"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
@@ -90,11 +83,46 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:src="@drawable/scorebtn"
+                android:maxWidth="100dp"
+                android:maxHeight="100dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/scoreTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="SCORE: "
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/userScoreTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="1.899"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="100dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/starbtn"
                 android:maxWidth="100dp"
                 android:maxHeight="100dp"
                 android:layout_marginRight="15dp"
-                android:layout_alignParentRight="true"
                 android:layout_marginLeft="20dp"/>
 
             <TextView
@@ -103,7 +131,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="RANK: "
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/userRankTextView"
@@ -111,7 +140,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="29"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 

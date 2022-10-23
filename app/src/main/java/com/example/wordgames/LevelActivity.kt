@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -15,10 +16,15 @@ class LevelActivity: AppCompatActivity() {
     lateinit var level1Button: Button
     lateinit var level2Button: Button
     lateinit var level3Button: Button
+    lateinit var warningTextView: TextView
+
+    private var isLevel2Unlock: Boolean = false
 
     private fun initComponent(){
         pilihLevelTextView = findViewById(R.id.pilihLevelTextView)
         level1Button = findViewById(R.id.level1Button)
+        level2Button = findViewById(R.id.level2Button)
+        warningTextView = findViewById(R.id.warningTextView)
     }
 
     private fun initListener(){
@@ -27,9 +33,18 @@ class LevelActivity: AppCompatActivity() {
 
         level1Button.setOnClickListener {
             val intent = Intent(this, GameActivity::class.java)
-            // start your next activity
             startActivity(intent)
             finish()
+        }
+
+        level2Button.setOnClickListener {
+            if(isLevel2Unlock){
+                val intent = Intent(this, Level2Activity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                warningTextView.visibility = View.VISIBLE
+            }
         }
     }
 

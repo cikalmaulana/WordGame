@@ -139,6 +139,10 @@ class GameActivity: AppCompatActivity() {
         scoreTextView.setTypeface(playfull)
         playerNameTextView.setTypeface(playfull)
         enemyNameTextView.setTypeface(playfull)
+        attackButton.setTypeface(playfull)
+        tryAgainButton.setTypeface(playfull)
+        nextGameButton.setTypeface(playfull)
+        level2Button.setTypeface(playfull)
 
         level2Button.setOnClickListener {
             val intent = Intent(this@GameActivity, Level2Activity::class.java)
@@ -254,6 +258,16 @@ class GameActivity: AppCompatActivity() {
             try {
                 while(life>0 && isGameRun){
                     runOnUiThread{
+                        val animation = TranslateAnimation(
+                            0.0f, 0.0f,
+                            0.0f, 30.0f
+                        )
+                        animation.setDuration(500)  // animation duration
+                        animation.setRepeatCount(999)  // animation repeat count
+                        animation.setRepeatMode(2)
+                        dinoImageView.startAnimation(animation)
+                        enemyImageView.startAnimation(animation)
+
                         Log.i("RANDI",indexArrayKata.toString())
                         Log.i("PJGARRAY",arrKata.size.toString())
                         val randomIndex = Random.nextInt(1,indexArrayKata)
@@ -333,6 +347,15 @@ class GameActivity: AppCompatActivity() {
                     if(life<=0) {
 //                        Tampilin game over
                         runOnUiThread {
+                            val animation = TranslateAnimation(
+                                0.0f, 0.0f,
+                                0.0f, 200.0f
+                            )
+                            animation.setDuration(1000)  // animation duration
+                            animation.setRepeatCount(0)  // animation repeat count
+                            animation.setRepeatMode(2)
+                            dinoImageView.startAnimation(animation)
+
                             kataKataTextView.visibility = View.INVISIBLE
                             tryAgainButton.visibility = View.VISIBLE
                             countDownTextView.setText("Die!")
