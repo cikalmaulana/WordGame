@@ -24,7 +24,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" android:label="Main"></activity>
+        <activity android:name=".HomeActivity" android:label="Home"></activity>
         <activity android:name=".LevelActivity" android:label="Level"></activity>
+        <activity android:name=".Level2Activity" android:label="Level2"></activity>
         <activity android:name=".LandingPageActivity" android:label="LandingPage"></activity>
         <activity android:name=".LoginActivity" android:label="Login"></activity>
         <activity android:name=".RegisterActivity" android:label="Register"></activity>

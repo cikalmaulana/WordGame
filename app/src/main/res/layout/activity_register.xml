@@ -1,102 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical">
+    android:layout_gravity="center_vertical"
+    android:scrollbars="none">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REGISTER!"
-        android:layout_gravity="center_horizontal"
-        android:textSize="40dp"
-        android:layout_marginBottom="20dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Username"
-        android:layout_marginLeft="10dp"
-        android:textSize="18dp"/>
-
-    <EditText
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:hint="Username"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/input_custom"/>
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
-        android:layout_marginLeft="10dp"
-        android:textSize="18dp"/>
+        android:layout_gravity="center_vertical">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:hint="Password"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:inputType="textPassword"
-        android:background="@drawable/input_custom"/>
+        <TextView
+            android:id="@+id/registerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:layout_gravity="center_horizontal"
+            android:textSize="60dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/blue"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Re-type password"
-        android:layout_marginLeft="10dp"
-        android:textSize="18dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama"
+            android:layout_marginLeft="15dp"
+            android:textSize="18dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:hint="Re-type password"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:inputType="textPassword"
-        android:background="@drawable/input_custom"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Nama"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/input_custom"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wrong Password / Username"
-        android:textColor="@color/red"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:textSize="18dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat"
+            android:layout_marginLeft="15dp"
+            android:textSize="18dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/registerButton"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Register"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/custom_button"
-        android:textAllCaps="false"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Alamat"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/input_custom"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Atau:"
-        android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asal Sekolah"
+            android:layout_marginLeft="15dp"
+            android:textSize="18dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/loginButton"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Login"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/custom_button"
-        android:textAllCaps="false"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Asal Sekolah"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/input_custom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:layout_marginLeft="15dp"
+            android:textSize="18dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Username"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/input_custom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:layout_marginLeft="15dp"
+            android:textSize="18dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Password"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:inputType="textPassword"
+            android:background="@drawable/input_custom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password harus disi!"
+            android:textColor="@color/red"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="18dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registerButton"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Daftar"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:background="@drawable/custom_button"
+            android:textAllCaps="false"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Atau:"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/loginButton"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Masuk"
+            android:background="@drawable/custom_button"
+            android:textAllCaps="false"/>
 
 
+    </LinearLayout>
 
-</LinearLayout>
+
+</ScrollView>

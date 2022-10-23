@@ -2,26 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/battlebg1">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:paddingTop="20dp"
+        android:paddingBottom="15dp"
+        android:background="@color/primary">
 
         <TextView
+            android:id="@+id/playerNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:text="You"
-            android:textSize="30dp"
-            android:layout_marginLeft="20dp"/>
+            android:textSize="22dp" />
 
         <TextView
+            android:id="@+id/scoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:text="0"
+            android:textSize="40dp" />
+
+        <TextView
+            android:id="@+id/enemyNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enemy"
-            android:textSize="30dp"
+            android:textSize="22dp"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="20dp"/>
 
@@ -31,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="1dp">
+        android:layout_marginTop="-35dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -44,9 +58,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
+                android:src="@drawable/healthbar"
+                android:maxWidth="60dp"
+                android:maxHeight="25dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
             <ImageView
@@ -54,9 +68,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
+                android:src="@drawable/healthbar"
+                android:maxWidth="60dp"
+                android:maxHeight="25dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
             <ImageView
@@ -64,9 +78,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
+                android:src="@drawable/healthbar"
+                android:maxWidth="60dp"
+                android:maxHeight="25dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
 
@@ -77,67 +91,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginRight="20dp"
-            android:layout_alignParentEnd="true">
-
-            <ImageView
-                android:id="@+id/enemyHeart6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"/>
-            <ImageView
-                android:id="@+id/enemyHeart7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"/>
-            <ImageView
-                android:id="@+id/enemyHeart8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"/>
-            <ImageView
-                android:id="@+id/enemyHeart9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"/>
-            <ImageView
-                android:id="@+id/enemyHeart10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
             android:layout_alignParentEnd="true">
 
             <ImageView
@@ -145,9 +98,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
+                android:src="@drawable/enemyhealthbar"
+                android:maxWidth="20dp"
+                android:maxHeight="25.4dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
             <ImageView
@@ -155,9 +108,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
+                android:src="@drawable/enemyhealthbar"
+                android:maxWidth="20dp"
+                android:maxHeight="25.4dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
             <ImageView
@@ -165,9 +118,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
+                android:src="@drawable/enemyhealthbar"
+                android:maxWidth="20dp"
+                android:maxHeight="25.4dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
             <ImageView
@@ -175,9 +128,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
+                android:src="@drawable/enemyhealthbar"
+                android:maxWidth="20dp"
+                android:maxHeight="25.4dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
             <ImageView
@@ -185,9 +138,59 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/heart"
-                android:maxWidth="30dp"
-                android:maxHeight="30dp"
+                android:src="@drawable/enemyhealthbar"
+                android:maxWidth="20dp"
+                android:maxHeight="25.4dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:id="@+id/enemyHeart6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/enemyhealthbar"
+                android:maxWidth="20dp"
+                android:maxHeight="25.4dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:id="@+id/enemyHeart7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/enemyhealthbar"
+                android:maxWidth="20dp"
+                android:maxHeight="25.4dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:id="@+id/enemyHeart8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/enemyhealthbar"
+                android:maxWidth="20dp"
+                android:maxHeight="25.4dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:id="@+id/enemyHeart9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/enemyhealthbar"
+                android:maxWidth="20dp"
+                android:maxHeight="25.4dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+            <ImageView
+                android:id="@+id/enemyHeart10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/enemyhealthbar"
+                android:maxWidth="20dp"
+                android:maxHeight="25.4dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
 
@@ -203,29 +206,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Score"/>
-
-            <TextView
-                android:id="@+id/scoreTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="0"
-                android:textSize="30dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/kataKataTextView"
@@ -233,15 +215,22 @@
                 android:layout_height="wrap_content"
                 android:text="Play"
                 android:layout_gravity="center_horizontal"
-                android:textSize="30dp"/>
+                android:textSize="30dp"
+                android:background="@color/primary"
+                android:padding="3dp"
+                android:layout_marginTop="5dp"/>
 
             <TextView
                 android:id="@+id/countDownTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
+                android:layout_centerInParent="true"
                 android:layout_gravity="center_horizontal"
-                android:textSize="50dp"/>
+                android:text="10"
+                android:textSize="40dp"
+                android:background="@color/primary"
+                android:padding="3dp"
+                android:layout_marginTop="5dp"/>
 
         </LinearLayout>
 
@@ -264,52 +253,63 @@
             android:textSize="20dp"
             android:layout_gravity="center_horizontal"
             android:visibility="invisible"/>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nextGameButton"
             android:layout_width="150dp"
             android:layout_height="65dp"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/custom_button"
             android:text="Next Level"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="20dp"
+            android:visibility="invisible" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/level2Button"
+            android:layout_width="150dp"
+            android:layout_height="65dp"
             android:layout_gravity="center_horizontal"
-            android:visibility="invisible"/>
+            android:background="@drawable/custom_button"
+            android:text="Lanjut Ke Level 2"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="-90dp">
 
         <ImageView
             android:id="@+id/dinoImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:src="@drawable/landingpagelogo"
+            android:layout_marginLeft="20dp"
+            android:adjustViewBounds="true"
             android:maxWidth="100dp"
             android:maxHeight="100dp"
-            android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="20dp"/>
+            android:src="@drawable/playerchar" />
 
         <ImageView
             android:id="@+id/enemyImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/landingpagelogo"
-            android:maxWidth="100dp"
-            android:maxHeight="100dp"
+            android:src="@drawable/enemychar"
+            android:maxWidth="200dp"
+            android:maxHeight="200dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:layout_marginRight="20dp"/>
+            android:scaleType="fitCenter" />
 
     </RelativeLayout>
-
-
 
     <RelativeLayout
         android:layout_width="match_parent"

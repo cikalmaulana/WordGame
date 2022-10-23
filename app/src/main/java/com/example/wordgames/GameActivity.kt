@@ -1,5 +1,7 @@
 package com.example.wordgames
 
+import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -13,6 +15,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
 import java.lang.Thread.sleep
+import java.util.*
+import java.util.Collections.addAll
+import kotlin.collections.ArrayList
 import kotlin.random.Random
 
 
@@ -21,12 +26,15 @@ class GameActivity: AppCompatActivity() {
     lateinit var countDownTextView: TextView
     lateinit var kataKataTextView: TextView
     lateinit var scoreTextView: TextView
+    lateinit var playerNameTextView: TextView
+    lateinit var enemyNameTextView: TextView
 
     lateinit var inputEditText: EditText
 
     lateinit var attackButton: Button
     lateinit var tryAgainButton: Button
     lateinit var nextGameButton:Button
+    lateinit var level2Button: Button
 
     lateinit var playerHeart1: ImageView
     lateinit var playerHeart2: ImageView
@@ -60,9 +68,13 @@ class GameActivity: AppCompatActivity() {
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
 
+    private var arrKataTemplate: ArrayList<String> = arrayListOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
+        "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
+        "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
+
     private var arrKata: ArrayList<String> = arrayListOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
-    "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
-    "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
+        "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
+        "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
 
 
     private var subArrKata: ArrayList<String> = arrayListOf()
@@ -71,11 +83,14 @@ class GameActivity: AppCompatActivity() {
         countDownTextView = findViewById(R.id.countDownTextView)
         kataKataTextView = findViewById(R.id.kataKataTextView)
         scoreTextView = findViewById(R.id.scoreTextView)
+        playerNameTextView = findViewById(R.id.playerNameTextView)
+        enemyNameTextView = findViewById(R.id.enemyNameTextView)
 
         inputEditText = findViewById(R.id.inputEditText)
 
         tryAgainButton = findViewById(R.id.tryAgainButton)
         nextGameButton = findViewById(R.id.nextGameButton)
+        level2Button = findViewById(R.id.level2Button)
 
         dinoImageView = findViewById(R.id.dinoImageView)
         enemyImageView = findViewById(R.id.enemyImageView)
@@ -115,22 +130,22 @@ class GameActivity: AppCompatActivity() {
         )
 
         //Ambil level dari activity sebelumnya, masukin ke sini
-
-        var index = 0
-        var randI = 30
-
-        while(i<10){
-            val random = Random(randI)
-            val x = random.nextInt()
-            subArrKata[index] = arrKata.get(x)
-            arrKata.removeAt(x)
-            randI--
-            index++
-        }
-        index=0
     }
 
     private fun initListener(){
+        val playfull= Typeface.createFromAsset(assets, "font/playfull.otf")
+        countDownTextView.setTypeface(playfull)
+        kataKataTextView.setTypeface(playfull)
+        scoreTextView.setTypeface(playfull)
+        playerNameTextView.setTypeface(playfull)
+        enemyNameTextView.setTypeface(playfull)
+
+        level2Button.setOnClickListener {
+            val intent = Intent(this@GameActivity, Level2Activity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         inputEditText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
 
@@ -177,6 +192,10 @@ class GameActivity: AppCompatActivity() {
 
         }
 
+        tryAgainButton.bringToFront()
+
+        nextGameButton.bringToFront()
+
         tryAgainButton.setOnClickListener{
             Log.e("TRYAGAIN","Clicked!")
             tryAgainButton.visibility = View.INVISIBLE
@@ -196,8 +215,23 @@ class GameActivity: AppCompatActivity() {
             life = 3
             isGameRun = true
             enemyHeart = 1
+            indexArrayKata = 31
+            kataKataTextView.visibility = View.VISIBLE
+            score = 0
+            initArray()
             gameStart()
         }
+    }
+
+    fun initArray(){
+        Log.e("INIT", "Masuk initarray")
+        var index = 0;
+        arrKata.removeAll(arrKata)
+
+        arrKata.addAll(listOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
+            "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
+            "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam"))
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -220,13 +254,12 @@ class GameActivity: AppCompatActivity() {
             try {
                 while(life>0 && isGameRun){
                     runOnUiThread{
-                        var randI = indexArrayKata
                         Log.i("RANDI",indexArrayKata.toString())
                         Log.i("PJGARRAY",arrKata.size.toString())
-                        val randomIndex = Random.nextInt(1,randI)
+                        val randomIndex = Random.nextInt(1,indexArrayKata)
                         val kata = arrKata.get(randomIndex)
+                        Log.i("KATASAATINI","Kata Sekarang Adalah $kata")
                         arrKata.removeAt(randomIndex)
-                        randI--
                         kataKataTextView.setText(kata)
                         indexArrayKata--
                     }
@@ -263,8 +296,11 @@ class GameActivity: AppCompatActivity() {
                                     nextGameButton.visibility = View.VISIBLE
                                     countDownTextView.setText("You Win!")
                                     isGameRun = false
-                                }else countDownTextView.setText("Level 1 Telah Selesai!")
-
+                                }else{
+                                    isGameRun = false
+                                    countDownTextView.setText("Level 1 Telah Selesai!")
+                                    level2Button.visibility = View.VISIBLE
+                                }
                             }else{
                                 closeEnemyHeart(enemyHeart)
                                 countDownTextView.setText("Attack!")
@@ -330,6 +366,13 @@ class GameActivity: AppCompatActivity() {
 
     fun closePlayerHeart(heart: Int){
         playerHearts.get("playerHeart$heart")?.visibility = View.INVISIBLE
+    }
+
+    override fun onBackPressed(){
+        super.onBackPressed();
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }

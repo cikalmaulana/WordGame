@@ -23,15 +23,13 @@ class LoginActivity: AppCompatActivity() {
 
     private fun initListener(){
         loginButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            // start your next activity
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
         }
 
         registerButton.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
-            // start your next activity
             startActivity(intent)
             finish()
         }
