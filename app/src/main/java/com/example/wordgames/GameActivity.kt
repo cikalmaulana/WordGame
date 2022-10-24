@@ -1,6 +1,7 @@
 package com.example.wordgames
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -35,6 +36,7 @@ class GameActivity: AppCompatActivity() {
     lateinit var tryAgainButton: Button
     lateinit var nextGameButton:Button
     lateinit var level2Button: Button
+    lateinit var backHomeButton: Button
 
     lateinit var playerHeart1: ImageView
     lateinit var playerHeart2: ImageView
@@ -53,6 +55,8 @@ class GameActivity: AppCompatActivity() {
     lateinit var enemyHeart8: ImageView
     lateinit var enemyHeart9: ImageView
     lateinit var enemyHeart10: ImageView
+
+    lateinit var sound: MediaPlayer
 
     private var life: Int = 3
     private var isGameRun: Boolean = true
@@ -91,6 +95,7 @@ class GameActivity: AppCompatActivity() {
         tryAgainButton = findViewById(R.id.tryAgainButton)
         nextGameButton = findViewById(R.id.nextGameButton)
         level2Button = findViewById(R.id.level2Button)
+        backHomeButton = findViewById(R.id.backHomeButton)
 
         dinoImageView = findViewById(R.id.dinoImageView)
         enemyImageView = findViewById(R.id.enemyImageView)
@@ -143,9 +148,17 @@ class GameActivity: AppCompatActivity() {
         tryAgainButton.setTypeface(playfull)
         nextGameButton.setTypeface(playfull)
         level2Button.setTypeface(playfull)
+        backHomeButton.setTypeface(playfull)
 
         level2Button.setOnClickListener {
             val intent = Intent(this@GameActivity, Level2Activity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        backHomeButton.setOnClickListener {
+            sound.stop()
+            val intent = Intent(this@GameActivity, HomeActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -220,8 +233,11 @@ class GameActivity: AppCompatActivity() {
             isGameRun = true
             enemyHeart = 1
             indexArrayKata = 31
+            dinoImageView.visibility = View.VISIBLE
+            enemyImageView.visibility = View.VISIBLE
             kataKataTextView.visibility = View.VISIBLE
             score = 0
+            scoreTextView.setText("0")
             initArray()
             gameStart()
         }
@@ -238,6 +254,14 @@ class GameActivity: AppCompatActivity() {
 
     }
 
+//    fun setScore(){
+//
+//    }
+
+    fun getScore():String{
+        return score.toString()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -246,16 +270,36 @@ class GameActivity: AppCompatActivity() {
         initComponent()
         initListener()
 
+        sound = MediaPlayer.create(this,R.raw.soundtrack)
+        sound.start()
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         gameStart()
     }
 
     fun gameStart(){
+
+//        Countdown sebelum mulai
+
         Log.e( "GAMESTART", "Game Start!")
         var playerHeart = 1
         val objRunnable = java.lang.Runnable {
             try {
+                var k = 3
+                while(k>=1){
+                    runOnUiThread {
+                        kataKataTextView.setText("Get Ready...")
+                        countDownTextView.setText(k.toString())
+                        Log.e("COUNTAWAL","${k.toString()}")
+                    }
+                    sleep(1000)
+                    k--
+                }
+                runOnUiThread {
+                    countDownTextView.setText("Start!")
+                }
+                sleep(1000)
                 while(life>0 && isGameRun){
                     runOnUiThread{
                         val animation = TranslateAnimation(
@@ -312,6 +356,9 @@ class GameActivity: AppCompatActivity() {
                                     isGameRun = false
                                 }else{
                                     isGameRun = false
+                                    dinoImageView.visibility = View.INVISIBLE
+                                    enemyImageView.visibility = View.INVISIBLE
+                                    kataKataTextView.visibility = View.INVISIBLE
                                     countDownTextView.setText("Level 1 Telah Selesai!")
                                     level2Button.visibility = View.VISIBLE
                                 }
@@ -351,16 +398,22 @@ class GameActivity: AppCompatActivity() {
                                 0.0f, 0.0f,
                                 0.0f, 200.0f
                             )
-                            animation.setDuration(1000)  // animation duration
+                            animation.setDuration(2000)  // animation duration
                             animation.setRepeatCount(0)  // animation repeat count
                             animation.setRepeatMode(2)
                             dinoImageView.startAnimation(animation)
 
+
+                            countDownTextView.setText("You Die!")
+                        }
+                        sleep(2000)
+                        runOnUiThread {
                             kataKataTextView.visibility = View.INVISIBLE
                             tryAgainButton.visibility = View.VISIBLE
-                            countDownTextView.setText("Die!")
+                            backHomeButton.visibility = View.VISIBLE
+                            dinoImageView.visibility = View.INVISIBLE
+                            enemyImageView.visibility = View.INVISIBLE
                         }
-                        sleep(1000)
                     }
                     i = time
                     Log.e("LIFE","Life sekarang $life")
@@ -392,6 +445,7 @@ class GameActivity: AppCompatActivity() {
     }
 
     override fun onBackPressed(){
+        sound.stop()
         super.onBackPressed();
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)

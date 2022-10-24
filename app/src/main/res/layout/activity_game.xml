@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/battlebg1">
+    android:background="#5a4332">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -235,148 +235,168 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="400dp"
+        android:background="@drawable/battlebg1"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="20dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/kataKataTextView"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Play"
-                android:layout_gravity="center_horizontal"
-                android:textSize="30dp"
-                android:background="@color/primary"
-                android:padding="3dp"
-                android:layout_marginTop="5dp"/>
-
-            <TextView
-                android:id="@+id/countDownTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_centerInParent="true"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/kataKataTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Play"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="30dp"
+                    android:background="@color/primary"
+                    android:padding="3dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/countDownTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_horizontal"
+                    android:text="10"
+                    android:textSize="40dp"
+                    android:background="@color/primary"
+                    android:padding="3dp"
+                    android:layout_marginTop="5dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tryAgainButton"
+                android:layout_width="150dp"
+                android:layout_height="65dp"
+                android:background="@drawable/custom_button"
+                android:text="Mulai Ulang"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
                 android:layout_gravity="center_horizontal"
-                android:text="10"
-                android:textSize="40dp"
-                android:background="@color/primary"
-                android:padding="3dp"
-                android:layout_marginTop="5dp"/>
+                android:visibility="invisible"/>
 
-        </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/backHomeButton"
+                android:layout_width="150dp"
+                android:layout_height="65dp"
+                android:background="@drawable/custom_button"
+                android:text="Kembali"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="invisible"
+                android:layout_marginTop="80dp"/>
 
-    </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/nextGameButton"
+                android:layout_width="150dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/custom_button"
+                android:text="Next Level"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:visibility="invisible" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/level2Button"
+                android:layout_width="150dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/custom_button"
+                android:text="Lanjut Ke Level 2"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:visibility="invisible" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tryAgainButton"
-            android:layout_width="150dp"
-            android:layout_height="65dp"
-            android:background="@drawable/custom_button"
-            android:text="Mulai Ulang"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:layout_gravity="center_horizontal"
-            android:visibility="invisible"/>
+        </RelativeLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/nextGameButton"
-            android:layout_width="150dp"
-            android:layout_height="65dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/custom_button"
-            android:text="Next Level"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:visibility="invisible" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/level2Button"
-            android:layout_width="150dp"
-            android:layout_height="65dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/custom_button"
-            android:text="Lanjut Ke Level 2"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:visibility="invisible" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="-90dp">
-
-        <ImageView
-            android:id="@+id/dinoImageView"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="20dp"
-            android:adjustViewBounds="true"
-            android:maxWidth="100dp"
-            android:maxHeight="100dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/playerchar" />
+            android:orientation="horizontal"
+            android:layout_marginTop="-160dp">
 
-        <ImageView
-            android:id="@+id/enemyImageView"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/dinoImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:adjustViewBounds="true"
+                android:maxWidth="100dp"
+                android:maxHeight="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/playerchar" />
+
+            <ImageView
+                android:id="@+id/enemyImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/enemychar"
+                android:maxWidth="200dp"
+                android:maxHeight="200dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/enemychar"
-            android:maxWidth="200dp"
-            android:maxHeight="200dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter" />
+            android:layout_marginBottom="20dp">
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/inputEditText"
+                android:layout_width="260dp"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/input_custom"
+                android:hint="Masukkan Jawaban"
+                android:padding="10dp"
+                android:textColor="@color/black"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/attackButton"
+                android:layout_width="80dp"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/custom_button"
+                android:text="Kirim"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
 
-        <EditText
-            android:id="@+id/inputEditText"
-            android:layout_width="260dp"
-            android:layout_height="45dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/input_custom"
-            android:hint="Masukkan Jawaban"
-            android:padding="10dp"
-            android:textColor="@color/black"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/attackButton"
-            android:layout_width="80dp"
-            android:layout_height="45dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/custom_button"
-            android:text="Kirim"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp" />
-
-    </RelativeLayout>
-
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>
