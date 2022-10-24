@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#5a4332">
+    android:background="#b0e5ee">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -238,7 +238,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:background="@drawable/battlebg1"
+        android:background="@drawable/battlebg3"
         android:orientation="vertical"
         android:layout_marginTop="10dp">
 

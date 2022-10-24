@@ -151,6 +151,7 @@ class GameActivity: AppCompatActivity() {
         backHomeButton.setTypeface(playfull)
 
         level2Button.setOnClickListener {
+            sound.stop()
             val intent = Intent(this@GameActivity, Level2Activity::class.java)
             startActivity(intent)
             finish()

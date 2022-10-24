@@ -70,8 +70,8 @@ class Level2Activity: AppCompatActivity() {
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
 
-    private var arrKataTemplate: ArrayList<String> = arrayListOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
-        "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
+    private var arrKataTemplate: ArrayList<String> = arrayListOf("Rumah Sakit", "Polisi Tidur", "Merah Jambu", "Mesin Cuci", "Sikat Gigi", "Papan Tulis", "Jam Dinding", "Jam Tangan", "Pulang Pergi",
+        "Pagi Hari", "Meja Makan", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
         "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
 
     private var arrKata: ArrayList<String> = arrayListOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
@@ -149,6 +149,7 @@ class Level2Activity: AppCompatActivity() {
         backHomeButton.setTypeface(playfull)
 
         level2Button.setOnClickListener {
+            sound.stop()
             val intent = Intent(this@Level2Activity, Level3Activity::class.java)
             startActivity(intent)
             finish()
