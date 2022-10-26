@@ -18,12 +18,14 @@ class LevelActivity: AppCompatActivity() {
     lateinit var level3Button: Button
     lateinit var warningTextView: TextView
 
-    private var isLevel2Unlock: Boolean = false
+    private var isLevel2Unlock: Boolean = true
+    private var isLevel3Unlock: Boolean = true
 
     private fun initComponent(){
         pilihLevelTextView = findViewById(R.id.pilihLevelTextView)
         level1Button = findViewById(R.id.level1Button)
         level2Button = findViewById(R.id.level2Button)
+        level3Button = findViewById(R.id.level3Button)
         warningTextView = findViewById(R.id.warningTextView)
     }
 
@@ -43,6 +45,18 @@ class LevelActivity: AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }else{
+                warningTextView.setText("Selesaikan Level 1 Dahulu")
+                warningTextView.visibility = View.VISIBLE
+            }
+        }
+
+        level3Button.setOnClickListener {
+            if(isLevel3Unlock){
+                val intent = Intent(this, Level3Activity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                warningTextView.setText("Selesaikan Level 2 Dahulu")
                 warningTextView.visibility = View.VISIBLE
             }
         }

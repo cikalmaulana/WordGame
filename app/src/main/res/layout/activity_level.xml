@@ -77,12 +77,12 @@
                     android:id="@+id/level2Button"
                     android:layout_width="150dp"
                     android:layout_height="60dp"
-                    android:text="Level 2"
-                    android:layout_marginRight="20dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginRight="20dp"
                     android:layout_marginBottom="100dp"
                     android:background="@drawable/btnlayout"
-                    android:textColor="@color/white"/>
+                    android:text="Level 2"
+                    android:textColor="@color/white" />
 
             </RelativeLayout>
 
