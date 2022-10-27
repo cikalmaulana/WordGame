@@ -42,6 +42,7 @@
             android:background="@drawable/input_custom"/>
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Alamat"
@@ -51,6 +52,7 @@
             android:layout_gravity="center_horizontal"/>
 
         <EditText
+            android:id="@+id/alamatEditText"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:hint="Alamat"
@@ -81,6 +83,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Kelas"
+            android:layout_marginLeft="15dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"/>
+
+        <EditText
+            android:id="@+id/kelasEditText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Kelas"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:background="@drawable/input_custom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Username"
             android:layout_marginLeft="15dp"
             android:textSize="18dp"
@@ -88,6 +109,7 @@
             android:layout_gravity="center_horizontal"/>
 
         <EditText
+            android:id="@+id/usernameEditText"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:hint="Username"
@@ -106,6 +128,7 @@
             android:layout_gravity="center_horizontal"/>
 
         <EditText
+            android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:hint="Password"
@@ -116,13 +139,15 @@
             android:background="@drawable/input_custom"/>
 
         <TextView
+            android:id="@+id/warningTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Password harus disi!"
             android:textColor="@color/red"
             android:layout_marginLeft="15dp"
             android:layout_marginBottom="10dp"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:visibility="invisible"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/registerButton"
