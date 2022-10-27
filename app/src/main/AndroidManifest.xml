@@ -4,6 +4,7 @@
     package="com.example.wordgames">
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -35,4 +36,7 @@
         <activity android:name=".NextGameActivity" android:label="Game"></activity>
     </application>
 
+    <!--permissions for INTERNET-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 </manifest>

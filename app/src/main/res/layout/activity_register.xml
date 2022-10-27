@@ -32,6 +32,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/namaEditText"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:hint="Nama"
@@ -68,6 +69,7 @@
             android:layout_gravity="center_horizontal"/>
 
         <EditText
+            android:id="@+id/asalSekolahEditText"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:hint="Asal Sekolah"
