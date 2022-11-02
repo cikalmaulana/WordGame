@@ -32,6 +32,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/usernameEditText"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:hint="Username"
@@ -50,6 +51,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:hint="Password"
@@ -60,13 +62,15 @@
             android:background="@drawable/input_custom"/>
 
         <TextView
+            android:id="@+id/wrongPassTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Wrong Password / Username"
             android:textColor="@color/red"
             android:layout_marginLeft="15dp"
             android:layout_marginBottom="10dp"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:visibility="invisible"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/loginButton"

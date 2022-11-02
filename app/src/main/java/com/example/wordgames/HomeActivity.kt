@@ -3,14 +3,11 @@ package com.example.wordgames
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import org.w3c.dom.Text
 
 class HomeActivity: AppCompatActivity() {
 
@@ -24,6 +21,10 @@ class HomeActivity: AppCompatActivity() {
     lateinit var viewHelpButton: TextView
     lateinit var usernameTextView: TextView
     lateinit var layoutStartGame: RelativeLayout
+
+    private var nama:String = ""
+    private var score:String = ""
+    private var level:String = ""
 
     private fun initComponent(){
         charImageView = findViewById(R.id.charImageView)
@@ -39,6 +40,12 @@ class HomeActivity: AppCompatActivity() {
     }
 
     private fun initListener(){
+        val intent = intent
+        nama = intent.getStringExtra("nama").toString()
+        score = intent.getStringExtra("score").toString()
+        level = intent.getStringExtra("leve").toString()
+        usernameTextView.setText(nama)
+        userScoreTextView.setText(score)
         val playfull= Typeface.createFromAsset(assets, "font/playfull.otf")
         klikTextView.setTypeface(playfull)
         scoreTextView.setTypeface(playfull)
@@ -73,5 +80,7 @@ class HomeActivity: AppCompatActivity() {
 
         initComponent()
         initListener()
+
+
     }
 }
