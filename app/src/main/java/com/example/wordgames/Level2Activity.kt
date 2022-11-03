@@ -13,14 +13,21 @@ import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.Thread.sleep
+import java.security.SecureRandom
+import java.security.cert.CertificateException
+import java.security.cert.X509Certificate
 import java.util.*
+import javax.net.ssl.*
 import kotlin.random.Random
 
 
 class Level2Activity: AppCompatActivity() {
 
-    lateinit var mTTS: TextToSpeech
+//    lateinit var mTTS: TextToSpeech
 
     lateinit var countDownTextView: TextView
     lateinit var kataKataTextView: TextView
@@ -67,6 +74,9 @@ class Level2Activity: AppCompatActivity() {
     private var level:Int = 1
     private var indexArrayKata: Int = 31
     private var score: Int = 300
+
+    private var username: String = ""
+    private var scoreLast: String = ""
 
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
@@ -150,6 +160,9 @@ class Level2Activity: AppCompatActivity() {
         level2Button.setTypeface(playfull)
         backHomeButton.setTypeface(playfull)
         speakButton.setTypeface(playfull)
+
+        username = intent.getStringExtra("username").toString()
+        scoreLast = intent.getStringExtra("score").toString()
 
         speakButton.visibility = View.GONE
 
@@ -267,14 +280,14 @@ class Level2Activity: AppCompatActivity() {
 
         speakButton = findViewById(R.id.speakButton)
 
-        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
-            Log.e("STATUS", status.toString())
-            mTTS.setLanguage(Locale("id","ID"))
-            if (status != TextToSpeech.ERROR){
-                //if there is no error then set language
-                mTTS.language = Locale("id","ID")
-            }
-        })
+//        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
+//            Log.e("STATUS", status.toString())
+//            mTTS.setLanguage(Locale("id","ID"))
+//            if (status != TextToSpeech.ERROR){
+//                //if there is no error then set language
+//                mTTS.language = Locale("id","ID")
+//            }
+//        })
 
         getSupportActionBar()?.hide()
         initComponent()
@@ -329,7 +342,7 @@ class Level2Activity: AppCompatActivity() {
                         Log.i("KATASAATINI","Kata Sekarang Adalah $kata")
                         arrKata.removeAt(randomIndex)
                         kataKataTextView.setText(kata)
-                        kataKataTextView.visibility = View.GONE
+//                        kataKataTextView.visibility = View.GONE
                         speakButton.visibility = View.VISIBLE
                         speakButton.setOnClickListener {
                             //get text from edit text
@@ -341,7 +354,7 @@ class Level2Activity: AppCompatActivity() {
                             else{
                                 //if there is text in edit text
                                 Toast.makeText(this, toSpeak, Toast.LENGTH_SHORT).show()
-                                mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+//                                mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
                             }
                         }
                         indexArrayKata--
@@ -429,6 +442,10 @@ class Level2Activity: AppCompatActivity() {
                             dinoImageView.startAnimation(animation)
 
                             speakButton.visibility = View.GONE
+                            if(scoreLast< score.toString()){
+                                Log.e("SCOREPUT","Masuk if")
+                                putScore()
+                            }
                             countDownTextView.setText("Kamu kalah!")
                         }
                         sleep(2000)
@@ -475,6 +492,69 @@ class Level2Activity: AppCompatActivity() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
+    }
+    fun putScore(){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https:192.168.1.9")
+            .client(getUnsafeOkHttpClient().build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        // Create Service
+        val service = retrofit.create(APIServicePut::class.java)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = service.updateScore(username,score)
+
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+
+                } else {
+
+                    Log.e("RETROFIT_ERROR", response.code().toString())
+
+                }
+            }
+        }
+    }
+
+    fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
+        return try {
+            // Create a trust manager that does not validate certificate chains
+            val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(
+                object : X509TrustManager {
+                    @Throws(CertificateException::class)
+                    override fun checkClientTrusted(chain: Array<X509Certificate?>?, authType: String?) {
+                    }
+
+                    @Throws(CertificateException::class)
+                    override fun checkServerTrusted(chain: Array<X509Certificate?>?, authType: String?) {
+                    }
+
+                    override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
+
+//                    val acceptedIssuers: Array<X509Certificate?>?
+//                        get() = arrayOf()
+                }
+            )
+
+            // Install the all-trusting trust manager
+            val sslContext: SSLContext = SSLContext.getInstance("SSL")
+            sslContext.init(null, trustAllCerts, SecureRandom())
+
+            /* Create an ssl socket factory with our all-trusting manager */
+            val sslSocketFactory: SSLSocketFactory = sslContext.getSocketFactory()
+            val builder = OkHttpClient.Builder()
+            builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+            builder.hostnameVerifier(object : HostnameVerifier {
+                override fun verify(hostname: String?, session: SSLSession?): Boolean {
+                    return true
+                }
+            })
+            builder
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
     }
 
 }

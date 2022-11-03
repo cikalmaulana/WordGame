@@ -98,11 +98,12 @@ class LoginActivity: AppCompatActivity() {
         finish()
     }
 
-    fun goHome(nama:String,score:String,level:String){
+    fun goHome(nama:String,score:String,level:String,username:String){
         val intent = Intent(this, HomeActivity::class.java)
         intent.putExtra("nama", nama)
-        intent.putExtra("score", score);
-        intent.putExtra("level", level);
+        intent.putExtra("username", username)
+        intent.putExtra("score", score)
+        intent.putExtra("level", level)
         startActivity(intent)
         finish()
     }
@@ -145,7 +146,10 @@ class LoginActivity: AppCompatActivity() {
                         val levelUser = jsonArray.getJSONObject(i).getString("level")
                         Log.i("LEVEL ", levelUser)
 
-                        goHome(nama,scoreUser,levelUser)
+                        val username = jsonArray.getJSONObject(i).getString("username")
+                        Log.i("USERNAME ", username)
+
+                        goHome(nama,scoreUser,levelUser,username)
                     }
 
                     Log.d("Pretty Printed JSON :", prettyJson)

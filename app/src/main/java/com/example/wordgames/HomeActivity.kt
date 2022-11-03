@@ -22,6 +22,7 @@ class HomeActivity: AppCompatActivity() {
     lateinit var usernameTextView: TextView
     lateinit var layoutStartGame: RelativeLayout
 
+    private var username:String = ""
     private var nama:String = ""
     private var score:String = ""
     private var level:String = ""
@@ -41,6 +42,7 @@ class HomeActivity: AppCompatActivity() {
 
     private fun initListener(){
         val intent = intent
+        username = intent.getStringExtra("username").toString()
         nama = intent.getStringExtra("nama").toString()
         score = intent.getStringExtra("score").toString()
         level = intent.getStringExtra("leve").toString()
@@ -58,6 +60,9 @@ class HomeActivity: AppCompatActivity() {
 
         layoutStartGame.setOnClickListener {
             val intent = Intent(this@HomeActivity, LevelActivity::class.java)
+            intent.putExtra("username", username)
+            intent.putExtra("score", score)
+            intent.putExtra("level", level)
             startActivity(intent)
             finish()
         }

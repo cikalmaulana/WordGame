@@ -16,19 +16,25 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
 import java.lang.Thread.sleep
-import java.util.*
 import java.util.Collections.addAll
 import kotlin.collections.ArrayList
 import kotlin.random.Random
 
 import android.speech.tts.TextToSpeech
 import android.widget.Toast
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.security.SecureRandom
+import java.security.cert.CertificateException
+import java.security.cert.X509Certificate
 import java.util.*
+import javax.net.ssl.*
 
 
 class GameActivity: AppCompatActivity() {
 
-    lateinit var mTTS:TextToSpeech
+//    lateinit var mTTS:TextToSpeech
 
     lateinit var countDownTextView: TextView
     lateinit var kataKataTextView: TextView
@@ -77,6 +83,9 @@ class GameActivity: AppCompatActivity() {
 
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
+
+    private var username: String = ""
+    private var scoreLast: String = ""
 
     lateinit var speakButton: Button
 
@@ -160,6 +169,9 @@ class GameActivity: AppCompatActivity() {
         backHomeButton.setTypeface(playfull)
         speakButton.setTypeface(playfull)
 
+        username = intent.getStringExtra("username").toString()
+        scoreLast = intent.getStringExtra("score").toString()
+
         speakButton.visibility = View.GONE
 
         level2Button.setOnClickListener {
@@ -228,7 +240,7 @@ class GameActivity: AppCompatActivity() {
         nextGameButton.bringToFront()
 
         tryAgainButton.setOnClickListener{
-            Log.e("TRYAGAIN","Clicked!")
+            Log.e("TRYAGAIN","Score terakhir : ${scoreLast.toString()}, dan Score dalam gaee = $score")
             tryAgainButton.visibility = View.INVISIBLE
             backHomeButton.visibility = View.INVISIBLE
             var playerHeart = 3
@@ -282,14 +294,14 @@ class GameActivity: AppCompatActivity() {
 
         speakButton = findViewById(R.id.speakButton)
 
-        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
-            Log.e("STATUS", status.toString())
-            mTTS.setLanguage(Locale("id","ID"))
-            if (status != TextToSpeech.ERROR){
-                //if there is no error then set language
-                mTTS.language = Locale("id","ID")
-            }
-        })
+//        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
+//            Log.e("STATUS", status.toString())
+//            mTTS.setLanguage(Locale("id","ID"))
+//            if (status != TextToSpeech.ERROR){
+//                //if there is no error then set language
+//                mTTS.language = Locale("id","ID")
+//            }
+//        })
 
         getSupportActionBar()?.hide()
         initComponent()
@@ -303,14 +315,14 @@ class GameActivity: AppCompatActivity() {
         gameStart()
     }
 
-    override fun onPause() {
-        if (mTTS.isSpeaking){
-            //if speaking then stop
-            mTTS.stop()
-            //mTTS.shutdown()
-        }
-        super.onPause()
-    }
+//    override fun onPause() {
+//        if (mTTS.isSpeaking){
+//            //if speaking then stop
+//            mTTS.stop()
+//            //mTTS.shutdown()
+//        }
+//        super.onPause()
+//    }
 
     fun gameStart(){
 
@@ -354,7 +366,7 @@ class GameActivity: AppCompatActivity() {
 //                        Log.i("KATASAATINI","Kata Sekarang Adalah $kata")
                         arrKata.removeAt(randomIndex)
                         kataKataTextView.setText(kata)
-                        kataKataTextView.visibility = View.GONE
+//                        kataKataTextView.visibility = View.GONE
                         speakButton.visibility = View.VISIBLE
                         speakButton.setOnClickListener {
                             //get text from edit text
@@ -366,7 +378,7 @@ class GameActivity: AppCompatActivity() {
                             else{
                                 //if there is text in edit text
                                 Toast.makeText(this, toSpeak, Toast.LENGTH_SHORT).show()
-                                mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+//                                mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
                             }
                         }
 
@@ -455,6 +467,10 @@ class GameActivity: AppCompatActivity() {
                             dinoImageView.startAnimation(animation)
 
                             speakButton.visibility = View.GONE
+                            if(scoreLast< score.toString()){
+                                Log.e("SCOREPUT","Masuk if")
+                                putScore()
+                            }
                             countDownTextView.setText("Kamu kalah!")
                         }
                         sleep(2000)
@@ -503,4 +519,67 @@ class GameActivity: AppCompatActivity() {
         finish()
     }
 
+    fun putScore(){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https:192.168.1.9")
+            .client(getUnsafeOkHttpClient().build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        // Create Service
+        val service = retrofit.create(APIServicePut::class.java)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = service.updateScore(username,score)
+
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+
+                } else {
+
+                    Log.e("RETROFIT_ERROR", response.code().toString())
+
+                }
+            }
+        }
+    }
+
+    fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
+        return try {
+            // Create a trust manager that does not validate certificate chains
+            val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(
+                object : X509TrustManager {
+                    @Throws(CertificateException::class)
+                    override fun checkClientTrusted(chain: Array<X509Certificate?>?, authType: String?) {
+                    }
+
+                    @Throws(CertificateException::class)
+                    override fun checkServerTrusted(chain: Array<X509Certificate?>?, authType: String?) {
+                    }
+
+                    override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
+
+//                    val acceptedIssuers: Array<X509Certificate?>?
+//                        get() = arrayOf()
+                }
+            )
+
+            // Install the all-trusting trust manager
+            val sslContext: SSLContext = SSLContext.getInstance("SSL")
+            sslContext.init(null, trustAllCerts, SecureRandom())
+
+            /* Create an ssl socket factory with our all-trusting manager */
+            val sslSocketFactory: SSLSocketFactory = sslContext.getSocketFactory()
+            val builder = OkHttpClient.Builder()
+            builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+            builder.hostnameVerifier(object : HostnameVerifier {
+                override fun verify(hostname: String?, session: SSLSession?): Boolean {
+                    return true
+                }
+            })
+            builder
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
+    }
 }
