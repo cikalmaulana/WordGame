@@ -21,8 +21,14 @@ import java.util.Collections.addAll
 import kotlin.collections.ArrayList
 import kotlin.random.Random
 
+import android.speech.tts.TextToSpeech
+import android.widget.Toast
+import java.util.*
+
 
 class GameActivity: AppCompatActivity() {
+
+    lateinit var mTTS:TextToSpeech
 
     lateinit var countDownTextView: TextView
     lateinit var kataKataTextView: TextView
@@ -72,6 +78,8 @@ class GameActivity: AppCompatActivity() {
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
 
+    lateinit var speakButton: Button
+
     private var arrKataTemplate: ArrayList<String> = arrayListOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
         "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
         "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
@@ -96,6 +104,7 @@ class GameActivity: AppCompatActivity() {
         nextGameButton = findViewById(R.id.nextGameButton)
         level2Button = findViewById(R.id.level2Button)
         backHomeButton = findViewById(R.id.backHomeButton)
+        speakButton = findViewById(R.id.speakButton)
 
         dinoImageView = findViewById(R.id.dinoImageView)
         enemyImageView = findViewById(R.id.enemyImageView)
@@ -149,6 +158,9 @@ class GameActivity: AppCompatActivity() {
         nextGameButton.setTypeface(playfull)
         level2Button.setTypeface(playfull)
         backHomeButton.setTypeface(playfull)
+        speakButton.setTypeface(playfull)
+
+        speakButton.visibility = View.GONE
 
         level2Button.setOnClickListener {
             sound.stop()
@@ -159,6 +171,7 @@ class GameActivity: AppCompatActivity() {
 
         backHomeButton.setOnClickListener {
             sound.stop()
+            backHomeButton.visibility = View.INVISIBLE
             val intent = Intent(this@GameActivity, HomeActivity::class.java)
             startActivity(intent)
             finish()
@@ -217,7 +230,7 @@ class GameActivity: AppCompatActivity() {
         tryAgainButton.setOnClickListener{
             Log.e("TRYAGAIN","Clicked!")
             tryAgainButton.visibility = View.INVISIBLE
-
+            backHomeButton.visibility = View.INVISIBLE
             var playerHeart = 3
             while(playerHeart>0){
                 openPlayerHeart(playerHeart)
@@ -267,16 +280,36 @@ class GameActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        speakButton = findViewById(R.id.speakButton)
+
+        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
+            Log.e("STATUS", status.toString())
+            mTTS.setLanguage(Locale("id","ID"))
+            if (status != TextToSpeech.ERROR){
+                //if there is no error then set language
+                mTTS.language = Locale("id","ID")
+            }
+        })
+
         getSupportActionBar()?.hide()
         initComponent()
         initListener()
 
         sound = MediaPlayer.create(this,R.raw.soundtrack)
-        sound.start()
+//        sound.start()
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         gameStart()
+    }
+
+    override fun onPause() {
+        if (mTTS.isSpeaking){
+            //if speaking then stop
+            mTTS.stop()
+            //mTTS.shutdown()
+        }
+        super.onPause()
     }
 
     fun gameStart(){
@@ -290,7 +323,8 @@ class GameActivity: AppCompatActivity() {
                 var k = 3
                 while(k>=1){
                     runOnUiThread {
-                        kataKataTextView.setText("Get Ready...")
+                        kataKataTextView.visibility = View.VISIBLE
+                        kataKataTextView.setText("Bersiap...")
                         countDownTextView.setText(k.toString())
                         Log.e("COUNTAWAL","${k.toString()}")
                     }
@@ -313,22 +347,38 @@ class GameActivity: AppCompatActivity() {
                         dinoImageView.startAnimation(animation)
                         enemyImageView.startAnimation(animation)
 
-                        Log.i("RANDI",indexArrayKata.toString())
-                        Log.i("PJGARRAY",arrKata.size.toString())
+//                        Log.i("RANDI",indexArrayKata.toString())
+//                        Log.i("PJGARRAY",arrKata.size.toString())
                         val randomIndex = Random.nextInt(1,indexArrayKata)
                         val kata = arrKata.get(randomIndex)
-                        Log.i("KATASAATINI","Kata Sekarang Adalah $kata")
+//                        Log.i("KATASAATINI","Kata Sekarang Adalah $kata")
                         arrKata.removeAt(randomIndex)
                         kataKataTextView.setText(kata)
+                        kataKataTextView.visibility = View.GONE
+                        speakButton.visibility = View.VISIBLE
+                        speakButton.setOnClickListener {
+                            //get text from edit text
+                            val toSpeak = kata
+                            if (toSpeak == ""){
+                                //if there is no text in edit text
+                                Toast.makeText(this, "Enter text", Toast.LENGTH_SHORT).show()
+                            }
+                            else{
+                                //if there is text in edit text
+                                Toast.makeText(this, toSpeak, Toast.LENGTH_SHORT).show()
+                                mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+                            }
+                        }
+
                         indexArrayKata--
                     }
                     while(!attack && i>0) {
-                        Log.e("WHILE", "While ke $i")
-                        Log.e("ATTACK","Attack status $attack")
+//                        Log.e("WHILE", "While ke $i")
+//                        Log.e("ATTACK","Attack status $attack")
                         runOnUiThread {
                             val str:Int = i-1
-                            if(attack && !wrongAnswer) countDownTextView.setText("Attack!")
-                            else if(wrongAnswer) countDownTextView.setText("Wrong Answer!!")
+                            if(attack && !wrongAnswer) countDownTextView.setText("SERANG!")
+                            else if(wrongAnswer) countDownTextView.setText("ketikanmu salah!")
                             else countDownTextView.setText(str.toString())
                             wrongAnswer = false
                         }
@@ -351,7 +401,7 @@ class GameActivity: AppCompatActivity() {
                             if(enemyHeart>=10){
                                 if(level<3){
                                     closeEnemyHeart(enemyHeart)
-                                    kataKataTextView.visibility = View.INVISIBLE
+                                    kataKataTextView.visibility = View.GONE
                                     nextGameButton.visibility = View.VISIBLE
                                     countDownTextView.setText("You Win!")
                                     isGameRun = false
@@ -359,13 +409,13 @@ class GameActivity: AppCompatActivity() {
                                     isGameRun = false
                                     dinoImageView.visibility = View.INVISIBLE
                                     enemyImageView.visibility = View.INVISIBLE
-                                    kataKataTextView.visibility = View.INVISIBLE
+                                    kataKataTextView.visibility = View.GONE
                                     countDownTextView.setText("Level 1 Telah Selesai!")
                                     level2Button.visibility = View.VISIBLE
                                 }
                             }else{
                                 closeEnemyHeart(enemyHeart)
-                                countDownTextView.setText("Attack!")
+                                countDownTextView.setText("Serang!")
                             }
 
 
@@ -374,7 +424,7 @@ class GameActivity: AppCompatActivity() {
                         }
                         else {
                             life--
-                            countDownTextView.setText("OUCH!!")
+                            countDownTextView.setText("Aww!")
                             closePlayerHeart(playerHeart)
                             playerHeart++
                             val animation = TranslateAnimation(
@@ -404,12 +454,12 @@ class GameActivity: AppCompatActivity() {
                             animation.setRepeatMode(2)
                             dinoImageView.startAnimation(animation)
 
-
-                            countDownTextView.setText("You Die!")
+                            speakButton.visibility = View.GONE
+                            countDownTextView.setText("Kamu kalah!")
                         }
                         sleep(2000)
                         runOnUiThread {
-                            kataKataTextView.visibility = View.INVISIBLE
+                            kataKataTextView.visibility = View.GONE
                             tryAgainButton.visibility = View.VISIBLE
                             backHomeButton.visibility = View.VISIBLE
                             dinoImageView.visibility = View.INVISIBLE

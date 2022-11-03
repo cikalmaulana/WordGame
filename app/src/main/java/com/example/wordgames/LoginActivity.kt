@@ -61,6 +61,7 @@ class LoginActivity: AppCompatActivity() {
         wrongPassTextView.setTypeface(playfull)
 
         loginButton.setOnClickListener {
+//            if(usernameEditText.getText() =="")
             checkLogin()
 //            Log.e("CORRECT",correctPassword.toString())
 //            if(correctPassword){

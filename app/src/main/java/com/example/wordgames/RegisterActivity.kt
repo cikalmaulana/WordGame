@@ -142,6 +142,45 @@ class RegisterActivity: AppCompatActivity() {
         }
     }
 
+//    Register awal
+    fun registerScore(username:String){
+// Create Retrofit
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://192.168.1.9")
+            .client(getUnsafeOkHttpClient().build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        // Create Service
+        val service = retrofit.create(APIService::class.java)
+
+        // Create HashMap with fields
+        val params = HashMap<String?, String?>()
+        params["score"] = "0"
+        params["level"] = "1"
+        params["username"] = username
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            // Do the POST request and get response
+            val response = service.createScore(params)
+
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    Log.e("SUCCESS", "${response.body()}")
+                    // Convert raw JSON to pretty JSON using GSON library
+
+
+//                    Log.d("Pretty Printed JSON :", prettyJson)
+
+                } else {
+
+                    Log.e("RETROFIT_ERROR", response.code().toString())
+
+                }
+            }
+        }
+    }
     fun registerUser(username: String, pass:String, nama:String, alamat:String,nama_sekolah:String, kelas:String) {
 
         // Create Retrofit
@@ -170,6 +209,7 @@ class RegisterActivity: AppCompatActivity() {
 
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
+                    registerScore(username)
                     passwordEditText.setText("")
                     namaEditText.setText("")
                     alamatEditText.setText("")

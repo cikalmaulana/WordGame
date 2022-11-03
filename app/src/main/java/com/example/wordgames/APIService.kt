@@ -9,4 +9,8 @@ interface APIService {
     @FormUrlEncoded
     @POST("/blindApp/pg_score_player.php?")
     suspend fun createEmployee(@FieldMap params: HashMap<String?, String?>): Response<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("/blindApp/pg_score_player.php?")
+    suspend fun createScore(@FieldMap params: HashMap<String?, String?>): Response<ResponseBody>
 }
