@@ -511,7 +511,7 @@ class Level3Activity: AppCompatActivity() {
         val service = retrofit.create(APIServicePut::class.java)
 
         CoroutineScope(Dispatchers.IO).launch {
-            val response = service.updateScore(username,scoreLast)
+            val response = service.updateScore(username,scoreLast.toInt())
 
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
