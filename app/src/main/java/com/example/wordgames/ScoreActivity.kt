@@ -90,7 +90,7 @@ class ScoreActivity: AppCompatActivity() {
             "usernameTextView6" to usernameTextView6,
             "usernameTextView7" to usernameTextView7,
             "usernameTextView8" to usernameTextView8,
-            "usernameTextView9" to usernameTextView8,
+            "usernameTextView9" to usernameTextView9,
             "usernameTextView10" to usernameTextView10,
         )
 
