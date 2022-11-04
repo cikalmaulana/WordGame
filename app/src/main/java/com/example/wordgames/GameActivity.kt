@@ -33,7 +33,7 @@ import javax.net.ssl.*
 
 class GameActivity: AppCompatActivity() {
 
-//    lateinit var mTTS: TextToSpeech
+    lateinit var mTTS: TextToSpeech
 
     lateinit var countDownTextView: TextView
     lateinit var kataKataTextView: TextView
@@ -308,14 +308,14 @@ class GameActivity: AppCompatActivity() {
 
         speakButton = findViewById(R.id.speakButton)
 
-//        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
-//            Log.e("STATUS", status.toString())
-//            mTTS.setLanguage(Locale("id","ID"))
-//            if (status != TextToSpeech.ERROR){
-//                //if there is no error then set language
-//                mTTS.language = Locale("id","ID")
-//            }
-//        })
+        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
+            Log.e("STATUS", status.toString())
+            mTTS.setLanguage(Locale("id","ID"))
+            if (status != TextToSpeech.ERROR){
+                //if there is no error then set language
+                mTTS.language = Locale("id","ID")
+            }
+        })
 
         getSupportActionBar()?.hide()
         initComponent()
@@ -329,14 +329,14 @@ class GameActivity: AppCompatActivity() {
         gameStart()
     }
 
-//    override fun onPause() {
-//        if (mTTS.isSpeaking){
-//            //if speaking then stop
-//            mTTS.stop()
-//            //mTTS.shutdown()
-//        }
-//        super.onPause()
-//    }
+    override fun onPause() {
+        if (mTTS.isSpeaking){
+            //if speaking then stop
+            mTTS.stop()
+            //mTTS.shutdown()
+        }
+        super.onPause()
+    }
 
     fun gameStart(){
 
@@ -380,7 +380,7 @@ class GameActivity: AppCompatActivity() {
 //                        Log.i("KATASAATINI","Kata Sekarang Adalah $kata")
                         arrKata.removeAt(randomIndex)
                         kataKataTextView.setText(kata)
-//                        kataKataTextView.visibility = View.GONE
+                        kataKataTextView.visibility = View.GONE
                         speakButton.visibility = View.VISIBLE
                         speakButton.setOnClickListener {
                             //get text from edit text
@@ -392,7 +392,7 @@ class GameActivity: AppCompatActivity() {
                             else{
                                 //if there is text in edit text
                                 Toast.makeText(this, toSpeak, Toast.LENGTH_SHORT).show()
-//                                mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+                                mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
                             }
                         }
 
