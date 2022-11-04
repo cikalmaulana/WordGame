@@ -110,6 +110,7 @@ class ScoreActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score)
+        getSupportActionBar()?.hide()
 
         nama = intent.getStringExtra("nama").toString()
         username = intent.getStringExtra("username").toString()

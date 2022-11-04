@@ -170,14 +170,14 @@
             android:id="@+id/viewHelpButton"
             android:layout_width="150dp"
             android:layout_height="70dp"
-            android:layout_gravity="center_horizontal"
-            android:text="HELP"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/btnlayout"
-            android:textAllCaps="false"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btnlayout"
+            android:text="HELP"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
 
     </RelativeLayout>
 </RelativeLayout>

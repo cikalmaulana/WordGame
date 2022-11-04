@@ -61,6 +61,20 @@ class HomeActivity: AppCompatActivity() {
 
         viewScoreButton.setOnClickListener{
             val intent = Intent(this@HomeActivity, ScoreActivity::class.java)
+            intent.putExtra("nama", nama)
+            intent.putExtra("username", username)
+            intent.putExtra("score", score)
+            intent.putExtra("level", level)
+            startActivity(intent)
+            finish()
+        }
+
+        viewHelpButton.setOnClickListener{
+            val intent = Intent(this@HomeActivity, HelpActivity::class.java)
+            intent.putExtra("nama", nama)
+            intent.putExtra("username", username)
+            intent.putExtra("score", score)
+            intent.putExtra("level", level)
             startActivity(intent)
             finish()
         }
