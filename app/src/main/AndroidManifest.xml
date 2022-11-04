@@ -34,6 +34,7 @@
         <activity android:name=".RegisterActivity" android:label="Register"></activity>
         <activity android:name=".GameActivity" android:label="Game" android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".NextGameActivity" android:label="Game"></activity>
+        <activity android:name=".ScoreActivity" android:label="Game"></activity>
     </application>
 
     <!--permissions for INTERNET-->

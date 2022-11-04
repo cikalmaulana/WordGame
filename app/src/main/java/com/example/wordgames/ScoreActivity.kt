@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
@@ -22,17 +25,87 @@ import java.security.cert.X509Certificate
 import javax.net.ssl.*
 
 class ScoreActivity: AppCompatActivity() {
+
+    lateinit var scoreTextView1: TextView
+    lateinit var scoreTextView2: TextView
+    lateinit var scoreTextView3: TextView
+    lateinit var scoreTextView4: TextView
+    lateinit var scoreTextView5: TextView
+    lateinit var scoreTextView6: TextView
+    lateinit var scoreTextView7: TextView
+    lateinit var scoreTextView8: TextView
+    lateinit var scoreTextView9: TextView
+    lateinit var scoreTextView10: TextView
+
+    lateinit var usernameTextView1: TextView
+    lateinit var usernameTextView2: TextView
+    lateinit var usernameTextView3: TextView
+    lateinit var usernameTextView4: TextView
+    lateinit var usernameTextView5: TextView
+    lateinit var usernameTextView6: TextView
+    lateinit var usernameTextView7: TextView
+    lateinit var usernameTextView8: TextView
+    lateinit var usernameTextView9: TextView
+    lateinit var usernameTextView10: TextView
+
+    private var usernameTextView = mapOf<String, TextView>()
+    private var scoreTextView = mapOf<String, TextView>()
+
     private var username: String = ""
     private var score: String = ""
     private var level:String = ""
     private var nama:String = ""
 
     private fun initComponent(){
+        usernameTextView1 = findViewById(R.id.usernameTextView1)
+        usernameTextView2 = findViewById(R.id.usernameTextView2)
+        usernameTextView3 = findViewById(R.id.usernameTextView3)
+        usernameTextView4 = findViewById(R.id.usernameTextView4)
+        usernameTextView5 = findViewById(R.id.usernameTextView5)
+        usernameTextView6 = findViewById(R.id.usernameTextView6)
+        usernameTextView7 = findViewById(R.id.usernameTextView7)
+        usernameTextView8 = findViewById(R.id.usernameTextView8)
+        usernameTextView9 = findViewById(R.id.usernameTextView9)
+        usernameTextView10 = findViewById(R.id.usernameTextView10)
 
+        scoreTextView1 = findViewById(R.id.scoreTextView1)
+        scoreTextView2 = findViewById(R.id.scoreTextView2)
+        scoreTextView3 = findViewById(R.id.scoreTextView3)
+        scoreTextView4 = findViewById(R.id.scoreTextView4)
+        scoreTextView5 = findViewById(R.id.scoreTextView5)
+        scoreTextView6 = findViewById(R.id.scoreTextView6)
+        scoreTextView7 = findViewById(R.id.scoreTextView7)
+        scoreTextView8 = findViewById(R.id.scoreTextView8)
+        scoreTextView9 = findViewById(R.id.scoreTextView9)
+        scoreTextView10 = findViewById(R.id.scoreTextView10)
     }
 
     private fun initListener(){
+        usernameTextView = mapOf(
+            "usernameTextView1" to usernameTextView1,
+            "usernameTextView2" to usernameTextView2,
+            "usernameTextView3" to usernameTextView3,
+            "usernameTextView4" to usernameTextView4,
+            "usernameTextView5" to usernameTextView5,
+            "usernameTextView6" to usernameTextView6,
+            "usernameTextView7" to usernameTextView7,
+            "usernameTextView8" to usernameTextView8,
+            "usernameTextView9" to usernameTextView8,
+            "usernameTextView10" to usernameTextView10,
+        )
 
+        scoreTextView = mapOf(
+            "scoreTextView1" to scoreTextView1,
+            "scoreTextView2" to scoreTextView2,
+            "scoreTextView3" to scoreTextView3,
+            "scoreTextView4" to scoreTextView4,
+            "scoreTextView5" to scoreTextView5,
+            "scoreTextView6" to scoreTextView6,
+            "scoreTextView7" to scoreTextView7,
+            "scoreTextView8" to scoreTextView8,
+            "scoreTextView9" to scoreTextView9,
+            "scoreTextView10" to scoreTextView10,
+        )
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +118,8 @@ class ScoreActivity: AppCompatActivity() {
 
         initComponent()
         initListener()
+
+        getScore()
     }
 
     override fun onBackPressed(){
@@ -62,7 +137,7 @@ class ScoreActivity: AppCompatActivity() {
 //    TextView nya pake map / arraylist aja kaya yg playerheart
 //    jadi tinggal di loop, masuk masukin satu sau di looping itu 10 buah
 
-    fun getScoreLevel(username:String, nama:String){
+    fun getScore(){
         val retrofit = Retrofit.Builder()
             .baseUrl("https:192.168.1.9")
             .client(getUnsafeOkHttpClient().build())
@@ -73,7 +148,7 @@ class ScoreActivity: AppCompatActivity() {
         val service = retrofit.create(APIServiceGet::class.java)
 
         CoroutineScope(Dispatchers.IO).launch {
-            val response = service.getScore(username)
+            val response = service.getAllScore()
 
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
@@ -91,18 +166,23 @@ class ScoreActivity: AppCompatActivity() {
 
                     val jsonArray = jsonObject.getJSONArray("result")
 
+                    var index = 1
+
                     for (i in 0 until jsonArray.length()) {
 
-                        //score
+                        val usernameUser = jsonArray.getJSONObject(i).getString("username")
+                        Log.i("USERNAMEUSER ", usernameUser)
+
                         val scoreUser = jsonArray.getJSONObject(i).getString("score")
                         Log.i("SCORE ", scoreUser)
 
                         val levelUser = jsonArray.getJSONObject(i).getString("level")
                         Log.i("LEVEL ", levelUser)
 
-                        val username = jsonArray.getJSONObject(i).getString("username")
-                        Log.i("USERNAME ", username)
-
+                        Log.e("INDEX", index.toString())
+                        usernameTextView.get("usernameTextView$index")?.setText("$index. $usernameUser")
+                        scoreTextView.get("scoreTextView$index")?.setText("$scoreUser pts")
+                        index++
                     }
 
                     Log.d("Pretty Printed JSON :", prettyJson)

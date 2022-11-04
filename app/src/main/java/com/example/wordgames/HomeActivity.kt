@@ -59,6 +59,12 @@ class HomeActivity: AppCompatActivity() {
         viewHelpButton.setTypeface(playfull)
         usernameTextView.setTypeface(playfull)
 
+        viewScoreButton.setOnClickListener{
+            val intent = Intent(this@HomeActivity, ScoreActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         layoutStartGame.setOnClickListener {
             val intent = Intent(this@HomeActivity, LevelActivity::class.java)
             intent.putExtra("nama", nama)
