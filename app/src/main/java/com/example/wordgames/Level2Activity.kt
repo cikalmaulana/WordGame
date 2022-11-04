@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
@@ -26,7 +27,7 @@ import kotlin.random.Random
 
 class Level2Activity: AppCompatActivity() {
 
-//    lateinit var mTTS: TextToSpeech
+    lateinit var mTTS: TextToSpeech
 
     lateinit var countDownTextView: TextView
     lateinit var kataKataTextView: TextView
@@ -172,6 +173,10 @@ class Level2Activity: AppCompatActivity() {
         level2Button.setOnClickListener {
             sound.stop()
             val intent = Intent(this@Level2Activity, Level3Activity::class.java)
+            intent.putExtra("nama", nama)
+            intent.putExtra("username", username)
+            intent.putExtra("score", scoreLast)
+            intent.putExtra("level", levelLast)
             startActivity(intent)
             finish()
         }
@@ -217,7 +222,7 @@ class Level2Activity: AppCompatActivity() {
             if (level<3){
                 nextGameButton.visibility = View.INVISIBLE
                 kataKataTextView.visibility = View.VISIBLE
-
+                speakButton.visibility = View.GONE
                 enemyHeart = 10
                 while(enemyHeart>0){
                     openEnemyHeart(enemyHeart)
@@ -287,14 +292,14 @@ class Level2Activity: AppCompatActivity() {
 
         speakButton = findViewById(R.id.speakButton)
 
-//        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
-//            Log.e("STATUS", status.toString())
-//            mTTS.setLanguage(Locale("id","ID"))
-//            if (status != TextToSpeech.ERROR){
-//                //if there is no error then set language
-//                mTTS.language = Locale("id","ID")
-//            }
-//        })
+        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
+            Log.e("STATUS", status.toString())
+            mTTS.setLanguage(Locale("id","ID"))
+            if (status != TextToSpeech.ERROR){
+                //if there is no error then set language
+                mTTS.language = Locale("id","ID")
+            }
+        })
 
         getSupportActionBar()?.hide()
         initComponent()
@@ -349,7 +354,7 @@ class Level2Activity: AppCompatActivity() {
                         Log.i("KATASAATINI","Kata Sekarang Adalah $kata")
                         arrKata.removeAt(randomIndex)
                         kataKataTextView.setText(kata)
-//                        kataKataTextView.visibility = View.GONE
+                        kataKataTextView.visibility = View.GONE
                         speakButton.visibility = View.VISIBLE
                         speakButton.setOnClickListener {
                             //get text from edit text
@@ -361,7 +366,7 @@ class Level2Activity: AppCompatActivity() {
                             else{
                                 //if there is text in edit text
                                 Toast.makeText(this, toSpeak, Toast.LENGTH_SHORT).show()
-//                                mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+                                mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
                             }
                         }
                         indexArrayKata--
@@ -406,6 +411,10 @@ class Level2Activity: AppCompatActivity() {
                                     kataKataTextView.visibility = View.INVISIBLE
                                     countDownTextView.setText("Level 2 Telah Selesai!")
                                     level2Button.visibility = View.VISIBLE
+                                    speakButton.visibility = View.GONE
+                                    enemyImageView.visibility = View.GONE
+                                    scoreLast = score.toString()
+                                    putScore()
                                 }
                             }else{
                                 closeEnemyHeart(enemyHeart)

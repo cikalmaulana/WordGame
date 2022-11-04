@@ -39,7 +39,6 @@ class Level3Activity: AppCompatActivity() {
     lateinit var attackButton: Button
     lateinit var tryAgainButton: Button
     lateinit var nextGameButton:Button
-    lateinit var level2Button: Button
     lateinit var backHomeButton: Button
 
     lateinit var playerHeart1: ImageView
@@ -105,7 +104,6 @@ class Level3Activity: AppCompatActivity() {
 
         tryAgainButton = findViewById(R.id.tryAgainButton)
         nextGameButton = findViewById(R.id.nextGameButton)
-        level2Button = findViewById(R.id.level2Button)
         backHomeButton = findViewById(R.id.backHomeButton)
         speakButton = findViewById(R.id.speakButton)
 
@@ -159,7 +157,6 @@ class Level3Activity: AppCompatActivity() {
         attackButton.setTypeface(playfull)
         tryAgainButton.setTypeface(playfull)
         nextGameButton.setTypeface(playfull)
-        level2Button.setTypeface(playfull)
         backHomeButton.setTypeface(playfull)
         speakButton.setTypeface(playfull)
 
@@ -169,12 +166,6 @@ class Level3Activity: AppCompatActivity() {
         levelLast = intent.getStringExtra("level").toString()
 
         speakButton.visibility = View.GONE
-
-        level2Button.setOnClickListener {
-            val intent = Intent(this@Level3Activity, Level2Activity::class.java)
-            startActivity(intent)
-            finish()
-        }
 
         backHomeButton.setOnClickListener {
             sound.stop()
@@ -217,7 +208,7 @@ class Level3Activity: AppCompatActivity() {
             if (level<3){
                 nextGameButton.visibility = View.INVISIBLE
                 kataKataTextView.visibility = View.VISIBLE
-
+                speakButton.visibility = View.GONE
                 enemyHeart = 10
                 while(enemyHeart>0){
                     openEnemyHeart(enemyHeart)
@@ -405,6 +396,10 @@ class Level3Activity: AppCompatActivity() {
                                     enemyImageView.visibility = View.INVISIBLE
                                     kataKataTextView.visibility = View.INVISIBLE
                                     countDownTextView.setText("Level 3 Telah Selesai!")
+                                    speakButton.visibility = View.GONE
+                                    enemyImageView.visibility = View.GONE
+                                    scoreLast = score.toString()
+                                    putScore()
                                 }
                             }else{
                                 closeEnemyHeart(enemyHeart)

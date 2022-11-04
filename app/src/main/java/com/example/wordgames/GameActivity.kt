@@ -4,6 +4,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.graphics.Typeface
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
@@ -26,12 +27,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.security.SecureRandom
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
+import java.util.*
 import javax.net.ssl.*
 
 
 class GameActivity: AppCompatActivity() {
 
-//    lateinit var mTTS:TextToSpeech
+    lateinit var mTTS: TextToSpeech
 
     lateinit var countDownTextView: TextView
     lateinit var kataKataTextView: TextView
@@ -180,6 +182,10 @@ class GameActivity: AppCompatActivity() {
         level2Button.setOnClickListener {
             sound.stop()
             val intent = Intent(this@GameActivity, Level2Activity::class.java)
+            intent.putExtra("nama", nama)
+            intent.putExtra("username", username)
+            intent.putExtra("score", scoreLast)
+            intent.putExtra("level", levelLast)
             startActivity(intent)
             finish()
         }
@@ -226,6 +232,7 @@ class GameActivity: AppCompatActivity() {
             if (level<3){
                 nextGameButton.visibility = View.INVISIBLE
                 kataKataTextView.visibility = View.VISIBLE
+                speakButton.visibility = View.GONE
 
                 enemyHeart = 10
                 while(enemyHeart>0){
@@ -301,14 +308,14 @@ class GameActivity: AppCompatActivity() {
 
         speakButton = findViewById(R.id.speakButton)
 
-//        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
-//            Log.e("STATUS", status.toString())
-//            mTTS.setLanguage(Locale("id","ID"))
-//            if (status != TextToSpeech.ERROR){
-//                //if there is no error then set language
-//                mTTS.language = Locale("id","ID")
-//            }
-//        })
+        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
+            Log.e("STATUS", status.toString())
+            mTTS.setLanguage(Locale("id","ID"))
+            if (status != TextToSpeech.ERROR){
+                //if there is no error then set language
+                mTTS.language = Locale("id","ID")
+            }
+        })
 
         getSupportActionBar()?.hide()
         initComponent()
@@ -322,14 +329,14 @@ class GameActivity: AppCompatActivity() {
         gameStart()
     }
 
-//    override fun onPause() {
-//        if (mTTS.isSpeaking){
-//            //if speaking then stop
-//            mTTS.stop()
-//            //mTTS.shutdown()
-//        }
-//        super.onPause()
-//    }
+    override fun onPause() {
+        if (mTTS.isSpeaking){
+            //if speaking then stop
+            mTTS.stop()
+            //mTTS.shutdown()
+        }
+        super.onPause()
+    }
 
     fun gameStart(){
 
@@ -373,7 +380,7 @@ class GameActivity: AppCompatActivity() {
 //                        Log.i("KATASAATINI","Kata Sekarang Adalah $kata")
                         arrKata.removeAt(randomIndex)
                         kataKataTextView.setText(kata)
-//                        kataKataTextView.visibility = View.GONE
+                        kataKataTextView.visibility = View.GONE
                         speakButton.visibility = View.VISIBLE
                         speakButton.setOnClickListener {
                             //get text from edit text
@@ -385,7 +392,7 @@ class GameActivity: AppCompatActivity() {
                             else{
                                 //if there is text in edit text
                                 Toast.makeText(this, toSpeak, Toast.LENGTH_SHORT).show()
-//                                mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+                                mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
                             }
                         }
 
@@ -429,8 +436,12 @@ class GameActivity: AppCompatActivity() {
                                     dinoImageView.visibility = View.INVISIBLE
                                     enemyImageView.visibility = View.INVISIBLE
                                     kataKataTextView.visibility = View.GONE
+                                    speakButton.visibility = View.GONE
+                                    enemyImageView.visibility = View.GONE
                                     countDownTextView.setText("Level 1 Telah Selesai!")
                                     level2Button.visibility = View.VISIBLE
+                                    scoreLast = score.toString()
+                                    putScore()
                                 }
                             }else{
                                 closeEnemyHeart(enemyHeart)

@@ -334,18 +334,6 @@
                 android:textSize="20dp"
                 android:visibility="invisible" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/level2Button"
-                android:layout_width="150dp"
-                android:layout_height="65dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/custom_button"
-                android:text="Lanjut Ke Level 2"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                android:visibility="invisible" />
-
         </RelativeLayout>
 
         <RelativeLayout
