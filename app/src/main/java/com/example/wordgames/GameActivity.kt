@@ -16,11 +16,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
 import java.lang.Thread.sleep
-import java.util.Collections.addAll
 import kotlin.collections.ArrayList
 import kotlin.random.Random
 
-import android.speech.tts.TextToSpeech
 import android.widget.Toast
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -28,7 +26,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.security.SecureRandom
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
-import java.util.*
 import javax.net.ssl.*
 
 
@@ -86,14 +83,16 @@ class GameActivity: AppCompatActivity() {
 
     private var username: String = ""
     private var scoreLast: String = ""
+    private var levelLast:String =""
+    private var nama:String=""
 
     lateinit var speakButton: Button
 
-    private var arrKataTemplate: ArrayList<String> = arrayListOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
+    private var arrKataTemplate: ArrayList<String> = arrayListOf("Kucing", "Jembatan", "Rumah", "Belajar", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
         "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
         "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
 
-    private var arrKata: ArrayList<String> = arrayListOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
+    private var arrKata: ArrayList<String> = arrayListOf("Kucing", "Jembatan", "Rumah", "Belajar", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
         "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
         "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
 
@@ -171,6 +170,10 @@ class GameActivity: AppCompatActivity() {
 
         username = intent.getStringExtra("username").toString()
         scoreLast = intent.getStringExtra("score").toString()
+        nama = intent.getStringExtra("nama").toString()
+        levelLast = intent.getStringExtra("level").toString()
+
+        Log.e("ONCREATE", "Username  = $username, scorelst = $scoreLast, nama = $nama, levellast = $levelLast")
 
         speakButton.visibility = View.GONE
 
@@ -185,6 +188,10 @@ class GameActivity: AppCompatActivity() {
             sound.stop()
             backHomeButton.visibility = View.INVISIBLE
             val intent = Intent(this@GameActivity, HomeActivity::class.java)
+            intent.putExtra("nama", nama)
+            intent.putExtra("username", username)
+            intent.putExtra("score", scoreLast)
+            intent.putExtra("level", levelLast)
             startActivity(intent)
             finish()
         }
@@ -469,6 +476,7 @@ class GameActivity: AppCompatActivity() {
                             speakButton.visibility = View.GONE
                             if(scoreLast< score.toString()){
                                 Log.e("SCOREPUT","Masuk if")
+                                scoreLast = score.toString()
                                 putScore()
                             }
                             countDownTextView.setText("Kamu kalah!")
@@ -515,6 +523,10 @@ class GameActivity: AppCompatActivity() {
         sound.stop()
         super.onBackPressed();
         val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("nama", nama)
+        intent.putExtra("username", username)
+        intent.putExtra("score", scoreLast)
+        intent.putExtra("level", levelLast)
         startActivity(intent)
         finish()
     }
@@ -530,7 +542,7 @@ class GameActivity: AppCompatActivity() {
         val service = retrofit.create(APIServicePut::class.java)
 
         CoroutineScope(Dispatchers.IO).launch {
-            val response = service.updateScore(username,score)
+            val response = service.updateScore(username,scoreLast)
 
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {

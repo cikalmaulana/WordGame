@@ -24,6 +24,7 @@ class LevelActivity: AppCompatActivity() {
     private var username: String = ""
     private var score: String = ""
     private var level:String = ""
+    private var nama:String = ""
 
     private fun initComponent(){
         pilihLevelTextView = findViewById(R.id.pilihLevelTextView)
@@ -37,14 +38,17 @@ class LevelActivity: AppCompatActivity() {
         val airfool = Typeface.createFromAsset(assets, "font/Airfools.otf")
         pilihLevelTextView.setTypeface(airfool)
 
+        nama = intent.getStringExtra("nama").toString()
         username = intent.getStringExtra("username").toString()
         score = intent.getStringExtra("score").toString()
-        level = intent.getStringExtra("leve").toString()
+        level = intent.getStringExtra("level").toString()
 
         level1Button.setOnClickListener {
             val intent = Intent(this, GameActivity::class.java)
+            intent.putExtra("nama", nama)
             intent.putExtra("username", username)
             intent.putExtra("score", score)
+            intent.putExtra("level", level)
             startActivity(intent)
             finish()
         }
@@ -52,8 +56,10 @@ class LevelActivity: AppCompatActivity() {
         level2Button.setOnClickListener {
             if(level>= 2.toString()){
                 val intent = Intent(this, Level2Activity::class.java)
+                intent.putExtra("nama", nama)
                 intent.putExtra("username", username)
                 intent.putExtra("score", score)
+                intent.putExtra("level", level)
                 startActivity(intent)
                 finish()
             }else{
@@ -65,8 +71,10 @@ class LevelActivity: AppCompatActivity() {
         level3Button.setOnClickListener {
             if(level>= 3.toString()){
                 val intent = Intent(this, Level3Activity::class.java)
+                intent.putExtra("nama", nama)
                 intent.putExtra("username", username)
                 intent.putExtra("score", score)
+                intent.putExtra("level", level)
                 startActivity(intent)
                 finish()
             }else{
@@ -90,6 +98,10 @@ class LevelActivity: AppCompatActivity() {
     override fun onBackPressed(){
         super.onBackPressed();
         val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("nama", nama)
+        intent.putExtra("username", username)
+        intent.putExtra("score", score)
+        intent.putExtra("level", level)
         startActivity(intent)
         finish()
     }

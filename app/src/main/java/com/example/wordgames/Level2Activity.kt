@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
@@ -73,21 +72,23 @@ class Level2Activity: AppCompatActivity() {
     private var time: Int = 11
     private var level:Int = 1
     private var indexArrayKata: Int = 31
-    private var score: Int = 300
+    private var score: Int = 0
 
     private var username: String = ""
     private var scoreLast: String = ""
+    private var levelLast:String =""
+    private var nama:String=""
 
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
 
     private var arrKataTemplate: ArrayList<String> = arrayListOf("Rumah Sakit", "Polisi Tidur", "Merah Jambu", "Mesin Cuci", "Sikat Gigi", "Papan Tulis", "Jam Dinding", "Jam Tangan", "Pulang Pergi",
-        "Pagi Hari", "Meja Makan", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
-        "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
+        "Pagi Hari", "Meja Makan", "Pergi ke Pasar", "Sangat Panas", "Lemari Baju", "Meja Hijau", "Meja dan Kursi", "Sepanjang Hari", "Jendela Kaca", "Kerja Keras", "Balok Kayu",
+        "Balap Motor", "Di Sekolah", "Sangat Lambat", "Sangat Cepat", "Dari Sekolah", "Ban Sepeda", "Membantu Ibu", "Berlari Cepat", "Sedang Menyapu", "Sepuluh Ekor","Kemarin Pagi","Akhir Pekan","Tadi Malam", "Hitam Putih", "Musim Panen", "Uang Tunai")
 
-    private var arrKata: ArrayList<String> = arrayListOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
-        "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
-        "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
+    private var arrKata: ArrayList<String> = arrayListOf("Rumah Sakit", "Polisi Tidur", "Merah Jambu", "Mesin Cuci", "Sikat Gigi", "Papan Tulis", "Jam Dinding", "Jam Tangan", "Pulang Pergi",
+        "Pagi Hari", "Meja Makan", "Pergi ke Pasar", "Sangat Panas", "Lemari Baju", "Meja Hijau", "Meja dan Kursi", "Sepanjang Hari", "Jendela Kaca", "Kerja Keras", "Balok Kayu",
+        "Balap Motor", "Di Sekolah", "Sangat Lambat", "Sangat Cepat", "Dari Sekolah", "Ban Sepeda", "Membantu Ibu", "Berlari Cepat", "Sedang Menyapu", "Sepuluh Ekor","Kemarin Pagi","Akhir Pekan","Tadi Malam", "Hitam Putih", "Musim Panen", "Uang Tunai")
 
 
     private var subArrKata: ArrayList<String> = arrayListOf()
@@ -163,6 +164,8 @@ class Level2Activity: AppCompatActivity() {
 
         username = intent.getStringExtra("username").toString()
         scoreLast = intent.getStringExtra("score").toString()
+        nama = intent.getStringExtra("nama").toString()
+        levelLast = intent.getStringExtra("level").toString()
 
         speakButton.visibility = View.GONE
 
@@ -176,6 +179,10 @@ class Level2Activity: AppCompatActivity() {
         backHomeButton.setOnClickListener {
             sound.stop()
             val intent = Intent(this@Level2Activity, HomeActivity::class.java)
+            intent.putExtra("nama", nama)
+            intent.putExtra("username", username)
+            intent.putExtra("score", scoreLast)
+            intent.putExtra("level", levelLast)
             startActivity(intent)
             finish()
         }
@@ -442,8 +449,9 @@ class Level2Activity: AppCompatActivity() {
                             dinoImageView.startAnimation(animation)
 
                             speakButton.visibility = View.GONE
-                            if(scoreLast< score.toString()){
+                            if(scoreLast < (300+score).toString()){
                                 Log.e("SCOREPUT","Masuk if")
+                                scoreLast = (300+score).toString()
                                 putScore()
                             }
                             countDownTextView.setText("Kamu kalah!")
@@ -490,6 +498,10 @@ class Level2Activity: AppCompatActivity() {
         sound.stop()
         super.onBackPressed();
         val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("nama", nama)
+        intent.putExtra("username", username)
+        intent.putExtra("score", scoreLast)
+        intent.putExtra("level", levelLast)
         startActivity(intent)
         finish()
     }
@@ -504,7 +516,7 @@ class Level2Activity: AppCompatActivity() {
         val service = retrofit.create(APIServicePut::class.java)
 
         CoroutineScope(Dispatchers.IO).launch {
-            val response = service.updateScore(username,score)
+            val response = service.updateScore(username,scoreLast)
 
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {

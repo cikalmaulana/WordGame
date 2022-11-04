@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp">
 
         <TextView
             android:id="@+id/registerTextView"
@@ -23,12 +24,12 @@
             android:textColor="@color/blue"/>
 
         <TextView
+            android:id="@+id/namaTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama"
             android:layout_marginLeft="15dp"
             android:textSize="18dp"
-            android:layout_gravity="center_horizontal"
             android:textColor="@color/black"/>
 
         <EditText
@@ -42,14 +43,13 @@
             android:background="@drawable/input_custom"/>
 
         <TextView
-
+            android:id="@+id/alamatTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Alamat"
             android:layout_marginLeft="15dp"
             android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_gravity="center_horizontal"/>
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/alamatEditText"
@@ -62,13 +62,13 @@
             android:background="@drawable/input_custom"/>
 
         <TextView
+            android:id="@+id/asalSekolahTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Asal Sekolah"
             android:layout_marginLeft="15dp"
             android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_gravity="center_horizontal"/>
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/asalSekolahEditText"
@@ -81,13 +81,13 @@
             android:background="@drawable/input_custom"/>
 
         <TextView
+            android:id="@+id/kelasTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kelas"
             android:layout_marginLeft="15dp"
             android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_gravity="center_horizontal"/>
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/kelasEditText"
@@ -100,13 +100,13 @@
             android:background="@drawable/input_custom"/>
 
         <TextView
+            android:id="@+id/usernameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username"
             android:layout_marginLeft="15dp"
             android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_gravity="center_horizontal"/>
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/usernameEditText"
@@ -119,13 +119,13 @@
             android:background="@drawable/input_custom"/>
 
         <TextView
+            android:id="@+id/passwordTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Password"
             android:layout_marginLeft="15dp"
             android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_gravity="center_horizontal"/>
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/passwordEditText"

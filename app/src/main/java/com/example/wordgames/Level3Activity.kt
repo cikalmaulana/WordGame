@@ -13,8 +13,15 @@ import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.Thread.sleep
+import java.security.SecureRandom
+import java.security.cert.CertificateException
+import java.security.cert.X509Certificate
 import java.util.*
+import javax.net.ssl.*
 import kotlin.random.Random
 
 
@@ -66,18 +73,23 @@ class Level3Activity: AppCompatActivity() {
     private var indexArrayKata: Int = 31
     private var score: Int = 600
 
+    private var username: String = ""
+    private var scoreLast: String = ""
+    private var levelLast:String =""
+    private var nama:String=""
+
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
 
     lateinit var speakButton: Button
 
-    private var arrKataTemplate: ArrayList<String> = arrayListOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
-        "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
-        "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
+    private var arrKataTemplate: ArrayList<String> = arrayListOf("Ibu pergi ke pasar", "Semua murid baru memakai baju olahraga", "Ayah menyimpan lemari besi di dalam gudang", "Ayahnya kini sedang dirawat di rumah sakit", "Rumahnya itu akan segera dijual", "keluarga mereka akan berwisata ke Pulau Dewata", "Ibu memotong halus bawang merah", "Dimas yakin memenangkan lomba balap motor itu", "Kami membaca buku itu sekali lagi",
+        "Aku membuang sampah di pagi hari", "Ibu sedang mencuci dan memasak", "Ibu membelikanku sepeda", "Kakek menaruh makanan di dalam kulkas", "Matahari pagi bersinar cerah", "Paman mengunjungiku bulan depan", "Aku mencuci piring", "Ayah makan menggunakan sendok", "Adik menonton televisi", "Ibu minum menggunakan gelas", "Aku mandi menggunakan sabun",
+        "Menyikat gigi itu sangatlah penting", "Temanku yang berkacamata itu pintar sekali", "Mesin jahit milik nenek sudah sangat tua", "Aku tidur larut malam", "Ibu menyetrika baju", "Temanku berkaus merah", "Ayah memakai kemeja untuk bekerja", "Ibu guru duduk di kursi", "Adik sekarang sudah bisa membaca dan menulis", "Adik bermain bersama temannya","Keluargaku pergi ke pantai","Budi paling pintar di kelasnya","Hari ini sekolah diliburkan", "Aku rajin belajar agar menjadi pintar", "Adik adalah salah seorang atlet berprestasi", "Nenek pergi ke pasar dan membeli sayur")
 
-    private var arrKata: ArrayList<String> = arrayListOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
-        "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
-        "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
+    private var arrKata: ArrayList<String> = arrayListOf("Ibu pergi ke pasar", "Semua murid baru memakai baju olahraga", "Ayah menyimpan lemari besi di dalam gudang", "Ayahnya kini sedang dirawat di rumah sakit", "Rumahnya itu akan segera dijual", "keluarga mereka akan berwisata ke Pulau Dewata", "Ibu memotong halus bawang merah", "Dimas yakin memenangkan lomba balap motor itu", "Kami membaca buku itu sekali lagi",
+        "Aku membuang sampah di pagi hari", "Ibu sedang mencuci dan memasak", "Ibu membelikanku sepeda", "Kakek menaruh makanan di dalam kulkas", "Matahari pagi bersinar cerah", "Paman mengunjungiku bulan depan", "Aku mencuci piring", "Ayah makan menggunakan sendok", "Adik menonton televisi", "Ibu minum menggunakan gelas", "Aku mandi menggunakan sabun",
+        "Menyikat gigi itu sangatlah penting", "Temanku yang berkacamata itu pintar sekali", "Mesin jahit milik nenek sudah sangat tua", "Aku tidur larut malam", "Ibu menyetrika baju", "Temanku berkaus merah", "Ayah memakai kemeja untuk bekerja", "Ibu guru duduk di kursi", "Adik sekarang sudah bisa membaca dan menulis", "Adik bermain bersama temannya","Keluargaku pergi ke pantai","Budi paling pintar di kelasnya","Hari ini sekolah diliburkan", "Aku rajin belajar agar menjadi pintar", "Adik adalah salah seorang atlet berprestasi", "Nenek pergi ke pasar dan membeli sayur")
 
 
     private var subArrKata: ArrayList<String> = arrayListOf()
@@ -151,6 +163,11 @@ class Level3Activity: AppCompatActivity() {
         backHomeButton.setTypeface(playfull)
         speakButton.setTypeface(playfull)
 
+        username = intent.getStringExtra("username").toString()
+        scoreLast = intent.getStringExtra("score").toString()
+        nama = intent.getStringExtra("nama").toString()
+        levelLast = intent.getStringExtra("level").toString()
+
         speakButton.visibility = View.GONE
 
         level2Button.setOnClickListener {
@@ -162,6 +179,10 @@ class Level3Activity: AppCompatActivity() {
         backHomeButton.setOnClickListener {
             sound.stop()
             val intent = Intent(this@Level3Activity, HomeActivity::class.java)
+            intent.putExtra("nama", nama)
+            intent.putExtra("username", username)
+            intent.putExtra("score", scoreLast)
+            intent.putExtra("level", levelLast)
             startActivity(intent)
             finish()
         }
@@ -427,6 +448,11 @@ class Level3Activity: AppCompatActivity() {
                             dinoImageView.startAnimation(animation)
 
                             speakButton.visibility = View.GONE
+                            if(scoreLast < (600+score).toString()){
+                                Log.e("SCOREPUT","Masuk if")
+                                scoreLast = (600+score).toString()
+                                putScore()
+                            }
                             countDownTextView.setText("Kamu kalah!")
                         }
                         sleep(2000)
@@ -471,8 +497,76 @@ class Level3Activity: AppCompatActivity() {
         sound.stop()
         super.onBackPressed();
         val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("nama", nama)
+        intent.putExtra("username", username)
+        intent.putExtra("score", scoreLast)
+        intent.putExtra("level", levelLast)
         startActivity(intent)
         finish()
+    }
+
+    fun putScore(){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https:192.168.1.9")
+            .client(getUnsafeOkHttpClient().build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        // Create Service
+        val service = retrofit.create(APIServicePut::class.java)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = service.updateScore(username,scoreLast)
+
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+
+                } else {
+
+                    Log.e("RETROFIT_ERROR", response.code().toString())
+
+                }
+            }
+        }
+    }
+
+    fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
+        return try {
+            // Create a trust manager that does not validate certificate chains
+            val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(
+                object : X509TrustManager {
+                    @Throws(CertificateException::class)
+                    override fun checkClientTrusted(chain: Array<X509Certificate?>?, authType: String?) {
+                    }
+
+                    @Throws(CertificateException::class)
+                    override fun checkServerTrusted(chain: Array<X509Certificate?>?, authType: String?) {
+                    }
+
+                    override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
+
+//                    val acceptedIssuers: Array<X509Certificate?>?
+//                        get() = arrayOf()
+                }
+            )
+
+            // Install the all-trusting trust manager
+            val sslContext: SSLContext = SSLContext.getInstance("SSL")
+            sslContext.init(null, trustAllCerts, SecureRandom())
+
+            /* Create an ssl socket factory with our all-trusting manager */
+            val sslSocketFactory: SSLSocketFactory = sslContext.getSocketFactory()
+            val builder = OkHttpClient.Builder()
+            builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+            builder.hostnameVerifier(object : HostnameVerifier {
+                override fun verify(hostname: String?, session: SSLSession?): Boolean {
+                    return true
+                }
+            })
+            builder
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
     }
 
 }

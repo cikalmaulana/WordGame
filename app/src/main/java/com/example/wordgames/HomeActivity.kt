@@ -45,9 +45,10 @@ class HomeActivity: AppCompatActivity() {
         username = intent.getStringExtra("username").toString()
         nama = intent.getStringExtra("nama").toString()
         score = intent.getStringExtra("score").toString()
-        level = intent.getStringExtra("leve").toString()
+        level = intent.getStringExtra("level").toString()
         usernameTextView.setText(nama)
         userScoreTextView.setText(score)
+        userRankTextView.setText(level)
         val playfull= Typeface.createFromAsset(assets, "font/playfull.otf")
         klikTextView.setTypeface(playfull)
         scoreTextView.setTypeface(playfull)
@@ -60,6 +61,7 @@ class HomeActivity: AppCompatActivity() {
 
         layoutStartGame.setOnClickListener {
             val intent = Intent(this@HomeActivity, LevelActivity::class.java)
+            intent.putExtra("nama", nama)
             intent.putExtra("username", username)
             intent.putExtra("score", score)
             intent.putExtra("level", level)
