@@ -40,6 +40,7 @@ class Level3Activity: AppCompatActivity() {
     lateinit var tryAgainButton: Button
     lateinit var nextGameButton:Button
     lateinit var backHomeButton: Button
+    lateinit var tulisanSkorTextView: TextView
 
     lateinit var playerHeart1: ImageView
     lateinit var playerHeart2: ImageView
@@ -47,6 +48,7 @@ class Level3Activity: AppCompatActivity() {
 
     lateinit var dinoImageView: ImageView
     lateinit var enemyImageView: ImageView
+    lateinit var flamebgImageView: ImageView
 
     lateinit var enemyHeart1: ImageView
     lateinit var enemyHeart2: ImageView
@@ -58,6 +60,7 @@ class Level3Activity: AppCompatActivity() {
     lateinit var enemyHeart8: ImageView
     lateinit var enemyHeart9: ImageView
     lateinit var enemyHeart10: ImageView
+    lateinit var flameImageView: ImageView
 
     lateinit var sound: MediaPlayer
 
@@ -66,10 +69,10 @@ class Level3Activity: AppCompatActivity() {
     private var attack: Boolean = false
     private var wrongAnswer: Boolean = false
     private var enemyHeart: Int = 1
-    private var i: Int = 11
-    private var time: Int = 11
+    private var i: Int = 21
+    private var time: Int = 21
     private var level:Int = 1
-    private var indexArrayKata: Int = 31
+    private var indexArrayKata: Int = 32
     private var score: Int = 600
 
     private var username: String = ""
@@ -82,14 +85,15 @@ class Level3Activity: AppCompatActivity() {
 
     lateinit var speakButton: Button
 
-    private var arrKataTemplate: ArrayList<String> = arrayListOf("Ibu pergi ke pasar", "Semua murid baru memakai baju olahraga", "Ayah menyimpan lemari besi di dalam gudang", "Ayahnya kini sedang dirawat di rumah sakit", "Rumahnya itu akan segera dijual", "keluarga mereka akan berwisata ke Pulau Dewata", "Ibu memotong halus bawang merah", "Dimas yakin memenangkan lomba balap motor itu", "Kami membaca buku itu sekali lagi",
-        "Aku membuang sampah di pagi hari", "Ibu sedang mencuci dan memasak", "Ibu membelikanku sepeda", "Kakek menaruh makanan di dalam kulkas", "Matahari pagi bersinar cerah", "Paman mengunjungiku bulan depan", "Aku mencuci piring", "Ayah makan menggunakan sendok", "Adik menonton televisi", "Ibu minum menggunakan gelas", "Aku mandi menggunakan sabun",
-        "Menyikat gigi itu sangatlah penting", "Temanku yang berkacamata itu pintar sekali", "Mesin jahit milik nenek sudah sangat tua", "Aku tidur larut malam", "Ibu menyetrika baju", "Temanku berkaus merah", "Ayah memakai kemeja untuk bekerja", "Ibu guru duduk di kursi", "Adik sekarang sudah bisa membaca dan menulis", "Adik bermain bersama temannya","Keluargaku pergi ke pantai","Budi paling pintar di kelasnya","Hari ini sekolah diliburkan", "Aku rajin belajar agar menjadi pintar", "Adik adalah salah seorang atlet berprestasi", "Nenek pergi ke pasar dan membeli sayur")
+    private var arrKataTemplate: ArrayList<String> = arrayListOf("Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur", "Rudi bakar sampah", "Kakak naik motor", "Paman tebang kayu", "Sungai tercemar limbah", "Bersepeda kurangi polusi", "Bensin merusak lingkungan", "Habiskan makanan tanpa sisa",
+            "Nenek menyapu halaman", "Pak Agus mengolah sampah plastik", "Petani menggunakan pupuk organik","Sayuran itu tidak diberi pestisida", "Pemerintah mereboisasi hutan gundul","Setiap toko tidak menggunakan kantung plastik","Gunakan sedotan ramah lingkungan","Kita harus hemat air","Siska mematikan lampu pada siang hari", "Jidan menanam sayur di halaman rumah",
+            "Fitri memisahkan jenis sampah","Daun kering dapat dijadikan pupuk organik", "Bahan kimia tidak baik untuk lingkungan", "Seluruh siswa menggunakan transportasi umum","Efek rumah kaca mengancam lingkungan", "Pak Yanto membersihkan solokan yang mampet","Generasi muda harus lestarikan alam","Banyak monyet menyerang rumah warga","Udara di desa sangat segar", "Udara di kota begitu panas dan sesak",
+            "Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur")
 
-    private var arrKata: ArrayList<String> = arrayListOf("Ibu pergi ke pasar", "Semua murid baru memakai baju olahraga", "Ayah menyimpan lemari besi di dalam gudang", "Ayahnya kini sedang dirawat di rumah sakit", "Rumahnya itu akan segera dijual", "keluarga mereka akan berwisata ke Pulau Dewata", "Ibu memotong halus bawang merah", "Dimas yakin memenangkan lomba balap motor itu", "Kami membaca buku itu sekali lagi",
-        "Aku membuang sampah di pagi hari", "Ibu sedang mencuci dan memasak", "Ibu membelikanku sepeda", "Kakek menaruh makanan di dalam kulkas", "Matahari pagi bersinar cerah", "Paman mengunjungiku bulan depan", "Aku mencuci piring", "Ayah makan menggunakan sendok", "Adik menonton televisi", "Ibu minum menggunakan gelas", "Aku mandi menggunakan sabun",
-        "Menyikat gigi itu sangatlah penting", "Temanku yang berkacamata itu pintar sekali", "Mesin jahit milik nenek sudah sangat tua", "Aku tidur larut malam", "Ibu menyetrika baju", "Temanku berkaus merah", "Ayah memakai kemeja untuk bekerja", "Ibu guru duduk di kursi", "Adik sekarang sudah bisa membaca dan menulis", "Adik bermain bersama temannya","Keluargaku pergi ke pantai","Budi paling pintar di kelasnya","Hari ini sekolah diliburkan", "Aku rajin belajar agar menjadi pintar", "Adik adalah salah seorang atlet berprestasi", "Nenek pergi ke pasar dan membeli sayur")
-
+    private var arrKata: ArrayList<String> = arrayListOf("Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur", "Rudi bakar sampah", "Kakak naik motor", "Paman tebang kayu", "Sungai tercemar limbah", "Bersepeda kurangi polusi", "Bensin merusak lingkungan", "Habiskan makanan tanpa sisa",
+        "Nenek menyapu halaman", "Pak Agus mengolah sampah plastik", "Petani menggunakan pupuk organik","Sayuran itu tidak diberi pestisida", "Pemerintah mereboisasi hutan gundul","Setiap toko tidak menggunakan kantung plastik","Gunakan sedotan ramah lingkungan","Kita harus hemat air","Siska mematikan lampu pada siang hari", "Jidan menanam sayur di halaman rumah",
+        "Fitri memisahkan jenis sampah","Daun kering dapat dijadikan pupuk organik", "Bahan kimia tidak baik untuk lingkungan", "Seluruh siswa menggunakan transportasi umum","Efek rumah kaca mengancam lingkungan", "Pak Yanto membersihkan solokan yang mampet","Generasi muda harus lestarikan alam","Banyak monyet menyerang rumah warga","Udara di desa sangat segar", "Udara di kota begitu panas dan sesak",
+        "Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur")
 
     private var subArrKata: ArrayList<String> = arrayListOf()
 
@@ -106,9 +110,12 @@ class Level3Activity: AppCompatActivity() {
         nextGameButton = findViewById(R.id.nextGameButton)
         backHomeButton = findViewById(R.id.backHomeButton)
         speakButton = findViewById(R.id.speakButton)
+        tulisanSkorTextView = findViewById(R.id.tulisanSkorTextView)
 
         dinoImageView = findViewById(R.id.dinoImageView)
         enemyImageView = findViewById(R.id.enemyImageView)
+        flameImageView = findViewById(R.id.flameImageView)
+        flamebgImageView = findViewById(R.id.flamebgImageView)
 
         playerHeart1 = findViewById(R.id.playerHeart1)
         playerHeart2 = findViewById(R.id.playerHeart2)
@@ -159,6 +166,8 @@ class Level3Activity: AppCompatActivity() {
         nextGameButton.setTypeface(playfull)
         backHomeButton.setTypeface(playfull)
         speakButton.setTypeface(playfull)
+        tulisanSkorTextView.setTypeface(playfull)
+        attackButton.setTypeface(playfull)
 
         username = intent.getStringExtra("username").toString()
         scoreLast = intent.getStringExtra("score").toString()
@@ -232,6 +241,9 @@ class Level3Activity: AppCompatActivity() {
             Log.e("TRYAGAIN","Clicked!")
             tryAgainButton.visibility = View.INVISIBLE
             backHomeButton.visibility = View.INVISIBLE
+            flamebgImageView.visibility = View.INVISIBLE
+            flameImageView.visibility = View.INVISIBLE
+
             var playerHeart = 3
             while(playerHeart>0){
                 openPlayerHeart(playerHeart)
@@ -247,12 +259,12 @@ class Level3Activity: AppCompatActivity() {
             life = 3
             isGameRun = true
             enemyHeart = 1
-            indexArrayKata = 31
+            indexArrayKata = 32
             dinoImageView.visibility = View.VISIBLE
             enemyImageView.visibility = View.VISIBLE
             kataKataTextView.visibility = View.VISIBLE
-            score = 600
-            scoreTextView.setText("600")
+            score = 0
+            scoreTextView.setText("0")
             initArray()
             gameStart()
         }
@@ -266,9 +278,10 @@ class Level3Activity: AppCompatActivity() {
         var index = 0;
         arrKata.removeAll(arrKata)
 
-        arrKata.addAll(listOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
-            "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
-            "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam"))
+        arrKata.addAll(listOf("Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur", "Rudi bakar sampah", "Kakak naik motor", "Paman tebang kayu", "Sungai tercemar limbah", "Bersepeda kurangi polusi", "Bensin merusak lingkungan", "Habiskan makanan tanpa sisa",
+            "Nenek menyapu halaman", "Pak Agus mengolah sampah plastik", "Petani menggunakan pupuk organik","Sayuran itu tidak diberi pestisida", "Pemerintah mereboisasi hutan gundul","Setiap toko tidak menggunakan kantung plastik","Gunakan sedotan ramah lingkungan","Kita harus hemat air","Siska mematikan lampu pada siang hari", "Jidan menanam sayur di halaman rumah",
+            "Fitri memisahkan jenis sampah","Daun kering dapat dijadikan pupuk organik", "Bahan kimia tidak baik untuk lingkungan", "Seluruh siswa menggunakan transportasi umum","Efek rumah kaca mengancam lingkungan", "Pak Yanto membersihkan solokan yang mampet","Generasi muda harus lestarikan alam","Banyak monyet menyerang rumah warga","Udara di desa sangat segar", "Udara di kota begitu panas dan sesak",
+            "Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur"))
 
     }
 
@@ -318,11 +331,12 @@ class Level3Activity: AppCompatActivity() {
                     k--
                 }
                 runOnUiThread {
-                    countDownTextView.setText("Start!")
+                    kataKataTextView.setText("Mulai!")
                 }
                 sleep(1000)
                 while(life>0 && isGameRun){
                     runOnUiThread{
+                        flameImageView.visibility = View.INVISIBLE
                         val animation = TranslateAnimation(
                             0.0f, 0.0f,
                             0.0f, 30.0f
@@ -363,7 +377,7 @@ class Level3Activity: AppCompatActivity() {
                         runOnUiThread {
                             val str:Int = i-1
                             if(attack && !wrongAnswer) countDownTextView.setText("Serang!")
-                            else if(wrongAnswer) countDownTextView.setText("Ketikanmu salah!")
+                            else if(wrongAnswer) countDownTextView.setText("Salah!")
                             else countDownTextView.setText(str.toString())
                             wrongAnswer = false
                         }
@@ -388,7 +402,10 @@ class Level3Activity: AppCompatActivity() {
                                     closeEnemyHeart(enemyHeart)
                                     kataKataTextView.visibility = View.INVISIBLE
                                     nextGameButton.visibility = View.VISIBLE
-                                    countDownTextView.setText("You Win!")
+                                    countDownTextView.setText("Kamu Menang!")
+                                    speakButton.visibility = View.INVISIBLE
+                                    dinoImageView.visibility = View.INVISIBLE
+                                    enemyImageView.visibility = View.INVISIBLE
                                     isGameRun = false
                                 }else{
                                     isGameRun = false
@@ -412,7 +429,8 @@ class Level3Activity: AppCompatActivity() {
                         }
                         else {
                             life--
-                            countDownTextView.setText("Aww!")
+//                            countDownTextView.setText("Aww!")
+                            flameImageView.visibility = View.VISIBLE
                             closePlayerHeart(playerHeart)
                             playerHeart++
                             val animation = TranslateAnimation(
@@ -423,13 +441,17 @@ class Level3Activity: AppCompatActivity() {
                             animation.setRepeatCount(1)  // animation repeat count
                             animation.setRepeatMode(2)
 
-                            enemyImageView.startAnimation(animation)
+//                            enemyImageView.startAnimation(animation)
                         }
                     }
                     sleep(2000)
                     attack = false
                     Log.e("I", "I Sekarang $i")
-
+                    if(life == 1){
+                        runOnUiThread {
+                            flamebgImageView.visibility = View.VISIBLE
+                        }
+                    }
                     if(life<=0) {
 //                        Tampilin game over
                         runOnUiThread {
@@ -441,6 +463,8 @@ class Level3Activity: AppCompatActivity() {
                             animation.setRepeatCount(0)  // animation repeat count
                             animation.setRepeatMode(2)
                             dinoImageView.startAnimation(animation)
+                            enemyImageView.startAnimation(animation)
+                            flameImageView.startAnimation(animation)
 
                             speakButton.visibility = View.GONE
                             if(scoreLast < (600+score).toString()){
@@ -448,15 +472,17 @@ class Level3Activity: AppCompatActivity() {
                                 scoreLast = (600+score).toString()
                                 putScore()
                             }
-                            countDownTextView.setText("Kamu kalah!")
+                            kataKataTextView.visibility = View.VISIBLE
+                            kataKataTextView.setText("Kamu kalah!")
                         }
-                        sleep(2000)
+                        sleep(2100)
                         runOnUiThread {
                             kataKataTextView.visibility = View.INVISIBLE
                             tryAgainButton.visibility = View.VISIBLE
                             backHomeButton.visibility = View.VISIBLE
                             dinoImageView.visibility = View.INVISIBLE
                             enemyImageView.visibility = View.INVISIBLE
+                            flameImageView.visibility = View.INVISIBLE
                         }
                     }
                     i = time

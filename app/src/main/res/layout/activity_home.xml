@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:text="SCORE: "
+                android:text="SKOR: "
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/black"/>
 
@@ -161,7 +161,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="20dp"
             android:background="@drawable/btnlayout"
-            android:text="SCORE"
+            android:text="SKOR"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
@@ -174,7 +174,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginRight="20dp"
             android:background="@drawable/btnlayout"
-            android:text="HELP"
+            android:text="BANTUAN"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />

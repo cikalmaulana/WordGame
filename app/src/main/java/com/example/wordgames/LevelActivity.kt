@@ -36,7 +36,9 @@ class LevelActivity: AppCompatActivity() {
 
     private fun initListener(){
         val airfool = Typeface.createFromAsset(assets, "font/Airfools.otf")
+        val playfull= Typeface.createFromAsset(assets, "font/playfull.otf")
         pilihLevelTextView.setTypeface(airfool)
+        warningTextView.setTypeface(playfull)
 
         nama = intent.getStringExtra("nama").toString()
         username = intent.getStringExtra("username").toString()

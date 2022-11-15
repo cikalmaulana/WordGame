@@ -18,23 +18,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="You"
+            android:text="Bacabaca"
             android:textSize="22dp" />
 
         <TextView
-            android:id="@+id/scoreTextView"
+            android:id="@+id/countDownTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
-            android:text="0"
+            android:background="@color/primary"
+            android:padding="3dp"
+            android:text="10"
             android:textSize="40dp" />
 
         <TextView
             android:id="@+id/enemyNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enemy"
+            android:text="Serigala"
             android:textSize="22dp"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="20dp"/>
@@ -246,6 +248,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/tulisanSkorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:text="Skor: "
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/scoreTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="0"
+                android:textSize="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"/>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -271,18 +294,6 @@
                     android:text="Play"
                     android:layout_gravity="center_horizontal"
                     android:textSize="30dp"
-                    android:background="@color/primary"
-                    android:padding="3dp"
-                    android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:id="@+id/countDownTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center_horizontal"
-                    android:text="10"
-                    android:textSize="40dp"
                     android:background="@color/primary"
                     android:padding="3dp"
                     android:layout_marginTop="5dp"/>
@@ -352,7 +363,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="-160dp">
+            android:layout_marginTop="-120dp">
 
             <ImageView
                 android:id="@+id/dinoImageView"
@@ -361,10 +372,24 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="20dp"
                 android:adjustViewBounds="true"
-                android:maxWidth="100dp"
-                android:maxHeight="100dp"
+                android:maxWidth="80dp"
+                android:maxHeight="80dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/playerchar" />
+                android:src="@drawable/playerchar"
+                android:layout_marginTop="20dp"/>
+
+            <ImageView
+                android:id="@+id/scratchImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:adjustViewBounds="true"
+                android:maxWidth="150dp"
+                android:maxHeight="150dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/scratch"
+                android:visibility="invisible"
+                android:layout_marginTop="20dp"/>
 
             <ImageView
                 android:id="@+id/enemyImageView"
@@ -375,39 +400,43 @@
                 android:maxWidth="200dp"
                 android:maxHeight="200dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/enemytiger" />
+                android:src="@drawable/warewolfenemy"
+                android:layout_marginTop="20dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="20dp">
+
+                <EditText
+                    android:id="@+id/inputEditText"
+                    android:layout_width="260dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/input_custom"
+                    android:hint="Masukkan Jawaban"
+                    android:padding="10dp"
+                    android:textColor="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/attackButton"
+                    android:layout_width="80dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/btnlayout"
+                    android:text="Kirim"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="-20dp">
 
-            <EditText
-                android:id="@+id/inputEditText"
-                android:layout_width="260dp"
-                android:layout_height="45dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/input_custom"
-                android:hint="Masukkan Jawaban"
-                android:padding="10dp"
-                android:textColor="@color/black" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/attackButton"
-                android:layout_width="80dp"
-                android:layout_height="45dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/custom_button"
-                android:text="Kirim"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp" />
-
-        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

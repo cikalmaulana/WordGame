@@ -1,189 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_vertical"
-    android:background="@color/background">
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/registerTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            android:layout_gravity="center_horizontal"
-            android:textSize="60dp"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/blue"/>
-
-        <TextView
-            android:id="@+id/namaTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama"
-            android:layout_marginLeft="15dp"
-            android:textSize="18dp"
-            android:textColor="@color/black"/>
-
-        <EditText
-            android:id="@+id/namaEditText"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:hint="Nama"
-            android:padding="10dp"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:background="@drawable/input_custom"/>
-
-        <TextView
-            android:id="@+id/alamatTextView"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Alamat"
-            android:layout_marginLeft="15dp"
-            android:textSize="18dp"
-            android:textColor="@color/black" />
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
 
-        <EditText
-            android:id="@+id/alamatEditText"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:hint="Alamat"
-            android:padding="10dp"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:background="@drawable/input_custom"/>
+            <TextView
+                android:id="@+id/registerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:layout_gravity="center_horizontal"
+                android:textSize="60dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/blue"/>
 
-        <TextView
-            android:id="@+id/asalSekolahTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Asal Sekolah"
-            android:layout_marginLeft="15dp"
-            android:textSize="18dp"
-            android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/namaTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:layout_marginLeft="15dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
 
-        <EditText
-            android:id="@+id/asalSekolahEditText"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:hint="Asal Sekolah"
-            android:padding="10dp"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:background="@drawable/input_custom"/>
+            <EditText
+                android:id="@+id/namaEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Nama"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:background="@drawable/input_custom"/>
 
-        <TextView
-            android:id="@+id/kelasTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kelas"
-            android:layout_marginLeft="15dp"
-            android:textSize="18dp"
-            android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/alamatTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alamat"
+                android:layout_marginLeft="15dp"
+                android:textSize="18dp"
+                android:textColor="@color/black" />
 
-        <EditText
-            android:id="@+id/kelasEditText"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:hint="Kelas"
-            android:padding="10dp"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:background="@drawable/input_custom"/>
+            <EditText
+                android:id="@+id/alamatEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Alamat"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:background="@drawable/input_custom"/>
 
-        <TextView
-            android:id="@+id/usernameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:layout_marginLeft="15dp"
-            android:textSize="18dp"
-            android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/asalSekolahTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Asal Sekolah"
+                android:layout_marginLeft="15dp"
+                android:textSize="18dp"
+                android:textColor="@color/black" />
 
-        <EditText
-            android:id="@+id/usernameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:hint="Username"
-            android:padding="10dp"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:background="@drawable/input_custom"/>
+            <EditText
+                android:id="@+id/asalSekolahEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Asal Sekolah"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:background="@drawable/input_custom"/>
 
-        <TextView
-            android:id="@+id/passwordTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Password"
-            android:layout_marginLeft="15dp"
-            android:textSize="18dp"
-            android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/kelasTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kelas"
+                android:layout_marginLeft="15dp"
+                android:textSize="18dp"
+                android:textColor="@color/black" />
 
-        <EditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:hint="Password"
-            android:padding="10dp"
-            android:layout_margin="10dp"
-            android:inputType="textPassword"
-            android:textColor="@color/black"
-            android:background="@drawable/input_custom"/>
+            <EditText
+                android:id="@+id/kelasEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Kelas"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:background="@drawable/input_custom"/>
 
-        <TextView
-            android:id="@+id/warningTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Password harus disi!"
-            android:textColor="@color/red"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="18dp"
-            android:visibility="invisible"/>
+            <TextView
+                android:id="@+id/usernameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:layout_marginLeft="15dp"
+                android:textSize="18dp"
+                android:textColor="@color/black" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/registerButton"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Daftar"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:background="@drawable/btnlayout"
-            android:textAllCaps="false"
-            android:layout_marginTop="15dp"/>
+            <EditText
+                android:id="@+id/usernameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Username"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:background="@drawable/input_custom"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Atau:"
-            android:textSize="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/black"
-            android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:id="@+id/passwordTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:layout_marginLeft="15dp"
+                android:textSize="18dp"
+                android:textColor="@color/black" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/loginButton"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Masuk"
-            android:background="@drawable/btnlayout"
-            android:textAllCaps="false"/>
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Password"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:background="@drawable/input_custom"/>
 
+            <TextView
+                android:id="@+id/warningTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password harus disi!"
+                android:textColor="@color/red"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18dp"
+                android:visibility="invisible"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/registerButton"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Daftar"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:background="@drawable/btnlayout"
+                android:textAllCaps="false"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Atau:"
+                android:textSize="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/loginButton"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Masuk"
+                android:background="@drawable/btnlayout"
+                android:textAllCaps="false"
+                android:layout_marginBottom="10dp"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
-
-
 </ScrollView>

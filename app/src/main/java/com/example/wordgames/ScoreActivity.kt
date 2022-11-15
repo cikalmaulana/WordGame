@@ -1,6 +1,7 @@
 package com.example.wordgames
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -47,6 +48,7 @@ class ScoreActivity: AppCompatActivity() {
     lateinit var usernameTextView8: TextView
     lateinit var usernameTextView9: TextView
     lateinit var usernameTextView10: TextView
+    lateinit var topScoreTextView:TextView
 
     private var usernameTextView = mapOf<String, TextView>()
     private var scoreTextView = mapOf<String, TextView>()
@@ -57,6 +59,8 @@ class ScoreActivity: AppCompatActivity() {
     private var nama:String = ""
 
     private fun initComponent(){
+        topScoreTextView = findViewById(R.id.topScoreTextView)
+
         usernameTextView1 = findViewById(R.id.usernameTextView1)
         usernameTextView2 = findViewById(R.id.usernameTextView2)
         usernameTextView3 = findViewById(R.id.usernameTextView3)
@@ -81,6 +85,8 @@ class ScoreActivity: AppCompatActivity() {
     }
 
     private fun initListener(){
+        val airfool = Typeface.createFromAsset(assets, "font/Airfools.otf")
+        topScoreTextView.setTypeface(airfool)
         usernameTextView = mapOf(
             "usernameTextView1" to usernameTextView1,
             "usernameTextView2" to usernameTextView2,

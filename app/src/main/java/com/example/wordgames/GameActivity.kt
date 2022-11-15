@@ -90,13 +90,13 @@ class GameActivity: AppCompatActivity() {
 
     lateinit var speakButton: Button
 
-    private var arrKataTemplate: ArrayList<String> = arrayListOf("Kucing", "Jembatan", "Rumah", "Belajar", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
-        "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
-        "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
+    private var arrKataTemplate: ArrayList<String> = arrayListOf("Daun", "Kayu", "Air", "Pohon", "Hutan", "Laut", "Awan", "Langit", "Sungai",
+        "Danau", "Laut", "Angin", "Udara", "Satwa", "Limbah", "Alam", "Polusi", "Ikan", "Bambu", "Bunga",
+        "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bus", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih")
 
-    private var arrKata: ArrayList<String> = arrayListOf("Kucing", "Jembatan", "Rumah", "Belajar", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
-        "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
-        "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam")
+    private var arrKata: ArrayList<String> = arrayListOf("Daun", "Kayu", "Air", "Pohon", "Hutan", "Laut", "Awan", "Langit", "Sungai",
+        "Danau", "Laut", "Angin", "Udara", "Satwa", "Limbah", "Alam", "Polusi", "Ikan", "Bambu", "Bunga",
+        "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bus", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih")
 
 
     private var subArrKata: ArrayList<String> = arrayListOf()
@@ -429,7 +429,10 @@ class GameActivity: AppCompatActivity() {
                                     closeEnemyHeart(enemyHeart)
                                     kataKataTextView.visibility = View.GONE
                                     nextGameButton.visibility = View.VISIBLE
-                                    countDownTextView.setText("You Win!")
+                                    countDownTextView.setText("Kamu Menang!")
+                                    speakButton.visibility = View.INVISIBLE
+                                    dinoImageView.visibility = View.INVISIBLE
+                                    enemyImageView.visibility = View.INVISIBLE
                                     isGameRun = false
                                 }else{
                                     isGameRun = false

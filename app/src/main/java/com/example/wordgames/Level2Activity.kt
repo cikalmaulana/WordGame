@@ -2,6 +2,7 @@ package com.example.wordgames
 
 import android.content.Intent
 import android.graphics.Typeface
+import android.media.Image
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -34,6 +35,7 @@ class Level2Activity: AppCompatActivity() {
     lateinit var scoreTextView: TextView
     lateinit var playerNameTextView: TextView
     lateinit var enemyNameTextView: TextView
+    lateinit var tulisanSkorTextView: TextView
 
     lateinit var inputEditText: EditText
 
@@ -62,6 +64,8 @@ class Level2Activity: AppCompatActivity() {
     lateinit var enemyHeart9: ImageView
     lateinit var enemyHeart10: ImageView
 
+    lateinit var scratchImageView: ImageView
+
     lateinit var sound: MediaPlayer
 
     private var life: Int = 3
@@ -69,10 +73,10 @@ class Level2Activity: AppCompatActivity() {
     private var attack: Boolean = false
     private var wrongAnswer: Boolean = false
     private var enemyHeart: Int = 1
-    private var i: Int = 11
-    private var time: Int = 11
+    private var i: Int = 16
+    private var time: Int = 16
     private var level:Int = 1
-    private var indexArrayKata: Int = 31
+    private var indexArrayKata: Int = 32
     private var score: Int = 0
 
     private var username: String = ""
@@ -83,14 +87,13 @@ class Level2Activity: AppCompatActivity() {
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
 
-    private var arrKataTemplate: ArrayList<String> = arrayListOf("Rumah Sakit", "Polisi Tidur", "Merah Jambu", "Mesin Cuci", "Sikat Gigi", "Papan Tulis", "Jam Dinding", "Jam Tangan", "Pulang Pergi",
-        "Pagi Hari", "Meja Makan", "Pergi ke Pasar", "Sangat Panas", "Lemari Baju", "Meja Hijau", "Meja dan Kursi", "Sepanjang Hari", "Jendela Kaca", "Kerja Keras", "Balok Kayu",
-        "Balap Motor", "Di Sekolah", "Sangat Lambat", "Sangat Cepat", "Dari Sekolah", "Ban Sepeda", "Membantu Ibu", "Berlari Cepat", "Sedang Menyapu", "Sepuluh Ekor","Kemarin Pagi","Akhir Pekan","Tadi Malam", "Hitam Putih", "Musim Panen", "Uang Tunai")
+    private var arrKataTemplate: ArrayList<String> = arrayListOf("Daun Hijau", "Kayu Bakar", "Air Hujan", "Asap Motor", "Pohon Pinus", "Hutan Kota", "Laut Merah", "Tinggi Gunung", "Awan Gelap", "Langit Sore",
+                                "Tanah Kering", "Pupuk Organik", "Sungai Kotor", "Angin Segar", "Satwa Liar", "Limbah Pabrik", "Udara Bersih", "Alam Lestari", "Polusi Udara", "Ikan Laut", "Bambu Kuning",
+                                "Bunga Mawar", "Ulat Sagu", "Akar Pohon", "Hutan Gundul", "Matahari Terbit", "Rumah Kaca", "Sepeda Lipat", "Bus Kota", "Kereta Api","Daun Hijau", "Kayu Bakar", "Satwa Liar")
 
-    private var arrKata: ArrayList<String> = arrayListOf("Rumah Sakit", "Polisi Tidur", "Merah Jambu", "Mesin Cuci", "Sikat Gigi", "Papan Tulis", "Jam Dinding", "Jam Tangan", "Pulang Pergi",
-        "Pagi Hari", "Meja Makan", "Pergi ke Pasar", "Sangat Panas", "Lemari Baju", "Meja Hijau", "Meja dan Kursi", "Sepanjang Hari", "Jendela Kaca", "Kerja Keras", "Balok Kayu",
-        "Balap Motor", "Di Sekolah", "Sangat Lambat", "Sangat Cepat", "Dari Sekolah", "Ban Sepeda", "Membantu Ibu", "Berlari Cepat", "Sedang Menyapu", "Sepuluh Ekor","Kemarin Pagi","Akhir Pekan","Tadi Malam", "Hitam Putih", "Musim Panen", "Uang Tunai")
-
+    private var arrKata: ArrayList<String> = arrayListOf("Daun Hijau", "Kayu Bakar", "Air Hujan", "Asap Motor", "Pohon Pinus", "Hutan Kota", "Laut Merah", "Tinggi Gunung", "Awan Gelap", "Langit Sore",
+        "Tanah Kering", "Pupuk Organik", "Sungai Kotor", "Angin Segar", "Satwa Liar", "Limbah Pabrik", "Udara Bersih", "Alam Lestari", "Polusi Udara", "Ikan Laut", "Bambu Kuning",
+        "Bunga Mawar", "Ulat Sagu", "Akar Pohon", "Hutan Gundul", "Matahari Terbit", "Rumah Kaca", "Sepeda Lipat", "Bus Kota", "Kereta Api","Daun Hijau", "Kayu Bakar", "Satwa Liar")
 
     private var subArrKata: ArrayList<String> = arrayListOf()
 
@@ -100,6 +103,7 @@ class Level2Activity: AppCompatActivity() {
         scoreTextView = findViewById(R.id.scoreTextView)
         playerNameTextView = findViewById(R.id.playerNameTextView)
         enemyNameTextView = findViewById(R.id.enemyNameTextView)
+        tulisanSkorTextView = findViewById(R.id.tulisanSkorTextView)
 
         inputEditText = findViewById(R.id.inputEditText)
 
@@ -111,6 +115,7 @@ class Level2Activity: AppCompatActivity() {
 
         dinoImageView = findViewById(R.id.dinoImageView)
         enemyImageView = findViewById(R.id.enemyImageView)
+        scratchImageView = findViewById(R.id.scratchImageView)
 
         playerHeart1 = findViewById(R.id.playerHeart1)
         playerHeart2 = findViewById(R.id.playerHeart2)
@@ -162,6 +167,8 @@ class Level2Activity: AppCompatActivity() {
         level2Button.setTypeface(playfull)
         backHomeButton.setTypeface(playfull)
         speakButton.setTypeface(playfull)
+        tulisanSkorTextView.setTypeface(playfull)
+        attackButton.setTypeface(playfull)
 
         username = intent.getStringExtra("username").toString()
         scoreLast = intent.getStringExtra("score").toString()
@@ -261,12 +268,12 @@ class Level2Activity: AppCompatActivity() {
             life = 3
             isGameRun = true
             enemyHeart = 1
-            indexArrayKata = 31
+            indexArrayKata = 32
             dinoImageView.visibility = View.VISIBLE
             enemyImageView.visibility = View.VISIBLE
             kataKataTextView.visibility = View.VISIBLE
-            score = 300
-            scoreTextView.setText("300")
+            score = 0
+            scoreTextView.setText("0")
             initArray()
             gameStart()
         }
@@ -280,9 +287,9 @@ class Level2Activity: AppCompatActivity() {
         var index = 0;
         arrKata.removeAll(arrKata)
 
-        arrKata.addAll(listOf("Bahtera", "Buana", "Distraksi", "Lembayung", "Papan", "Penggaris", "Buku", "Sapu", "Sampah",
-            "Gunting", "Komputer", "Sepeda", "Kulkas", "Matahari", "Bulan", "Piring", "Sendok", "Televisi", "Gelas", "Sabun",
-            "Sikat", "Kacamata", "Mesin", "Tidur", "Setrika", "Kaus", "Kemeja", "Kursi", "Celana", "Telepon","Gigi","Pensin","Penghapus", "Ponsel", "Lemari", "Jam"))
+        arrKata.addAll(listOf("Daun Hijau", "Kayu Bakar", "Air Hujan", "Asap Motor", "Pohon Pinus", "Hutan Kota", "Laut Merah", "Tinggi Gunung", "Awan Gelap", "Langit Sore",
+            "Tanah Kering", "Pupuk Organik", "Sungai Kotor", "Angin Segar", "Satwa Liar", "Limbah Pabrik", "Udara Bersih", "Alam Lestari", "Polusi Udara", "Ikan Laut", "Bambu Kuning",
+            "Bunga Mawar", "Ulat Sagu", "Akar Pohon", "Hutan Gundul", "Matahari Terbit", "Rumah Kaca", "Sepeda Lipat", "Bus Kota", "Kereta Api","Daun Hijau", "Kayu Bakar", "Satwa Liar"))
 
     }
 
@@ -332,10 +339,11 @@ class Level2Activity: AppCompatActivity() {
                     k--
                 }
                 runOnUiThread {
-                    countDownTextView.setText("Start!")
+                    countDownTextView.setText("Mulai!")
                 }
                 sleep(1000)
                 while(life>0 && isGameRun){
+                    scratchImageView.visibility = View.INVISIBLE
                     runOnUiThread{
                         val animation = TranslateAnimation(
                             0.0f, 0.0f,
@@ -344,8 +352,17 @@ class Level2Activity: AppCompatActivity() {
                         animation.setDuration(500)  // animation duration
                         animation.setRepeatCount(999)  // animation repeat count
                         animation.setRepeatMode(2)
+
+                        val animation2 = TranslateAnimation(
+                            0.0f, 30.0f,
+                            0.0f, 30.0f
+                        )
+                        animation2.setDuration(500)  // animation duration
+                        animation2.setRepeatCount(999)  // animation repeat count
+                        animation2.setRepeatMode(2)
+
                         dinoImageView.startAnimation(animation)
-                        enemyImageView.startAnimation(animation)
+                        enemyImageView.startAnimation(animation2)
 
                         Log.i("RANDI",indexArrayKata.toString())
                         Log.i("PJGARRAY",arrKata.size.toString())
@@ -377,7 +394,7 @@ class Level2Activity: AppCompatActivity() {
                         runOnUiThread {
                             val str:Int = i-1
                             if(attack && !wrongAnswer) countDownTextView.setText("Serang!")
-                            else if(wrongAnswer) countDownTextView.setText("Ketikanmu salah!")
+                            else if(wrongAnswer) countDownTextView.setText("Salah!")
                             else countDownTextView.setText(str.toString())
                             wrongAnswer = false
                         }
@@ -402,7 +419,10 @@ class Level2Activity: AppCompatActivity() {
                                     closeEnemyHeart(enemyHeart)
                                     kataKataTextView.visibility = View.INVISIBLE
                                     nextGameButton.visibility = View.VISIBLE
-                                    countDownTextView.setText("You Win!")
+                                    countDownTextView.setText("Kamu Menang!")
+                                    speakButton.visibility = View.INVISIBLE
+                                    dinoImageView.visibility = View.INVISIBLE
+                                    enemyImageView.visibility = View.INVISIBLE
                                     isGameRun = false
                                 }else{
                                     isGameRun = false
@@ -427,7 +447,7 @@ class Level2Activity: AppCompatActivity() {
                         }
                         else {
                             life--
-                            countDownTextView.setText("Aww!")
+//                            countDownTextView.setText("Aww!")
                             closePlayerHeart(playerHeart)
                             playerHeart++
                             val animation = TranslateAnimation(
@@ -439,9 +459,16 @@ class Level2Activity: AppCompatActivity() {
                             animation.setRepeatMode(2)
 
                             enemyImageView.startAnimation(animation)
+
                         }
                     }
-                    sleep(2000)
+                    sleep(1100)
+                    runOnUiThread {
+                        if(!attack){
+                            scratchImageView.visibility = View.VISIBLE
+                        }
+                    }
+                    sleep(1100)
                     attack = false
                     Log.e("I", "I Sekarang $i")
 
@@ -458,12 +485,14 @@ class Level2Activity: AppCompatActivity() {
                             dinoImageView.startAnimation(animation)
 
                             speakButton.visibility = View.GONE
+//                            score yang baru selalu dari 0 + skor yang baru didaatnya
                             if(scoreLast < (300+score).toString()){
                                 Log.e("SCOREPUT","Masuk if")
                                 scoreLast = (300+score).toString()
                                 putScore()
                             }
-                            countDownTextView.setText("Kamu kalah!")
+//                            countDownTextView.setText("Kamu kalah!")
+                            scratchImageView.visibility = View.INVISIBLE
                         }
                         sleep(2000)
                         runOnUiThread {
@@ -472,6 +501,7 @@ class Level2Activity: AppCompatActivity() {
                             backHomeButton.visibility = View.VISIBLE
                             dinoImageView.visibility = View.INVISIBLE
                             enemyImageView.visibility = View.INVISIBLE
+                            scratchImageView.visibility = View.INVISIBLE
                         }
                     }
                     i = time

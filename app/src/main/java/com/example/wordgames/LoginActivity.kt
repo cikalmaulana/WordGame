@@ -62,12 +62,12 @@ class LoginActivity: AppCompatActivity() {
 
         loginButton.setOnClickListener {
 //            if(usernameEditText.getText() =="")
-            checkLogin()
+//            checkLogin()
 //            Log.e("CORRECT",correctPassword.toString())
 //            if(correctPassword){
-//                val intent = Intent(this, HomeActivity::class.java)
-//                startActivity(intent)
-//                finish()
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
 //            }
         }
 

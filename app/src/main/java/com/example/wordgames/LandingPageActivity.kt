@@ -15,13 +15,13 @@
         lateinit var loginButton: Button
         lateinit var bacabacaTextView1: TextView
         lateinit var bacabacaTextView2: TextView
-        lateinit var quotesTextView: TextView
+//        lateinit var quotesTextView: TextView
 
         private fun initComponent(){
             loginButton = findViewById(R.id.loginButton)
             bacabacaTextView1 = findViewById(R.id.bacabacaTextView1)
             bacabacaTextView2 = findViewById(R.id.bacabacaTextView2)
-            quotesTextView = findViewById(R.id.quotesTextView)
+//            quotesTextView = findViewById(R.id.quotesTextView)
         }
 
         private fun initListener(){
@@ -36,7 +36,7 @@
             val playfull= Typeface.createFromAsset(assets, "font/playfull.otf")
             bacabacaTextView1.setTypeface(airfool)
             bacabacaTextView2.setTypeface(airfool)
-            quotesTextView.setTypeface(montserrat)
+//            quotesTextView.setTypeface(montserrat)
             loginButton.setTypeface(playfull)
         }
 
