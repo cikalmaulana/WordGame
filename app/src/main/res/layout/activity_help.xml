@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="50dp"
+        android:padding="20dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -32,15 +33,73 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="4. Jika jawabanmu salah, score tidak akan ditambah"
+            android:text="4. Jika jawabanmu salah, score tidak akan bertambah"
             android:layout_marginTop="10dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="5. Jika telah selesai keseluruhan, berhak naik ke level selanjutnya"
+            android:text="------------------------------------------------------------------------------------------"
             android:layout_marginTop="10dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Setiap level terdiri dari 3 babak, kamu harus selesaikan 3 babak tersebut untuk dapat naik level"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Level 1 berisi kata-kata"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Level 2 berisi frasa"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Level 3 berisi kalimat"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="------------------------------------------------------------------------------------------"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Masing-masing level memilki batas waktu untuk mengetik jawaban"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Level 1 memiliki batas waktu 10 detik"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Level 2 memiliki batas waktu 15 detik"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Level 3 memiliki batas waktu 20 detik"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jika melewati batas waktu, nyawa pemain akan berkurang"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 
 

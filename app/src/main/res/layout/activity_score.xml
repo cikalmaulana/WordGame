@@ -77,7 +77,7 @@
                         <TextView
                             android:id="@+id/scoreTextView2"
                             android:layout_column="2"
-                            android:text="51.200 pts"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -87,7 +87,7 @@
                         <TextView
                             android:id="@+id/usernameTextView3"
                             android:layout_column="1"
-                            android:text="3. Noobmaster69"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"
@@ -95,7 +95,7 @@
                         <TextView
                             android:id="@+id/scoreTextView3"
                             android:layout_column="1"
-                            android:text="10.100 pts"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -105,7 +105,7 @@
                         <TextView
                             android:id="@+id/usernameTextView4"
                             android:layout_column="1"
-                            android:text="4. PaperRex"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"
@@ -113,7 +113,7 @@
                         <TextView
                             android:id="@+id/scoreTextView4"
                             android:layout_column="1"
-                            android:text="9.249 pts"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -123,7 +123,7 @@
                         <TextView
                             android:id="@+id/usernameTextView5"
                             android:layout_column="1"
-                            android:text="5. BruceBanner"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"
@@ -131,7 +131,7 @@
                         <TextView
                             android:id="@+id/scoreTextView5"
                             android:layout_column="1"
-                            android:text="9.100 pts"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -141,14 +141,14 @@
                         <TextView
                             android:id="@+id/usernameTextView6"
                             android:layout_column="1"
-                            android:text="6. DonaldTrump"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
                         <TextView
                             android:id="@+id/scoreTextView6"
                             android:layout_column="1"
-                            android:text="7.900 pts"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -158,14 +158,14 @@
                         <TextView
                             android:id="@+id/usernameTextView7"
                             android:layout_column="1"
-                            android:text="7. Bejo"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
                         <TextView
                             android:id="@+id/scoreTextView7"
                             android:layout_column="1"
-                            android:text="7.800 pts"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -175,14 +175,14 @@
                         <TextView
                             android:id="@+id/usernameTextView8"
                             android:layout_column="1"
-                            android:text="8. SaepulElSavador"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
                         <TextView
                             android:id="@+id/scoreTextView8"
                             android:layout_column="1"
-                            android:text="7.400 pts"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -192,14 +192,14 @@
                         <TextView
                             android:id="@+id/usernameTextView9"
                             android:layout_column="1"
-                            android:text="9. ClintBarton"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
                         <TextView
                             android:id="@+id/scoreTextView9"
                             android:layout_column="1"
-                            android:text="7.200 pts"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
@@ -209,14 +209,14 @@
                         <TextView
                             android:id="@+id/usernameTextView10"
                             android:layout_column="1"
-                            android:text="10. AsepProGaming"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
                         <TextView
                             android:id="@+id/scoreTextView10"
                             android:layout_column="1"
-                            android:text="7.100 pts"
+                            android:text=""
                             android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="20dp"/>

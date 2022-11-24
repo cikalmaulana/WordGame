@@ -475,7 +475,7 @@ class Level3Activity: AppCompatActivity() {
                             kataKataTextView.visibility = View.VISIBLE
                             kataKataTextView.setText("Kamu gagal!")
                             enemyImageView.startAnimation(animation)
-                            
+
                         }
                         sleep(2100)
                         runOnUiThread {
