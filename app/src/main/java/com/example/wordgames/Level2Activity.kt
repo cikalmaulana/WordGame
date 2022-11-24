@@ -52,6 +52,7 @@ class Level2Activity: AppCompatActivity() {
 
     lateinit var dinoImageView: ImageView
     lateinit var enemyImageView: ImageView
+    lateinit var floodbgImageView: ImageView
 
     lateinit var enemyHeart1: ImageView
     lateinit var enemyHeart2: ImageView
@@ -116,6 +117,7 @@ class Level2Activity: AppCompatActivity() {
         dinoImageView = findViewById(R.id.dinoImageView)
         enemyImageView = findViewById(R.id.enemyImageView)
         scratchImageView = findViewById(R.id.scratchImageView)
+        floodbgImageView = findViewById(R.id.floodbgImageView)
 
         playerHeart1 = findViewById(R.id.playerHeart1)
         playerHeart2 = findViewById(R.id.playerHeart2)
@@ -328,10 +330,11 @@ class Level2Activity: AppCompatActivity() {
         var playerHeart = 1
         val objRunnable = java.lang.Runnable {
             try {
+                floodbgImageView.visibility = View.INVISIBLE
                 var k = 3
                 while(k>=1){
                     runOnUiThread {
-                        kataKataTextView.setText("Bersiap...")
+                        kataKataTextView.setText("Cegah Monster Membuang Sampah Sembarangan!")
                         countDownTextView.setText(k.toString())
                         Log.e("COUNTAWAL","${k.toString()}")
                     }
@@ -417,9 +420,9 @@ class Level2Activity: AppCompatActivity() {
                             if(enemyHeart>=10){
                                 if(level<3){
                                     closeEnemyHeart(enemyHeart)
-                                    kataKataTextView.visibility = View.INVISIBLE
+                                    kataKataTextView.visibility = View.VISIBLE
                                     nextGameButton.visibility = View.VISIBLE
-                                    countDownTextView.setText("Kamu Menang!")
+                                    kataKataTextView.setText("Kamu Menang!")
                                     speakButton.visibility = View.INVISIBLE
                                     dinoImageView.visibility = View.INVISIBLE
                                     enemyImageView.visibility = View.INVISIBLE
@@ -428,8 +431,8 @@ class Level2Activity: AppCompatActivity() {
                                     isGameRun = false
                                     dinoImageView.visibility = View.INVISIBLE
                                     enemyImageView.visibility = View.INVISIBLE
-                                    kataKataTextView.visibility = View.INVISIBLE
-                                    countDownTextView.setText("Level 2 Telah Selesai!")
+                                    kataKataTextView.visibility = View.VISIBLE
+                                    kataKataTextView.setText("Level 2 Telah Selesai!")
                                     level2Button.visibility = View.VISIBLE
                                     speakButton.visibility = View.GONE
                                     enemyImageView.visibility = View.GONE
@@ -451,7 +454,7 @@ class Level2Activity: AppCompatActivity() {
                             closePlayerHeart(playerHeart)
                             playerHeart++
                             val animation = TranslateAnimation(
-                                0.0f, -300.0f,
+                                0.0f, -150.0f,
                                 0.0f, 0.0f
                             )
                             animation.setDuration(1000)  // animation duration
@@ -462,15 +465,29 @@ class Level2Activity: AppCompatActivity() {
 
                         }
                     }
-                    sleep(1100)
+                    sleep(1000)
                     runOnUiThread {
                         if(!attack){
+                            val animation = TranslateAnimation(
+                                0.0f, 0.0f,
+                                0.0f, 150.0f
+                            )
+                            animation.setDuration(800)  // animation duration
+                            animation.setRepeatCount(0)  // animation repeat count
+                            animation.setRepeatMode(1)
                             scratchImageView.visibility = View.VISIBLE
+                            scratchImageView.startAnimation(animation)
                         }
                     }
                     sleep(1100)
                     attack = false
                     Log.e("I", "I Sekarang $i")
+
+                    if(life == 1){
+                        runOnUiThread {
+                            floodbgImageView.visibility = View.VISIBLE
+                        }
+                    }
 
                     if(life<=0) {
 //                        Tampilin game over
@@ -483,6 +500,7 @@ class Level2Activity: AppCompatActivity() {
                             animation.setRepeatCount(0)  // animation repeat count
                             animation.setRepeatMode(2)
                             dinoImageView.startAnimation(animation)
+                            enemyImageView.startAnimation(animation)
 
                             speakButton.visibility = View.GONE
 //                            score yang baru selalu dari 0 + skor yang baru didaatnya
@@ -492,6 +510,8 @@ class Level2Activity: AppCompatActivity() {
                                 putScore()
                             }
 //                            countDownTextView.setText("Kamu kalah!")
+                            kataKataTextView.visibility = View.VISIBLE
+                            kataKataTextView.setText("Kamu gagal!")
                             scratchImageView.visibility = View.INVISIBLE
                         }
                         sleep(2000)

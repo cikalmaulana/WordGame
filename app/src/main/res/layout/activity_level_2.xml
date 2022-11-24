@@ -240,7 +240,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="400dp"
-        android:background="@drawable/battlebg2"
+        android:background="@drawable/bglvl2"
         android:orientation="vertical"
         android:layout_marginTop="10dp">
 
@@ -350,8 +350,8 @@
                 android:layout_width="150dp"
                 android:layout_height="65dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/custom_button"
-                android:text="Lanjut Ke Level 2"
+                android:background="@drawable/btnlayout"
+                android:text="Level Selanjutnya"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp"
@@ -364,6 +364,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="-120dp">
+
+            <ImageView
+                android:id="@+id/floodbgImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/flood"
+                android:visibility="invisible"/>
 
             <ImageView
                 android:id="@+id/dinoImageView"
@@ -384,12 +395,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:adjustViewBounds="true"
-                android:maxWidth="150dp"
+                android:maxWidth="80dp"
                 android:maxHeight="150dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/scratch"
-                android:visibility="invisible"
-                android:layout_marginTop="20dp"/>
+                android:src="@drawable/trashbag"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="150dp"
+                android:visibility="invisible"/>
 
             <ImageView
                 android:id="@+id/enemyImageView"
@@ -397,10 +409,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:adjustViewBounds="true"
-                android:maxWidth="200dp"
-                android:maxHeight="200dp"
+                android:maxWidth="150dp"
+                android:maxHeight="150dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/warewolfenemy"
+                android:src="@drawable/trashmonsster"
                 android:layout_marginTop="20dp"/>
 
             <RelativeLayout

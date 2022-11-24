@@ -73,7 +73,7 @@ class Level3Activity: AppCompatActivity() {
     private var time: Int = 21
     private var level:Int = 1
     private var indexArrayKata: Int = 32
-    private var score: Int = 600
+    private var score: Int = 0
 
     private var username: String = ""
     private var scoreLast: String = ""
@@ -323,7 +323,7 @@ class Level3Activity: AppCompatActivity() {
                 var k = 3
                 while(k>=1){
                     runOnUiThread {
-                        kataKataTextView.setText("Bersiap...")
+                        kataKataTextView.setText("Cegah Kebakaran Hutan!")
                         countDownTextView.setText(k.toString())
                         Log.e("COUNTAWAL","${k.toString()}")
                     }
@@ -400,9 +400,9 @@ class Level3Activity: AppCompatActivity() {
                             if(enemyHeart>=10){
                                 if(level<3){
                                     closeEnemyHeart(enemyHeart)
-                                    kataKataTextView.visibility = View.INVISIBLE
+                                    kataKataTextView.visibility = View.VISIBLE
                                     nextGameButton.visibility = View.VISIBLE
-                                    countDownTextView.setText("Kamu Menang!")
+                                    kataKataTextView.setText("Kamu Menang!")
                                     speakButton.visibility = View.INVISIBLE
                                     dinoImageView.visibility = View.INVISIBLE
                                     enemyImageView.visibility = View.INVISIBLE
@@ -411,8 +411,8 @@ class Level3Activity: AppCompatActivity() {
                                     isGameRun = false
                                     dinoImageView.visibility = View.INVISIBLE
                                     enemyImageView.visibility = View.INVISIBLE
-                                    kataKataTextView.visibility = View.INVISIBLE
-                                    countDownTextView.setText("Level 3 Telah Selesai!")
+                                    kataKataTextView.visibility = View.VISIBLE
+                                    kataKataTextView.setText("Level 3 Telah Selesai!")
                                     speakButton.visibility = View.GONE
                                     enemyImageView.visibility = View.GONE
                                     scoreLast = score.toString()
@@ -473,7 +473,9 @@ class Level3Activity: AppCompatActivity() {
                                 putScore()
                             }
                             kataKataTextView.visibility = View.VISIBLE
-                            kataKataTextView.setText("Kamu kalah!")
+                            kataKataTextView.setText("Kamu gagal!")
+                            enemyImageView.startAnimation(animation)
+                            
                         }
                         sleep(2100)
                         runOnUiThread {
