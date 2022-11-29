@@ -114,7 +114,7 @@ class GameActivity: AppCompatActivity() {
     private var i: Int = 16
     private var time: Int = 16
     private var level:Int = 1
-    private var indexArrayKata: Int = 31
+    private var indexArrayKata: Int = 37
     private var score: Int = 0
     private var iSound: Int = 0
 
@@ -138,7 +138,7 @@ class GameActivity: AppCompatActivity() {
 
     private var arrKata: ArrayList<String> = arrayListOf("Daun", "Kayu", "Air", "Pohon", "Hutan", "Laut", "Awan", "Langit", "Sungai",
         "Danau", "Laut", "Angin", "Udara", "Satwa", "Limbah", "Alam", "Polusi", "Ikan", "Bambu", "Bunga",
-        "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bis", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih")
+        "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bis", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih","Daun", "Kayu", "Air", "Pohon", "Hutan")
 
 
     private var subArrKata: ArrayList<String> = arrayListOf()
@@ -385,6 +385,7 @@ class GameActivity: AppCompatActivity() {
         tryAgainButton.setOnClickListener{
             Log.e("TRYAGAIN","Score terakhir : ${scoreLast.toString()}, dan Score dalam gaee = $score")
             iSound = 0
+            cloudImageView.visibility = View.INVISIBLE
             tryAgainButton.visibility = View.INVISIBLE
             backHomeButton.visibility = View.INVISIBLE
             scratchImageView.visibility = View.INVISIBLE
@@ -404,7 +405,7 @@ class GameActivity: AppCompatActivity() {
             life = 3
             isGameRun = true
             enemyHeart = 1
-            indexArrayKata = 31
+            indexArrayKata = 36
             dinoImageView.visibility = View.VISIBLE
             enemyImageView.visibility = View.VISIBLE
             kataKataTextView.visibility = View.VISIBLE
@@ -422,7 +423,7 @@ class GameActivity: AppCompatActivity() {
 
         arrKata.addAll(listOf("Daun", "Kayu", "Air", "Pohon", "Hutan", "Laut", "Awan", "Langit", "Sungai",
             "Danau", "Laut", "Angin", "Udara", "Satwa", "Limbah", "Alam", "Polusi", "Ikan", "Bambu", "Bunga",
-            "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bis", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih"))
+            "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bis", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih","Daun", "Kayu", "Air", "Pohon", "Hutan",))
 
     }
 
@@ -500,8 +501,9 @@ class GameActivity: AppCompatActivity() {
                 var k = 3
                 while(k>=1){
                     runOnUiThread {
-                        cloudImageView.visibility = View.INVISIBLE
                         kataKataTextView.visibility = View.VISIBLE
+                        scratchImageView.visibility = View.INVISIBLE
+                        scratchMusuhImageView.visibility = View.INVISIBLE
                         kataKataTextView.setText("Cegah Polusi Udara!")
                         countDownTextView.setText(k.toString())
                         Log.e("COUNTAWAL","${k.toString()}")
@@ -529,7 +531,7 @@ class GameActivity: AppCompatActivity() {
                         dinoImageView.startAnimation(animation)
                         enemyImageView.startAnimation(animation)
 
-//                        Log.i("RANDI",indexArrayKata.toString())
+                        Log.i("RANDI",indexArrayKata.toString())
 //                        Log.i("PJGARRAY",arrKata.size.toString())
                         randomIndex = Random.nextInt(1,indexArrayKata)
                         val kata = arrKata.get(randomIndex)
@@ -575,7 +577,7 @@ class GameActivity: AppCompatActivity() {
                         i--
                     }
                     runOnUiThread {
-                        if(attack && i>0){
+                        if(attack && i>0 && countDownTextView.text != "0"){
                             score+=10
                             scoreTextView.setText(score.toString())
                             val animation = TranslateAnimation(
@@ -599,13 +601,16 @@ class GameActivity: AppCompatActivity() {
                                     animation.setRepeatMode(2)
                                     dinoImageView.startAnimation(animation)
                                     enemyImageView.startAnimation(animation)
-                                    sleep(1000)
+
                                     kataKataTextView.visibility = View.VISIBLE
                                     nextGameButton.visibility = View.VISIBLE
+                                    scratchMusuhImageView.visibility = View.INVISIBLE
+                                    scratchImageView.visibility = View.INVISIBLE
                                     kataKataTextView.setText("Kamu Menang!")
                                     speakButton.visibility = View.GONE
                                     dinoImageView.visibility = View.INVISIBLE
                                     enemyImageView.visibility = View.INVISIBLE
+
                                     isGameRun = false
                                 }else{
                                     isGameRun = false
@@ -618,9 +623,12 @@ class GameActivity: AppCompatActivity() {
                                     animation.setRepeatMode(2)
                                     dinoImageView.startAnimation(animation)
                                     enemyImageView.startAnimation(animation)
+                                    scratchMusuhImageView.startAnimation(animation)
                                     sleep(1000)
                                     dinoImageView.visibility = View.INVISIBLE
                                     enemyImageView.visibility = View.INVISIBLE
+                                    scratchMusuhImageView.visibility = View.INVISIBLE
+                                    scratchImageView.visibility = View.INVISIBLE
                                     kataKataTextView.visibility = View.VISIBLE
                                     speakButton.visibility = View.GONE
                                     enemyImageView.visibility = View.GONE
@@ -672,15 +680,17 @@ class GameActivity: AppCompatActivity() {
                             animation2.setRepeatMode(2)
                             dinoImageView.startAnimation(animation2)
                         }else{
-                            scratchMusuhImageView.visibility = View.VISIBLE
-                            val animation2 = TranslateAnimation(
-                                0.0f, 30.0f,
-                                0.0f, 0.0f
-                            )
-                            animation2.setDuration(150)  // animation duration
-                            animation2.setRepeatCount(1)  // animation repeat count
-                            animation2.setRepeatMode(2)
-                            enemyImageView.startAnimation(animation2)
+                            if(isGameRun) {
+                                scratchMusuhImageView.visibility = View.VISIBLE
+                                val animation2 = TranslateAnimation(
+                                    0.0f, 30.0f,
+                                    0.0f, 0.0f
+                                )
+                                animation2.setDuration(150)  // animation duration
+                                animation2.setRepeatCount(1)  // animation repeat count
+                                animation2.setRepeatMode(2)
+                                enemyImageView.startAnimation(animation2)
+                            }
                         }
 
                     }
@@ -707,7 +717,7 @@ class GameActivity: AppCompatActivity() {
                             enemyImageView.startAnimation(animation)
 
                             speakButton.visibility = View.GONE
-                            if(scoreLast< score.toString()){
+                            if(scoreLast.toInt() < score){
                                 Log.e("SCOREPUT","Masuk if")
                                 scoreLast = score.toString()
                                 putScore()
@@ -725,6 +735,8 @@ class GameActivity: AppCompatActivity() {
                             backHomeButton.visibility = View.VISIBLE
                             dinoImageView.visibility = View.INVISIBLE
                             enemyImageView.visibility = View.INVISIBLE
+                            scratchImageView.visibility = View.INVISIBLE
+                            scratchMusuhImageView.visibility = View.INVISIBLE
                         }
                     }
                     i = time

@@ -115,7 +115,7 @@ class Level2Activity: AppCompatActivity() {
     private var i: Int = 21
     private var time: Int = 21
     private var level:Int = 1
-    private var indexArrayKata: Int = 32
+    private var indexArrayKata: Int = 37
     private var score: Int = 0
 
     private var username: String = ""
@@ -135,7 +135,7 @@ class Level2Activity: AppCompatActivity() {
 
     private var arrKata: ArrayList<String> = arrayListOf("Daun Hijau", "Kayu Bakar", "Air Hujan", "Asap Motor", "Pohon Pinus", "Hutan Kota", "Laut Merah", "Tinggi Gunung", "Awan Gelap", "Langit Sore",
         "Tanah Kering", "Pupuk Organik", "Sungai Kotor", "Angin Segar", "Satwa Liar", "Limbah Pabrik", "Udara Bersih", "Alam Lestari", "Polusi Udara", "Ikan Laut", "Bambu Kuning",
-        "Bunga Mawar", "Ulat Sagu", "Akar Pohon", "Hutan Gundul", "Matahari Terbit", "Rumah Kaca", "Sepeda Lipat", "Bus Kota", "Kereta Api","Daun Hijau", "Kayu Bakar", "Satwa Liar")
+        "Bunga Mawar", "Ulat Sagu", "Akar Pohon", "Hutan Gundul", "Matahari Terbit", "Rumah Kaca", "Sepeda Lipat", "Bus Kota", "Kereta Api","Daun Hijau", "Kayu Bakar", "Satwa Liar","Angin Segar", "Satwa Liar", "Limbah Pabrik", "Udara Bersih", "Alam Lestari", "Polusi Udara", "Ikan Laut")
 
     private var subArrKata: ArrayList<String> = arrayListOf()
 
@@ -342,7 +342,7 @@ class Level2Activity: AppCompatActivity() {
             Log.e("NEXTLEVEL","Clicked!")
             if (level<3){
                 if(scoreLast.toInt() < score+300){
-                    scoreLast = score.toString()
+                    scoreLast = (score+300).toString()
                     putScore()
                 }
                 nextGameButton.visibility = View.INVISIBLE
@@ -373,6 +373,7 @@ class Level2Activity: AppCompatActivity() {
             backHomeButton.visibility = View.INVISIBLE
             scratchImageView.visibility = View.INVISIBLE
             scratchMusuhImageView.visibility = View.INVISIBLE
+            floodbgImageView.visibility = View.INVISIBLE
             var playerHeart = 3
             while(playerHeart>0){
                 openPlayerHeart(playerHeart)
@@ -388,7 +389,7 @@ class Level2Activity: AppCompatActivity() {
             life = 3
             isGameRun = true
             enemyHeart = 1
-            indexArrayKata = 32
+            indexArrayKata = 36
             dinoImageView.visibility = View.VISIBLE
             enemyImageView.visibility = View.VISIBLE
             kataKataTextView.visibility = View.VISIBLE
@@ -409,7 +410,7 @@ class Level2Activity: AppCompatActivity() {
 
         arrKata.addAll(listOf("Daun Hijau", "Kayu Bakar", "Air Hujan", "Asap Motor", "Pohon Pinus", "Hutan Kota", "Laut Merah", "Tinggi Gunung", "Awan Gelap", "Langit Sore",
             "Tanah Kering", "Pupuk Organik", "Sungai Kotor", "Angin Segar", "Satwa Liar", "Limbah Pabrik", "Udara Bersih", "Alam Lestari", "Polusi Udara", "Ikan Laut", "Bambu Kuning",
-            "Bunga Mawar", "Ulat Sagu", "Akar Pohon", "Hutan Gundul", "Matahari Terbit", "Rumah Kaca", "Sepeda Lipat", "Bus Kota", "Kereta Api","Daun Hijau", "Kayu Bakar", "Satwa Liar"))
+            "Bunga Mawar", "Ulat Sagu", "Akar Pohon", "Hutan Gundul", "Matahari Terbit", "Rumah Kaca", "Sepeda Lipat", "Bus Kota", "Kereta Api","Daun Hijau", "Kayu Bakar", "Satwa Liar","Angin Segar", "Satwa Liar", "Limbah Pabrik", "Udara Bersih", "Alam Lestari", "Polusi Udara", "Ikan Laut"))
 
     }
 
@@ -448,7 +449,6 @@ class Level2Activity: AppCompatActivity() {
         var playerHeart = 1
         val objRunnable = java.lang.Runnable {
             try {
-                floodbgImageView.visibility = View.INVISIBLE
                 var k = 3
                 while(k>=1){
                     runOnUiThread {
@@ -532,7 +532,7 @@ class Level2Activity: AppCompatActivity() {
                         i--
                     }
                     runOnUiThread {
-                        if(attack && i>0){
+                        if(attack && i>0 && countDownTextView.text != "0"){
                             score+=10
                             scoreTextView.setText(score.toString())
                             val animation = TranslateAnimation(
@@ -556,9 +556,11 @@ class Level2Activity: AppCompatActivity() {
                                     animation.setRepeatMode(2)
                                     dinoImageView.startAnimation(animation)
                                     enemyImageView.startAnimation(animation)
-                                    sleep(1000)
+
                                     kataKataTextView.visibility = View.VISIBLE
                                     nextGameButton.visibility = View.VISIBLE
+                                    scratchMusuhImageView.visibility = View.INVISIBLE
+                                    scratchImageView.visibility = View.INVISIBLE
                                     kataKataTextView.setText("Kamu Menang!")
                                     speakButton.visibility = View.GONE
                                     dinoImageView.visibility = View.INVISIBLE
@@ -575,16 +577,18 @@ class Level2Activity: AppCompatActivity() {
                                     animation.setRepeatMode(2)
                                     dinoImageView.startAnimation(animation)
                                     enemyImageView.startAnimation(animation)
-                                    sleep(1000)
+
                                     dinoImageView.visibility = View.INVISIBLE
                                     enemyImageView.visibility = View.INVISIBLE
+                                    scratchMusuhImageView.visibility = View.INVISIBLE
+                                    scratchImageView.visibility = View.INVISIBLE
                                     kataKataTextView.visibility = View.VISIBLE
                                     kataKataTextView.setText("Level 2 Telah Selesai!")
                                     level2Button.visibility = View.VISIBLE
                                     speakButton.visibility = View.GONE
                                     enemyImageView.visibility = View.GONE
                                     if(scoreLast.toInt() < score+300){
-                                        scoreLast = score.toString()
+                                        scoreLast = (score+300).toString()
                                         putScore()
                                     }
                                     setLevel(3)
@@ -629,15 +633,17 @@ class Level2Activity: AppCompatActivity() {
                             scratchImageView.visibility = View.VISIBLE
                             scratchImageView.startAnimation(animation)
                         }else{
-                            scratchMusuhImageView.visibility = View.VISIBLE
-                            val animation2 = TranslateAnimation(
-                                0.0f, 30.0f,
-                                0.0f, 0.0f
-                            )
-                            animation2.setDuration(150)  // animation duration
-                            animation2.setRepeatCount(1)  // animation repeat count
-                            animation2.setRepeatMode(2)
-                            enemyImageView.startAnimation(animation2)
+                            if(isGameRun) {
+                                scratchMusuhImageView.visibility = View.VISIBLE
+                                val animation2 = TranslateAnimation(
+                                    0.0f, 30.0f,
+                                    0.0f, 0.0f
+                                )
+                                animation2.setDuration(150)  // animation duration
+                                animation2.setRepeatCount(1)  // animation repeat count
+                                animation2.setRepeatMode(2)
+                                enemyImageView.startAnimation(animation2)
+                            }
                         }
                     }
                     sleep(1100)
@@ -665,7 +671,7 @@ class Level2Activity: AppCompatActivity() {
 
                             speakButton.visibility = View.GONE
 //                            score yang baru selalu dari 0 + skor yang baru didaatnya
-                            if(scoreLast < (300+score).toString()){
+                            if(scoreLast.toInt() < 300+score){
                                 Log.e("SCOREPUT","Masuk if")
                                 scoreLast = (300+score).toString()
                                 putScore()
@@ -683,6 +689,7 @@ class Level2Activity: AppCompatActivity() {
                             dinoImageView.visibility = View.INVISIBLE
                             enemyImageView.visibility = View.INVISIBLE
                             scratchImageView.visibility = View.INVISIBLE
+                            scratchMusuhImageView.visibility = View.INVISIBLE
                         }
                     }
                     i = time

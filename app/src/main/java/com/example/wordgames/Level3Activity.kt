@@ -104,7 +104,7 @@ class Level3Activity: AppCompatActivity() {
     private var i: Int = 26
     private var time: Int = 26
     private var level:Int = 1
-    private var indexArrayKata: Int = 32
+    private var indexArrayKata: Int = 37
     private var score: Int = 0
 
     private var username: String = ""
@@ -128,7 +128,7 @@ class Level3Activity: AppCompatActivity() {
     private var arrKata: ArrayList<String> = arrayListOf("Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur", "Rudi bakar sampah", "Kakak naik motor", "Paman tebang kayu", "Sungai tercemar limbah", "Bersepeda kurangi polusi", "Bensin merusak lingkungan", "Habiskan makanan tanpa sisa",
         "Nenek menyapu halaman", "Pak Agus mengolah sampah plastik", "Petani menggunakan pupuk organik","Sayuran itu tidak diberi pestisida", "Pemerintah mereboisasi hutan gundul","Setiap toko tidak menggunakan kantung plastik","Gunakan sedotan ramah lingkungan","Kita harus hemat air","Siska mematikan lampu pada siang hari", "Jidan menanam sayur di halaman rumah",
         "Fitri memisahkan jenis sampah","Daun kering dapat dijadikan pupuk organik", "Bahan kimia tidak baik untuk lingkungan", "Seluruh siswa menggunakan transportasi umum","Efek rumah kaca mengancam lingkungan", "Pak Yanto membersihkan solokan yang mampet","Generasi muda harus lestarikan alam","Banyak monyet menyerang rumah warga","Udara di desa sangat segar", "Udara di kota begitu panas dan sesak",
-        "Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur")
+        "Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur","Rudi bakar sampah", "Kakak naik motor", "Paman tebang kayu", "Sungai tercemar limbah","Daun kering dapat dijadikan pupuk organik", "Bahan kimia tidak baik untuk lingkungan", "Seluruh siswa menggunakan transportasi umum","Efek rumah kaca mengancam lingkungan", "Pak Yanto membersihkan solokan yang mampet")
 
     private var subArrKata: ArrayList<String> = arrayListOf()
 
@@ -363,7 +363,7 @@ class Level3Activity: AppCompatActivity() {
             life = 3
             isGameRun = true
             enemyHeart = 1
-            indexArrayKata = 32
+            indexArrayKata = 36
             dinoImageView.visibility = View.VISIBLE
             enemyImageView.visibility = View.VISIBLE
             kataKataTextView.visibility = View.VISIBLE
@@ -385,7 +385,8 @@ class Level3Activity: AppCompatActivity() {
         arrKata.addAll(listOf("Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur", "Rudi bakar sampah", "Kakak naik motor", "Paman tebang kayu", "Sungai tercemar limbah", "Bersepeda kurangi polusi", "Bensin merusak lingkungan", "Habiskan makanan tanpa sisa",
             "Nenek menyapu halaman", "Pak Agus mengolah sampah plastik", "Petani menggunakan pupuk organik","Sayuran itu tidak diberi pestisida", "Pemerintah mereboisasi hutan gundul","Setiap toko tidak menggunakan kantung plastik","Gunakan sedotan ramah lingkungan","Kita harus hemat air","Siska mematikan lampu pada siang hari", "Jidan menanam sayur di halaman rumah",
             "Fitri memisahkan jenis sampah","Daun kering dapat dijadikan pupuk organik", "Bahan kimia tidak baik untuk lingkungan", "Seluruh siswa menggunakan transportasi umum","Efek rumah kaca mengancam lingkungan", "Pak Yanto membersihkan solokan yang mampet","Generasi muda harus lestarikan alam","Banyak monyet menyerang rumah warga","Udara di desa sangat segar", "Udara di kota begitu panas dan sesak",
-            "Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur"))
+            "Ayah tanam pohon", "Ibu siram bunga", "Kakek panen sayur","Rudi bakar sampah", "Kakak naik motor", "Paman tebang kayu", "Sungai tercemar limbah","Daun kering dapat dijadikan pupuk organik", "Bahan kimia tidak baik untuk lingkungan", "Seluruh siswa menggunakan transportasi umum","Efek rumah kaca mengancam lingkungan", "Pak Yanto membersihkan solokan yang mampet"))
+
 
     }
 
@@ -499,7 +500,7 @@ class Level3Activity: AppCompatActivity() {
                         i--
                     }
                     runOnUiThread {
-                        if(attack && i>0){
+                        if(attack && i>0 && countDownTextView.text != "0"){
                             score+=10
                             scoreTextView.setText(score.toString())
                             val animation = TranslateAnimation(
@@ -523,9 +524,11 @@ class Level3Activity: AppCompatActivity() {
                                     animation.setRepeatMode(2)
                                     dinoImageView.startAnimation(animation)
                                     enemyImageView.startAnimation(animation)
-                                    sleep(1000)
+
                                     kataKataTextView.visibility = View.VISIBLE
                                     nextGameButton.visibility = View.VISIBLE
+                                    scratchMusuhImageView.visibility = View.INVISIBLE
+                                    flameImageView.visibility = View.INVISIBLE
                                     kataKataTextView.setText("Kamu Menang!")
                                     speakButton.visibility = View.GONE
                                     dinoImageView.visibility = View.INVISIBLE
@@ -542,9 +545,11 @@ class Level3Activity: AppCompatActivity() {
                                     animation.setRepeatMode(2)
                                     dinoImageView.startAnimation(animation)
                                     enemyImageView.startAnimation(animation)
-                                    sleep(1000)
+
                                     dinoImageView.visibility = View.INVISIBLE
                                     enemyImageView.visibility = View.INVISIBLE
+                                    scratchMusuhImageView.visibility = View.INVISIBLE
+                                    flameImageView.visibility = View.INVISIBLE
                                     kataKataTextView.visibility = View.VISIBLE
                                     kataKataTextView.setText("Level 3 Telah Selesai!")
                                     speakButton.visibility = View.GONE
@@ -596,15 +601,18 @@ class Level3Activity: AppCompatActivity() {
                             animation2.setRepeatMode(2)
                             enemyImageView.startAnimation(animation2)
                         }else{
-                            flameImageView.visibility = View.VISIBLE
-                            val animation2 = TranslateAnimation(
-                                0.0f, -30.0f,
-                                0.0f, 0.0f
-                            )
-                            animation2.setDuration(150)  // animation duration
-                            animation2.setRepeatCount(1)  // animation repeat count
-                            animation2.setRepeatMode(2)
-                            dinoImageView.startAnimation(animation2)
+                            if(isGameRun) {
+                                flameImageView.visibility = View.VISIBLE
+                                val animation2 = TranslateAnimation(
+                                    0.0f, -30.0f,
+                                    0.0f, 0.0f
+                                )
+                                animation2.setDuration(150)  // animation duration
+                                animation2.setRepeatCount(1)  // animation repeat count
+                                animation2.setRepeatMode(2)
+                                dinoImageView.startAnimation(animation2)
+                            }
+
                         }
                     }
                     sleep(1100)
@@ -640,7 +648,7 @@ class Level3Activity: AppCompatActivity() {
                             enemyImageView.startAnimation(animation)
 
                         }
-                        sleep(2100)
+                        sleep(2000)
                         runOnUiThread {
                             kataKataTextView.visibility = View.INVISIBLE
                             tryAgainButton.visibility = View.VISIBLE
@@ -648,6 +656,7 @@ class Level3Activity: AppCompatActivity() {
                             dinoImageView.visibility = View.INVISIBLE
                             enemyImageView.visibility = View.INVISIBLE
                             flameImageView.visibility = View.INVISIBLE
+                            scratchMusuhImageView.visibility = View.INVISIBLE
                         }
                     }
                     i = time
