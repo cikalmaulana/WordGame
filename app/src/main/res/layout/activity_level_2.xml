@@ -29,7 +29,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@color/primary"
             android:padding="3dp"
-            android:text="10"
+            android:text=""
             android:textSize="40dp" />
 
         <TextView
@@ -291,7 +291,7 @@
                     android:id="@+id/kataKataTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Play"
+                    android:text=""
                     android:layout_gravity="center_horizontal"
                     android:textSize="30dp"
                     android:background="@color/primary"
@@ -414,6 +414,21 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/trashmonsster"
                 android:layout_marginTop="20dp"/>
+
+            <ImageView
+                android:id="@+id/scratchMusuhImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:adjustViewBounds="true"
+                android:maxWidth="80dp"
+                android:maxHeight="150dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/scratchmusuh"
+                android:layout_marginTop="70dp"
+                android:layout_marginRight="40dp"
+                android:layout_alignParentRight="true"
+                android:visibility="invisible"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"

@@ -49,6 +49,7 @@ class Level3Activity: AppCompatActivity() {
     lateinit var dinoImageView: ImageView
     lateinit var enemyImageView: ImageView
     lateinit var flamebgImageView: ImageView
+    lateinit var scratchMusuhImageView: ImageView
 
     lateinit var enemyHeart1: ImageView
     lateinit var enemyHeart2: ImageView
@@ -64,13 +65,44 @@ class Level3Activity: AppCompatActivity() {
 
     lateinit var sound: MediaPlayer
 
+    lateinit var kata1: MediaPlayer
+    lateinit var kata2: MediaPlayer
+    lateinit var kata3: MediaPlayer
+    lateinit var kata4: MediaPlayer
+    lateinit var kata5: MediaPlayer
+    lateinit var kata6: MediaPlayer
+    lateinit var kata7: MediaPlayer
+    lateinit var kata8: MediaPlayer
+    lateinit var kata9: MediaPlayer
+    lateinit var kata10: MediaPlayer
+    lateinit var kata11: MediaPlayer
+    lateinit var kata12: MediaPlayer
+    lateinit var kata13: MediaPlayer
+    lateinit var kata14: MediaPlayer
+    lateinit var kata15: MediaPlayer
+    lateinit var kata16: MediaPlayer
+    lateinit var kata17: MediaPlayer
+    lateinit var kata18: MediaPlayer
+    lateinit var kata19: MediaPlayer
+    lateinit var kata20: MediaPlayer
+    lateinit var kata21: MediaPlayer
+    lateinit var kata22: MediaPlayer
+    lateinit var kata23: MediaPlayer
+    lateinit var kata24: MediaPlayer
+    lateinit var kata25: MediaPlayer
+    lateinit var kata26: MediaPlayer
+    lateinit var kata27: MediaPlayer
+    lateinit var kata28: MediaPlayer
+    lateinit var kata29: MediaPlayer
+    lateinit var kata30: MediaPlayer
+
     private var life: Int = 3
     private var isGameRun: Boolean = true
     private var attack: Boolean = false
     private var wrongAnswer: Boolean = false
     private var enemyHeart: Int = 1
-    private var i: Int = 21
-    private var time: Int = 21
+    private var i: Int = 26
+    private var time: Int = 26
     private var level:Int = 1
     private var indexArrayKata: Int = 32
     private var score: Int = 0
@@ -80,9 +112,11 @@ class Level3Activity: AppCompatActivity() {
     private var levelLast:String =""
     private var nama:String=""
     private var kataKeluar: String = ""
+    private var randomIndex: Int = 0
 
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
+    private var kataSound:HashMap<String,MediaPlayer> = hashMapOf<String,MediaPlayer>()
 
     lateinit var speakButton: Button
 
@@ -117,6 +151,7 @@ class Level3Activity: AppCompatActivity() {
         enemyImageView = findViewById(R.id.enemyImageView)
         flameImageView = findViewById(R.id.flameImageView)
         flamebgImageView = findViewById(R.id.flamebgImageView)
+        scratchMusuhImageView = findViewById(R.id.scratchMusuhImageView)
 
         playerHeart1 = findViewById(R.id.playerHeart1)
         playerHeart2 = findViewById(R.id.playerHeart2)
@@ -134,6 +169,37 @@ class Level3Activity: AppCompatActivity() {
         enemyHeart9 = findViewById(R.id.enemyHeart9)
         enemyHeart10 = findViewById(R.id.enemyHeart10)
 
+        kata1 = MediaPlayer.create(this,R.raw.kalimat1)
+        kata2 = MediaPlayer.create(this,R.raw.kalimat2)
+        kata3 = MediaPlayer.create(this,R.raw.kalimat3)
+        kata4 = MediaPlayer.create(this,R.raw.kalimat4)
+        kata5 = MediaPlayer.create(this,R.raw.kalimat5)
+        kata6 = MediaPlayer.create(this,R.raw.kalimat6)
+        kata7 = MediaPlayer.create(this,R.raw.kalimat7)
+        kata8 = MediaPlayer.create(this,R.raw.kalimat8)
+        kata9 = MediaPlayer.create(this,R.raw.kalimat9)
+        kata10 = MediaPlayer.create(this,R.raw.kalimat10)
+        kata11 = MediaPlayer.create(this,R.raw.kalimat11)
+        kata12 = MediaPlayer.create(this,R.raw.kalimat12)
+        kata13 = MediaPlayer.create(this,R.raw.kalimat13)
+        kata14 = MediaPlayer.create(this,R.raw.kalimat14)
+        kata15 = MediaPlayer.create(this,R.raw.kalimat15)
+        kata16 = MediaPlayer.create(this,R.raw.kalimat16)
+        kata17 = MediaPlayer.create(this,R.raw.kalimat17)
+        kata18 = MediaPlayer.create(this,R.raw.kalimat18)
+        kata19 = MediaPlayer.create(this,R.raw.kalimat19)
+        kata20 = MediaPlayer.create(this,R.raw.kalimat20)
+        kata21 = MediaPlayer.create(this,R.raw.kalimat21)
+        kata22 = MediaPlayer.create(this,R.raw.kalimat22)
+        kata23 = MediaPlayer.create(this,R.raw.kalimat23)
+        kata24 = MediaPlayer.create(this,R.raw.kalimat24)
+        kata25 = MediaPlayer.create(this,R.raw.kalimat25)
+        kata26 = MediaPlayer.create(this,R.raw.kalimat26)
+        kata27 = MediaPlayer.create(this,R.raw.kalimat27)
+        kata28 = MediaPlayer.create(this,R.raw.kalimat28)
+        kata29 = MediaPlayer.create(this,R.raw.kalimat29)
+        kata30 = MediaPlayer.create(this,R.raw.kalimat30)
+
         enemyHearts = mapOf(
             "enemyHeart1" to enemyHeart1,
             "enemyHeart2" to enemyHeart2,
@@ -150,6 +216,39 @@ class Level3Activity: AppCompatActivity() {
             "playerHeart1" to playerHeart1,
             "playerHeart2" to playerHeart2,
             "playerHeart3" to playerHeart3,
+        )
+
+        kataSound = hashMapOf(
+            "Ayah tanam pohon" to kata1,
+            "Ibu siram bunga" to kata2,
+            "Kakek panen sayur" to kata3,
+            "Rudi bakar sampah" to kata4,
+            "Kakak naik motor" to kata5,
+            "Paman tebang kayu" to kata6,
+            "Sungai tercemar limbah" to kata7,
+            "Bersepeda kurangi polusi" to kata8,
+            "Bensin merusak lingkungan" to kata9,
+            "Habiskan makanan tanpa sisa" to kata10,
+            "Nenek menyapu halaman" to kata11,
+            "Pak Agus mengolah sampah plastik" to kata12,
+            "Petani menggunakan pupuk organik" to kata13,
+            "Sayuran itu tidak diberi pestisida" to kata14,
+            "Pemerintah mereboisasi hutan gundul" to kata15,
+            "Setiap toko tidak menggunakan kantung plastik" to kata16,
+            "Gunakan sedotan ramah lingkungan" to kata17,
+            "Kita harus hemat air" to kata18,
+            "Siska mematikan lampu pada siang hari" to kata19,
+            "Jidan menanam sayur di halaman rumah" to kata20,
+            "Fitri memisahkan jenis sampah" to kata21,
+            "Daun kering dapat dijadikan pupuk organik" to kata22,
+            "Bahan kimia tidak baik untuk lingkungan" to kata23,
+            "Seluruh siswa menggunakan transportasi umum" to kata24,
+            "Efek rumah kaca mengancam lingkungan" to kata25,
+            "Pak Yanto membersihkan solokan yang mampet" to kata26,
+            "Generasi muda harus lestarikan alam" to kata27,
+            "Banyak monyet menyerang rumah warga" to kata28,
+            "Udara di desa sangat segar" to kata29,
+            "Udara di kota begitu panas dan sesak" to kata30
         )
 
         //Ambil level dari activity sebelumnya, masukin ke sini
@@ -216,6 +315,10 @@ class Level3Activity: AppCompatActivity() {
         nextGameButton.setOnClickListener {
             Log.e("NEXTLEVEL","Clicked!")
             if (level<3){
+                if(scoreLast.toInt() < score+600){
+                    scoreLast = score.toString()
+                    putScore()
+                }
                 nextGameButton.visibility = View.INVISIBLE
                 kataKataTextView.visibility = View.VISIBLE
                 speakButton.visibility = View.GONE
@@ -244,7 +347,7 @@ class Level3Activity: AppCompatActivity() {
             backHomeButton.visibility = View.INVISIBLE
             flamebgImageView.visibility = View.INVISIBLE
             flameImageView.visibility = View.INVISIBLE
-
+            scratchMusuhImageView.visibility = View.INVISIBLE
             var playerHeart = 3
             while(playerHeart>0){
                 openPlayerHeart(playerHeart)
@@ -339,6 +442,7 @@ class Level3Activity: AppCompatActivity() {
                 while(life>0 && isGameRun){
                     runOnUiThread{
                         flameImageView.visibility = View.INVISIBLE
+                        scratchMusuhImageView.visibility = View.INVISIBLE
                         val animation = TranslateAnimation(
                             0.0f, 0.0f,
                             0.0f, 30.0f
@@ -351,8 +455,10 @@ class Level3Activity: AppCompatActivity() {
 
                         Log.i("RANDI",indexArrayKata.toString())
                         Log.i("PJGARRAY",arrKata.size.toString())
-                        val randomIndex = Random.nextInt(1,indexArrayKata)
+                        randomIndex = Random.nextInt(1,indexArrayKata)
                         val kata = arrKata.get(randomIndex)
+                        Log.e("KALIMATSAATINI", "$kata")
+                        val x =  kataSound.get("$kata")
                         kataKeluar = kata
                         Log.i("KATASAATINI","Kata Sekarang Adalah $kata")
                         arrKata.removeAt(randomIndex)
@@ -360,9 +466,9 @@ class Level3Activity: AppCompatActivity() {
                         kataKataTextView.visibility = View.GONE
                         speakButton.visibility = View.VISIBLE
                         speakButton.setOnClickListener {
-                            //get text from edit text
-                            val toSpeak = kata
-                            mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+                            if (x != null) {
+                                x.start()
+                            }
                         }
                         indexArrayKata--
                     }
@@ -443,8 +549,11 @@ class Level3Activity: AppCompatActivity() {
                                     kataKataTextView.setText("Level 3 Telah Selesai!")
                                     speakButton.visibility = View.GONE
                                     enemyImageView.visibility = View.GONE
-                                    scoreLast = score.toString()
-                                    putScore()
+                                    if(scoreLast.toInt() < score+600){
+                                        scoreLast = score.toString()
+                                        putScore()
+                                    }
+
                                 }
                             }else{
                                 closeEnemyHeart(enemyHeart)
@@ -460,11 +569,11 @@ class Level3Activity: AppCompatActivity() {
                         else {
                             life--
 //                            countDownTextView.setText("Aww!")
-                            flameImageView.visibility = View.VISIBLE
+//                            flameImageView.visibility = View.VISIBLE
                             closePlayerHeart(playerHeart)
                             playerHeart++
                             val animation = TranslateAnimation(
-                                0.0f, -300.0f,
+                                0.0f, -30.0f,
                                 0.0f, 0.0f
                             )
                             animation.setDuration(1000)  // animation duration
@@ -474,7 +583,31 @@ class Level3Activity: AppCompatActivity() {
 //                            enemyImageView.startAnimation(animation)
                         }
                     }
-                    sleep(2000)
+                    sleep(1000)
+                    runOnUiThread {
+                        if(attack){
+                            scratchMusuhImageView.visibility = View.VISIBLE
+                            val animation2 = TranslateAnimation(
+                                0.0f, 30.0f,
+                                0.0f, 0.0f
+                            )
+                            animation2.setDuration(150)  // animation duration
+                            animation2.setRepeatCount(1)  // animation repeat count
+                            animation2.setRepeatMode(2)
+                            enemyImageView.startAnimation(animation2)
+                        }else{
+                            flameImageView.visibility = View.VISIBLE
+                            val animation2 = TranslateAnimation(
+                                0.0f, -30.0f,
+                                0.0f, 0.0f
+                            )
+                            animation2.setDuration(150)  // animation duration
+                            animation2.setRepeatCount(1)  // animation repeat count
+                            animation2.setRepeatMode(2)
+                            dinoImageView.startAnimation(animation2)
+                        }
+                    }
+                    sleep(1100)
                     attack = false
                     Log.e("I", "I Sekarang $i")
                     if(life == 1){

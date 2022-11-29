@@ -66,16 +66,54 @@ class Level2Activity: AppCompatActivity() {
     lateinit var enemyHeart10: ImageView
 
     lateinit var scratchImageView: ImageView
+    lateinit var scratchMusuhImageView: ImageView
 
     lateinit var sound: MediaPlayer
+
+    lateinit var kata1: MediaPlayer
+    lateinit var kata2: MediaPlayer
+    lateinit var kata3: MediaPlayer
+    lateinit var kata4: MediaPlayer
+    lateinit var kata5: MediaPlayer
+    lateinit var kata6: MediaPlayer
+    lateinit var kata7: MediaPlayer
+    lateinit var kata8: MediaPlayer
+    lateinit var kata9: MediaPlayer
+    lateinit var kata10: MediaPlayer
+    lateinit var kata11: MediaPlayer
+    lateinit var kata12: MediaPlayer
+    lateinit var kata13: MediaPlayer
+    lateinit var kata14: MediaPlayer
+    lateinit var kata15: MediaPlayer
+    lateinit var kata16: MediaPlayer
+    lateinit var kata17: MediaPlayer
+    lateinit var kata18: MediaPlayer
+    lateinit var kata19: MediaPlayer
+    lateinit var kata20: MediaPlayer
+    lateinit var kata21: MediaPlayer
+    lateinit var kata22: MediaPlayer
+    lateinit var kata23: MediaPlayer
+    lateinit var kata24: MediaPlayer
+    lateinit var kata25: MediaPlayer
+    lateinit var kata26: MediaPlayer
+    lateinit var kata27: MediaPlayer
+    lateinit var kata28: MediaPlayer
+    lateinit var kata29: MediaPlayer
+    lateinit var kata30: MediaPlayer
+    lateinit var kata31: MediaPlayer
+    lateinit var kata32: MediaPlayer
+    lateinit var kata33: MediaPlayer
+    lateinit var kata34: MediaPlayer
+    lateinit var kata35: MediaPlayer
+    lateinit var kata36: MediaPlayer
 
     private var life: Int = 3
     private var isGameRun: Boolean = true
     private var attack: Boolean = false
     private var wrongAnswer: Boolean = false
     private var enemyHeart: Int = 1
-    private var i: Int = 16
-    private var time: Int = 16
+    private var i: Int = 21
+    private var time: Int = 21
     private var level:Int = 1
     private var indexArrayKata: Int = 32
     private var score: Int = 0
@@ -85,9 +123,11 @@ class Level2Activity: AppCompatActivity() {
     private var levelLast:String =""
     private var nama:String=""
     private var kataKeluar: String = ""
+    private var randomIndex: Int = 0
 
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
+    private var kataSound:HashMap<String,MediaPlayer> = hashMapOf<String,MediaPlayer>()
 
     private var arrKataTemplate: ArrayList<String> = arrayListOf("Daun Hijau", "Kayu Bakar", "Air Hujan", "Asap Motor", "Pohon Pinus", "Hutan Kota", "Laut Merah", "Tinggi Gunung", "Awan Gelap", "Langit Sore",
                                 "Tanah Kering", "Pupuk Organik", "Sungai Kotor", "Angin Segar", "Satwa Liar", "Limbah Pabrik", "Udara Bersih", "Alam Lestari", "Polusi Udara", "Ikan Laut", "Bambu Kuning",
@@ -118,6 +158,7 @@ class Level2Activity: AppCompatActivity() {
         dinoImageView = findViewById(R.id.dinoImageView)
         enemyImageView = findViewById(R.id.enemyImageView)
         scratchImageView = findViewById(R.id.scratchImageView)
+        scratchMusuhImageView = findViewById(R.id.scratchMusuhImageView)
         floodbgImageView = findViewById(R.id.floodbgImageView)
 
         playerHeart1 = findViewById(R.id.playerHeart1)
@@ -135,6 +176,43 @@ class Level2Activity: AppCompatActivity() {
         enemyHeart8 = findViewById(R.id.enemyHeart8)
         enemyHeart9 = findViewById(R.id.enemyHeart9)
         enemyHeart10 = findViewById(R.id.enemyHeart10)
+2
+        kata1 = MediaPlayer.create(this,R.raw.frasa1)
+        kata2 = MediaPlayer.create(this,R.raw.frasa2)
+        kata3 = MediaPlayer.create(this,R.raw.frasa3)
+        kata4 = MediaPlayer.create(this,R.raw.frasa4)
+        kata5 = MediaPlayer.create(this,R.raw.frasa5)
+        kata6 = MediaPlayer.create(this,R.raw.frasa6)
+        kata7 = MediaPlayer.create(this,R.raw.frasa7)
+        kata8 = MediaPlayer.create(this,R.raw.frasa8)
+        kata9 = MediaPlayer.create(this,R.raw.frasa9)
+        kata10 = MediaPlayer.create(this,R.raw.frasa10)
+        kata11 = MediaPlayer.create(this,R.raw.frasa11)
+        kata12 = MediaPlayer.create(this,R.raw.frasa12)
+        kata13 = MediaPlayer.create(this,R.raw.frasa13)
+        kata14 = MediaPlayer.create(this,R.raw.frasa14)
+        kata15 = MediaPlayer.create(this,R.raw.frasa15)
+        kata16 = MediaPlayer.create(this,R.raw.frasa16)
+        kata17 = MediaPlayer.create(this,R.raw.frasa17)
+        kata18 = MediaPlayer.create(this,R.raw.frasa18)
+        kata19 = MediaPlayer.create(this,R.raw.frasa19)
+        kata20 = MediaPlayer.create(this,R.raw.frasa20)
+        kata21 = MediaPlayer.create(this,R.raw.frasa21)
+        kata22 = MediaPlayer.create(this,R.raw.frasa22)
+        kata23 = MediaPlayer.create(this,R.raw.frasa23)
+        kata24 = MediaPlayer.create(this,R.raw.frasa24)
+        kata25 = MediaPlayer.create(this,R.raw.frasa25)
+        kata26 = MediaPlayer.create(this,R.raw.frasa26)
+        kata27 = MediaPlayer.create(this,R.raw.frasa27)
+        kata28 = MediaPlayer.create(this,R.raw.frasa28)
+        kata29 = MediaPlayer.create(this,R.raw.frasa29)
+        kata30 = MediaPlayer.create(this,R.raw.frasa30)
+        kata31 = MediaPlayer.create(this,R.raw.frasa1)
+        kata32 = MediaPlayer.create(this,R.raw.frasa2)
+        kata33 = MediaPlayer.create(this,R.raw.frasa15)
+        kata34 = MediaPlayer.create(this,R.raw.kata34)
+        kata35 = MediaPlayer.create(this,R.raw.kata35)
+        kata36 = MediaPlayer.create(this,R.raw.kata36)
 
         enemyHearts = mapOf(
             "enemyHeart1" to enemyHeart1,
@@ -152,6 +230,39 @@ class Level2Activity: AppCompatActivity() {
             "playerHeart1" to playerHeart1,
             "playerHeart2" to playerHeart2,
             "playerHeart3" to playerHeart3,
+        )
+
+        kataSound = hashMapOf(
+            "Daun Hijau" to kata1,
+            "Kayu Bakar" to kata2,
+            "Air Hujan" to kata3,
+            "Asap Motor" to kata4,
+            "Pohon Pinus" to kata5,
+            "Hutan Kota" to kata6,
+            "Laut Merah" to kata7,
+            "Tinggi Gunung" to kata8,
+            "Awan Gelap" to kata9,
+            "Langit Sore" to kata10,
+            "Tanah Kering" to kata11,
+            "Pupuk Organik" to kata12,
+            "Sungai Kotor" to kata13,
+            "Angin Segar" to kata14,
+            "Satwa Liar" to kata15,
+            "Limbah Pabrik" to kata16,
+            "Udara Bersih" to kata17,
+            "Alam Lestari" to kata18,
+            "Polusi Udara" to kata19,
+            "Ikan Laut" to kata20,
+            "Bambu Kuning" to kata21,
+            "Bunga Mawar" to kata22,
+            "Ulat Sagu" to kata23,
+            "Akar Pohon" to kata24,
+            "Hutan Gundul" to kata25,
+            "Matahari Terbit" to kata26,
+            "Rumah Kaca" to kata27,
+            "Sepeda Lipat" to kata28,
+            "Bus Kota" to kata29,
+            "Kereta Api" to kata30
         )
 
         //Ambil level dari activity sebelumnya, masukin ke sini
@@ -230,6 +341,10 @@ class Level2Activity: AppCompatActivity() {
         nextGameButton.setOnClickListener {
             Log.e("NEXTLEVEL","Clicked!")
             if (level<3){
+                if(scoreLast.toInt() < score+300){
+                    scoreLast = score.toString()
+                    putScore()
+                }
                 nextGameButton.visibility = View.INVISIBLE
                 kataKataTextView.visibility = View.VISIBLE
                 speakButton.visibility = View.GONE
@@ -256,6 +371,8 @@ class Level2Activity: AppCompatActivity() {
             Log.e("TRYAGAIN","Clicked!")
             tryAgainButton.visibility = View.INVISIBLE
             backHomeButton.visibility = View.INVISIBLE
+            scratchImageView.visibility = View.INVISIBLE
+            scratchMusuhImageView.visibility = View.INVISIBLE
             var playerHeart = 3
             while(playerHeart>0){
                 openPlayerHeart(playerHeart)
@@ -349,6 +466,7 @@ class Level2Activity: AppCompatActivity() {
                 sleep(1000)
                 while(life>0 && isGameRun){
                     scratchImageView.visibility = View.INVISIBLE
+                    scratchMusuhImageView.visibility = View.INVISIBLE
                     runOnUiThread{
                         val animation = TranslateAnimation(
                             0.0f, 0.0f,
@@ -371,8 +489,9 @@ class Level2Activity: AppCompatActivity() {
 
                         Log.i("RANDI",indexArrayKata.toString())
                         Log.i("PJGARRAY",arrKata.size.toString())
-                        val randomIndex = Random.nextInt(1,indexArrayKata)
+                        randomIndex = Random.nextInt(1,indexArrayKata)
                         val kata = arrKata.get(randomIndex)
+                        val x =  kataSound.get("$kata")
                         kataKeluar = kata
                         Log.i("KATASAATINI","Kata Sekarang Adalah $kata")
                         arrKata.removeAt(randomIndex)
@@ -380,9 +499,9 @@ class Level2Activity: AppCompatActivity() {
                         kataKataTextView.visibility = View.GONE
                         speakButton.visibility = View.VISIBLE
                         speakButton.setOnClickListener {
-                            //get text from edit text
-                            val toSpeak = kata
-                            mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+                            if (x != null) {
+                                x.start()
+                            }
                         }
                         indexArrayKata--
                     }
@@ -417,7 +536,7 @@ class Level2Activity: AppCompatActivity() {
                             score+=10
                             scoreTextView.setText(score.toString())
                             val animation = TranslateAnimation(
-                                0.0f, 300.0f,
+                                0.0f, 450.0f,
                                 0.0f, 0.0f
                             )
                             animation.setDuration(1000)  // animation duration
@@ -464,8 +583,11 @@ class Level2Activity: AppCompatActivity() {
                                     level2Button.visibility = View.VISIBLE
                                     speakButton.visibility = View.GONE
                                     enemyImageView.visibility = View.GONE
-                                    scoreLast = score.toString()
-                                    putScore()
+                                    if(scoreLast.toInt() < score+300){
+                                        scoreLast = score.toString()
+                                        putScore()
+                                    }
+                                    setLevel(3)
                                 }
                             }else{
                                 closeEnemyHeart(enemyHeart)
@@ -506,6 +628,16 @@ class Level2Activity: AppCompatActivity() {
                             animation.setRepeatMode(1)
                             scratchImageView.visibility = View.VISIBLE
                             scratchImageView.startAnimation(animation)
+                        }else{
+                            scratchMusuhImageView.visibility = View.VISIBLE
+                            val animation2 = TranslateAnimation(
+                                0.0f, 30.0f,
+                                0.0f, 0.0f
+                            )
+                            animation2.setDuration(150)  // animation duration
+                            animation2.setRepeatCount(1)  // animation repeat count
+                            animation2.setRepeatMode(2)
+                            enemyImageView.startAnimation(animation2)
                         }
                     }
                     sleep(1100)
@@ -593,6 +725,35 @@ class Level2Activity: AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    fun setLevel(levelBaru: Int){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https:bacabaca.online")
+            .client(getUnsafeOkHttpClient().build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        // Create Service
+        val service = retrofit.create(APIServicePut::class.java)
+
+        if(levelLast.toInt()<levelBaru){
+            levelLast = levelBaru.toString()
+            CoroutineScope(Dispatchers.IO).launch {
+                val response = service.updateLevel(username,levelBaru.toString())
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+
+                    } else {
+
+                        Log.e("RETROFIT_ERROR", response.code().toString())
+
+                    }
+                }
+            }
+        }
+    }
+
     fun putScore(){
         val retrofit = Retrofit.Builder()
             .baseUrl("https:bacabaca.online")

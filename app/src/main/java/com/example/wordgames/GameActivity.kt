@@ -54,6 +54,7 @@ class GameActivity: AppCompatActivity() {
     lateinit var enemyImageView: ImageView
     lateinit var cloudImageView: ImageView
     lateinit var scratchImageView: ImageView
+    lateinit var scratchMusuhImageView: ImageView
 
     lateinit var enemyHeart1: ImageView
     lateinit var enemyHeart2: ImageView
@@ -110,8 +111,8 @@ class GameActivity: AppCompatActivity() {
     private var attack: Boolean = false
     private var wrongAnswer: Boolean = false
     private var enemyHeart: Int = 1
-    private var i: Int = 11
-    private var time: Int = 11
+    private var i: Int = 16
+    private var time: Int = 16
     private var level:Int = 1
     private var indexArrayKata: Int = 31
     private var score: Int = 0
@@ -162,6 +163,7 @@ class GameActivity: AppCompatActivity() {
         enemyImageView = findViewById(R.id.enemyImageView)
         cloudImageView = findViewById(R.id.cloudImageView)
         scratchImageView = findViewById(R.id.scratchImageView)
+        scratchMusuhImageView = findViewById(R.id.scratchMusuhImageView)
 
         playerHeart1 = findViewById(R.id.playerHeart1)
         playerHeart2 = findViewById(R.id.playerHeart2)
@@ -353,6 +355,10 @@ class GameActivity: AppCompatActivity() {
         nextGameButton.setOnClickListener {
             Log.e("NEXTLEVEL","Clicked!")
             if (level<3){
+                if(scoreLast.toInt() < score){
+                    scoreLast = score.toString()
+                    putScore()
+                }
                 nextGameButton.visibility = View.INVISIBLE
                 kataKataTextView.visibility = View.VISIBLE
                 speakButton.visibility = View.GONE
@@ -381,6 +387,8 @@ class GameActivity: AppCompatActivity() {
             iSound = 0
             tryAgainButton.visibility = View.INVISIBLE
             backHomeButton.visibility = View.INVISIBLE
+            scratchImageView.visibility = View.INVISIBLE
+            scratchMusuhImageView.visibility = View.INVISIBLE
             var playerHeart = 3
             while(playerHeart>0){
                 openPlayerHeart(playerHeart)
@@ -510,6 +518,7 @@ class GameActivity: AppCompatActivity() {
                     Log.e("ISOUNDSKRG", iSound.toString())
                     runOnUiThread{
                         scratchImageView.visibility = View.INVISIBLE
+                        scratchMusuhImageView.visibility = View.INVISIBLE
                         val animation = TranslateAnimation(
                             0.0f, 0.0f,
                             0.0f, 30.0f
@@ -524,7 +533,6 @@ class GameActivity: AppCompatActivity() {
 //                        Log.i("PJGARRAY",arrKata.size.toString())
                         randomIndex = Random.nextInt(1,indexArrayKata)
                         val kata = arrKata.get(randomIndex)
-                        val indexSound = randomIndex+1
                         val x =  kataSound.get("$kata")
                         kataKeluar = kata
                         Log.e("KATASAATINI","Kata Sekarang Adalah $kata")
@@ -571,7 +579,7 @@ class GameActivity: AppCompatActivity() {
                             score+=10
                             scoreTextView.setText(score.toString())
                             val animation = TranslateAnimation(
-                                0.0f, 300.0f,
+                                0.0f, 350.0f,
                                 0.0f, 0.0f
                             )
                             animation.setDuration(1000)  // animation duration
@@ -618,9 +626,11 @@ class GameActivity: AppCompatActivity() {
                                     enemyImageView.visibility = View.GONE
                                     kataKataTextView.setText("Level 1 Telah Selesai!")
                                     level2Button.visibility = View.VISIBLE
-                                    scoreLast = score.toString()
-                                    setLevel(2);
-                                    putScore()
+                                    if(scoreLast.toInt() < score){
+                                        scoreLast = score.toString()
+                                        putScore()
+                                    }
+                                    setLevel(2)
                                 }
                             }else{
                                 closeEnemyHeart(enemyHeart)
@@ -653,7 +663,26 @@ class GameActivity: AppCompatActivity() {
                     runOnUiThread {
                         if(!attack){
                             scratchImageView.visibility = View.VISIBLE
+                            val animation2 = TranslateAnimation(
+                                0.0f, -30.0f,
+                                0.0f, 0.0f
+                            )
+                            animation2.setDuration(150)  // animation duration
+                            animation2.setRepeatCount(1)  // animation repeat count
+                            animation2.setRepeatMode(2)
+                            dinoImageView.startAnimation(animation2)
+                        }else{
+                            scratchMusuhImageView.visibility = View.VISIBLE
+                            val animation2 = TranslateAnimation(
+                                0.0f, 30.0f,
+                                0.0f, 0.0f
+                            )
+                            animation2.setDuration(150)  // animation duration
+                            animation2.setRepeatCount(1)  // animation repeat count
+                            animation2.setRepeatMode(2)
+                            enemyImageView.startAnimation(animation2)
                         }
+
                     }
                     sleep(1100)
                     attack = false
@@ -687,6 +716,7 @@ class GameActivity: AppCompatActivity() {
                             kataKataTextView.visibility = View.VISIBLE
                             kataKataTextView.setText("Kamu gagal!")
                             scratchImageView.visibility = View.INVISIBLE
+                            scratchMusuhImageView.visibility = View.INVISIBLE
                         }
                         sleep(2000)
                         runOnUiThread {

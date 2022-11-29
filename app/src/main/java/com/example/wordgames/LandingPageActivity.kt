@@ -16,9 +16,13 @@
 //        lateinit var bacabacaTextView1: TextView
         lateinit var bacabacaTextView2: TextView
 //        lateinit var quotesTextView: TextView
+        lateinit var mempersembahkan1TextView: TextView
+        lateinit var mempersembahkan2TextView: TextView
 
         private fun initComponent(){
             loginButton = findViewById(R.id.loginButton)
+            mempersembahkan1TextView = findViewById(R.id.mempersembahkan1TextView)
+            mempersembahkan2TextView = findViewById(R.id.mempersembahkan2TextView)
 //            bacabacaTextView1 = findViewById(R.id.bacabacaTextView1)
 //            bacabacaTextView2 = findViewById(R.id.bacabacaTextView2)
 //            quotesTextView = findViewById(R.id.quotesTextView)
@@ -38,6 +42,8 @@
 //            bacabacaTextView2.setTypeface(airfool)
 //            quotesTextView.setTypeface(montserrat)
             loginButton.setTypeface(playfull)
+            mempersembahkan1TextView.setTypeface(playfull)
+            mempersembahkan2TextView.setTypeface(playfull)
         }
 
         override fun onCreate(savedInstanceState: Bundle?) {
