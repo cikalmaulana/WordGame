@@ -1,8 +1,9 @@
 package com.example.wordgames
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.media.MediaPlayer
 import android.graphics.Typeface
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
@@ -10,25 +11,20 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.TranslateAnimation
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
-import java.lang.Thread.sleep
-import kotlin.collections.ArrayList
-import kotlin.random.Random
-
-import android.widget.Toast
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Thread.sleep
 import java.security.SecureRandom
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
 import java.util.*
 import javax.net.ssl.*
+import kotlin.collections.HashMap
+import kotlin.random.Random
 
 
 class GameActivity: AppCompatActivity() {
@@ -70,7 +66,44 @@ class GameActivity: AppCompatActivity() {
     lateinit var enemyHeart9: ImageView
     lateinit var enemyHeart10: ImageView
 
-    lateinit var sound: MediaPlayer
+//    lateinit var sound: MediaPlayer
+
+    lateinit var kata1: MediaPlayer
+    lateinit var kata2: MediaPlayer
+    lateinit var kata3: MediaPlayer
+    lateinit var kata4: MediaPlayer
+    lateinit var kata5: MediaPlayer
+    lateinit var kata6: MediaPlayer
+    lateinit var kata7: MediaPlayer
+    lateinit var kata8: MediaPlayer
+    lateinit var kata9: MediaPlayer
+    lateinit var kata10: MediaPlayer
+    lateinit var kata11: MediaPlayer
+    lateinit var kata12: MediaPlayer
+    lateinit var kata13: MediaPlayer
+    lateinit var kata14: MediaPlayer
+    lateinit var kata15: MediaPlayer
+    lateinit var kata16: MediaPlayer
+    lateinit var kata17: MediaPlayer
+    lateinit var kata18: MediaPlayer
+    lateinit var kata19: MediaPlayer
+    lateinit var kata20: MediaPlayer
+    lateinit var kata21: MediaPlayer
+    lateinit var kata22: MediaPlayer
+    lateinit var kata23: MediaPlayer
+    lateinit var kata24: MediaPlayer
+    lateinit var kata25: MediaPlayer
+    lateinit var kata26: MediaPlayer
+    lateinit var kata27: MediaPlayer
+    lateinit var kata28: MediaPlayer
+    lateinit var kata29: MediaPlayer
+    lateinit var kata30: MediaPlayer
+    lateinit var kata31: MediaPlayer
+    lateinit var kata32: MediaPlayer
+    lateinit var kata33: MediaPlayer
+    lateinit var kata34: MediaPlayer
+    lateinit var kata35: MediaPlayer
+    lateinit var kata36: MediaPlayer
 
     private var life: Int = 3
     private var isGameRun: Boolean = true
@@ -82,25 +115,29 @@ class GameActivity: AppCompatActivity() {
     private var level:Int = 1
     private var indexArrayKata: Int = 31
     private var score: Int = 0
+    private var iSound: Int = 0
 
     private var enemyHearts = mapOf<String,ImageView>()
     private var playerHearts = mapOf<String,ImageView>()
+    private var kataSound:HashMap<String,MediaPlayer> = hashMapOf<String,MediaPlayer>()
+    lateinit var randomIndexes: ArrayList<Int>
 
     private var username: String = ""
     private var scoreLast: String = ""
     private var levelLast:String =""
     private var nama:String=""
     private var kataKeluar: String = ""
+    private var randomIndex: Int = 0
 
     lateinit var speakButton: Button
 
     private var arrKataTemplate: ArrayList<String> = arrayListOf("Daun", "Kayu", "Air", "Pohon", "Hutan", "Laut", "Awan", "Langit", "Sungai",
         "Danau", "Laut", "Angin", "Udara", "Satwa", "Limbah", "Alam", "Polusi", "Ikan", "Bambu", "Bunga",
-        "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bus", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih")
+        "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bis", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih")
 
     private var arrKata: ArrayList<String> = arrayListOf("Daun", "Kayu", "Air", "Pohon", "Hutan", "Laut", "Awan", "Langit", "Sungai",
         "Danau", "Laut", "Angin", "Udara", "Satwa", "Limbah", "Alam", "Polusi", "Ikan", "Bambu", "Bunga",
-        "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bus", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih")
+        "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bis", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih")
 
 
     private var subArrKata: ArrayList<String> = arrayListOf()
@@ -142,6 +179,45 @@ class GameActivity: AppCompatActivity() {
         enemyHeart9 = findViewById(R.id.enemyHeart9)
         enemyHeart10 = findViewById(R.id.enemyHeart10)
 
+        kata1 = MediaPlayer.create(this,R.raw.kata1)
+        kata2 = MediaPlayer.create(this,R.raw.kata2)
+        kata3 = MediaPlayer.create(this,R.raw.kata3)
+        kata4 = MediaPlayer.create(this,R.raw.kata4)
+        kata5 = MediaPlayer.create(this,R.raw.kata5)
+        kata6 = MediaPlayer.create(this,R.raw.kata6)
+        kata7 = MediaPlayer.create(this,R.raw.kata7)
+        kata8 = MediaPlayer.create(this,R.raw.kata8)
+        kata9 = MediaPlayer.create(this,R.raw.kata9)
+        kata10 = MediaPlayer.create(this,R.raw.kata10)
+        kata11 = MediaPlayer.create(this,R.raw.kata11)
+        kata12 = MediaPlayer.create(this,R.raw.kata12)
+        kata13 = MediaPlayer.create(this,R.raw.kata13)
+        kata14 = MediaPlayer.create(this,R.raw.kata14)
+        kata15 = MediaPlayer.create(this,R.raw.kata15)
+        kata16 = MediaPlayer.create(this,R.raw.kata16)
+        kata17 = MediaPlayer.create(this,R.raw.kata17)
+        kata18 = MediaPlayer.create(this,R.raw.kata18)
+        kata19 = MediaPlayer.create(this,R.raw.kata19)
+        kata20 = MediaPlayer.create(this,R.raw.kata20)
+        kata21 = MediaPlayer.create(this,R.raw.kata21)
+        kata22 = MediaPlayer.create(this,R.raw.kata22)
+        kata23 = MediaPlayer.create(this,R.raw.kata23)
+        kata24 = MediaPlayer.create(this,R.raw.kata24)
+        kata25 = MediaPlayer.create(this,R.raw.kata25)
+        kata26 = MediaPlayer.create(this,R.raw.kata26)
+        kata27 = MediaPlayer.create(this,R.raw.kata27)
+        kata28 = MediaPlayer.create(this,R.raw.kata28)
+        kata29 = MediaPlayer.create(this,R.raw.kata29)
+        kata30 = MediaPlayer.create(this,R.raw.kata30)
+        kata31 = MediaPlayer.create(this,R.raw.kata31)
+        kata32 = MediaPlayer.create(this,R.raw.kata32)
+        kata33 = MediaPlayer.create(this,R.raw.kata33)
+        kata34 = MediaPlayer.create(this,R.raw.kata34)
+        kata35 = MediaPlayer.create(this,R.raw.kata35)
+        kata36 = MediaPlayer.create(this,R.raw.kata36)
+
+        randomIndexes = arrayListOf()
+
         enemyHearts = mapOf(
             "enemyHeart1" to enemyHeart1,
             "enemyHeart2" to enemyHeart2,
@@ -158,6 +234,45 @@ class GameActivity: AppCompatActivity() {
             "playerHeart1" to playerHeart1,
             "playerHeart2" to playerHeart2,
             "playerHeart3" to playerHeart3,
+        )
+
+        kataSound = hashMapOf(
+            "Daun" to kata1,
+            "Kayu" to kata2,
+            "Air" to kata3,
+            "Pohon" to kata4,
+            "Hutan" to kata5,
+            "Laut" to kata6,
+            "Awan" to kata7,
+            "Langit" to kata8,
+            "Sungai" to kata9,
+            "Danau" to kata10,
+            "Laut" to kata11,
+            "Angin" to kata12,
+            "Udara" to kata13,
+            "Satwa" to kata14,
+            "Limbah" to kata15,
+            "Alam" to kata16,
+            "Polusi" to kata17,
+            "Ikan" to kata18,
+            "Bambu" to kata19,
+            "Bunga" to kata20,
+            "Matahari" to kata21,
+            "Ulat" to kata22,
+            "Akar" to kata23,
+            "Rumah" to kata24,
+            "Sepeda" to kata25,
+            "Bis" to kata26,
+            "Kereta" to kata27,
+            "Api" to kata28,
+            "Mawar" to kata29,
+            "Motor" to kata30,
+            "Pupuk" to kata31,
+            "Pasir" to kata32,
+            "Tanah" to kata33,
+            "Sore" to kata34,
+            "Segar" to kata35,
+            "Bersih" to kata36,
         )
 
         //Ambil level dari activity sebelumnya, masukin ke sini
@@ -188,7 +303,7 @@ class GameActivity: AppCompatActivity() {
         speakButton.visibility = View.GONE
 
         level2Button.setOnClickListener {
-            sound.stop()
+//            sound.stop()
             val intent = Intent(this@GameActivity, Level2Activity::class.java)
             intent.putExtra("nama", nama)
             intent.putExtra("username", username)
@@ -199,7 +314,7 @@ class GameActivity: AppCompatActivity() {
         }
 
         backHomeButton.setOnClickListener {
-            sound.stop()
+//            sound.stop()
             backHomeButton.visibility = View.INVISIBLE
             val intent = Intent(this@GameActivity, HomeActivity::class.java)
             intent.putExtra("nama", nama)
@@ -263,6 +378,7 @@ class GameActivity: AppCompatActivity() {
 
         tryAgainButton.setOnClickListener{
             Log.e("TRYAGAIN","Score terakhir : ${scoreLast.toString()}, dan Score dalam gaee = $score")
+            iSound = 0
             tryAgainButton.visibility = View.INVISIBLE
             backHomeButton.visibility = View.INVISIBLE
             var playerHeart = 3
@@ -298,7 +414,7 @@ class GameActivity: AppCompatActivity() {
 
         arrKata.addAll(listOf("Daun", "Kayu", "Air", "Pohon", "Hutan", "Laut", "Awan", "Langit", "Sungai",
             "Danau", "Laut", "Angin", "Udara", "Satwa", "Limbah", "Alam", "Polusi", "Ikan", "Bambu", "Bunga",
-            "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bus", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih"))
+            "Matahari", "Ulat", "Akar", "Rumah", "Sepeda", "Bis", "Kereta", "Api", "Mawar", "Motor","Pupuk", "Pasir","Tanah", "Sore", "Segar", "Bersih"))
 
     }
 
@@ -313,28 +429,47 @@ class GameActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-
         speakButton = findViewById(R.id.speakButton)
-
+        Log.e("LOCALE", Arrays.toString(Locale.getAvailableLocales()))
         mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
+            val result: Int = mTTS.setLanguage(Locale("in","IN"))
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Toast.makeText(getBaseContext(), "Bahasa Indonesia Tidak didukung di perangkat mu!", Toast.LENGTH_LONG).show()
+            }
             Log.e("STATUS", status.toString())
+
             mTTS.setLanguage(Locale("id","ID"))
+            mTTS.language = Locale("id","ID")
             if (status != TextToSpeech.ERROR){
                 //if there is no error then set language
-                mTTS.language = Locale("id","ID")
+                mTTS.setLanguage(Locale("in","IN"))
+                mTTS.language = Locale("in","IN")
             }
         })
+        Log.e("LOCALE", Arrays.toString(Locale.getAvailableLocales()))
 
         getSupportActionBar()?.hide()
         initComponent()
         initListener()
-
-        sound = MediaPlayer.create(this,R.raw.soundtrack)
+//        val x = R.raw.soundtrack
+//        sound = MediaPlayer.create(this,x)
 //        sound.start()
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         gameStart()
+    }
+
+    private fun installVoiceData() {
+        val intent = Intent(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.setPackage("com.google.android.tts" /*replace with the package name of the target TTS engine*/)
+        try {
+            Log.e("INSTALL", "Installing voice data: " + intent.toUri(0))
+            startActivity(intent)
+        } catch (ex: ActivityNotFoundException) {
+            Log.e("INSTALL", "Failed to install TTS data, no acitivty found for $intent)")
+        }
     }
 
     override fun onPause() {
@@ -371,6 +506,8 @@ class GameActivity: AppCompatActivity() {
                 }
                 sleep(1000)
                 while(life>0 && isGameRun){
+                    iSound+=1
+                    Log.e("ISOUNDSKRG", iSound.toString())
                     runOnUiThread{
                         scratchImageView.visibility = View.INVISIBLE
                         val animation = TranslateAnimation(
@@ -385,21 +522,22 @@ class GameActivity: AppCompatActivity() {
 
 //                        Log.i("RANDI",indexArrayKata.toString())
 //                        Log.i("PJGARRAY",arrKata.size.toString())
-                        val randomIndex = Random.nextInt(1,indexArrayKata)
+                        randomIndex = Random.nextInt(1,indexArrayKata)
                         val kata = arrKata.get(randomIndex)
+                        val indexSound = randomIndex+1
+                        val x =  kataSound.get("$kata")
                         kataKeluar = kata
-//                        Log.i("KATASAATINI","Kata Sekarang Adalah $kata")
+                        Log.e("KATASAATINI","Kata Sekarang Adalah $kata")
+                        Log.e("RANDOMINDEX","Randomindex Sekarang Adalah $randomIndex")
                         arrKata.removeAt(randomIndex)
                         kataKataTextView.setText(kata)
                         kataKataTextView.visibility = View.GONE
                         speakButton.visibility = View.VISIBLE
                         speakButton.setOnClickListener {
-                            //get text from edit text
-                            val toSpeak = kata
-                                //if there is text in edit text
-                            mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+                            if (x != null) {
+                                x.start()
+                            }
                         }
-
                         indexArrayKata--
                     }
                     while(!attack && i>0) {
@@ -589,7 +727,7 @@ class GameActivity: AppCompatActivity() {
     }
 
     override fun onBackPressed(){
-        sound.stop()
+//        sound.stop()
         super.onBackPressed();
         val intent = Intent(this, HomeActivity::class.java)
         intent.putExtra("nama", nama)
