@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="20dp"
-            android:text="Kelalawar"
+            android:text="Kelelawar"
             android:textSize="22dp" />
 
     </RelativeLayout>
