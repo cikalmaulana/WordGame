@@ -7,6 +7,7 @@ import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class HomeActivity: AppCompatActivity() {
@@ -26,6 +27,8 @@ class HomeActivity: AppCompatActivity() {
     private var nama:String = ""
     private var score:String = ""
     private var level:String = ""
+
+    private var pressedTime: Long =0
 
     private fun initComponent(){
         charImageView = findViewById(R.id.charImageView)
@@ -109,5 +112,15 @@ class HomeActivity: AppCompatActivity() {
         initListener()
 
 
+    }
+
+    override fun onBackPressed(){
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        } else {
+            Toast.makeText(getBaseContext(), "Tekan kembali sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
     }
 }

@@ -7,14 +7,14 @@ import retrofit2.http.Query
 
 interface APIServiceGet {
     @Headers("Content-Type: application/json")
-    @GET("/blindApp/pg_score_player.php")
+    @GET("/pg_score_player.php")
     suspend fun getUser(@Query("usernamelogin") usernamelogin: String?): Response<ResponseBody>
 
     @Headers("Content-Type: application/json")
-    @GET("/blindApp/pg_score_player.php")
+    @GET("/pg_score_player.php")
     suspend fun getScore(@Query("usernamescore") usernamescore: String?): Response<ResponseBody>
 
     @Headers("Content-Type: application/json")
-    @GET("/blindApp/pg_score_player.php")
+    @GET("/pg_score_player.php")
     suspend fun getAllScore(): Response<ResponseBody>
 }

@@ -46,6 +46,7 @@ class RegisterActivity: AppCompatActivity() {
     lateinit var kelasTextView: TextView
     lateinit var usernameTextView: TextView
     lateinit var passwordTextView: TextView
+    lateinit var atauTextView:TextView
 
     private var isUsernameExist: Boolean = true
 
@@ -67,6 +68,7 @@ class RegisterActivity: AppCompatActivity() {
         kelasTextView = findViewById(R.id.kelasTextView)
         usernameTextView = findViewById(R.id.usernameTextView)
         passwordTextView = findViewById(R.id.passwordTextView)
+        atauTextView = findViewById(R.id.atauTextView)
     }
 
     private fun initListener(){
@@ -82,6 +84,7 @@ class RegisterActivity: AppCompatActivity() {
         kelasTextView.setTypeface(playfull)
         usernameTextView.setTypeface(playfull)
         passwordTextView.setTypeface(playfull)
+        atauTextView.setTypeface(playfull)
 
         loginButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -183,7 +186,7 @@ class RegisterActivity: AppCompatActivity() {
     fun cekUsername(){
         var res = true
         val retrofit = Retrofit.Builder()
-            .baseUrl("https:192.168.1.9")
+            .baseUrl("https:bacabaca.online")
             .client(getUnsafeOkHttpClient().build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -223,7 +226,7 @@ class RegisterActivity: AppCompatActivity() {
     fun registerScore(username:String){
 // Create Retrofit
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://192.168.1.9")
+            .baseUrl("https://bacabaca.online")
             .client(getUnsafeOkHttpClient().build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -262,7 +265,7 @@ class RegisterActivity: AppCompatActivity() {
 
         // Create Retrofit
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://192.168.1.9")
+            .baseUrl("https://bacabaca.online")
             .client(getUnsafeOkHttpClient().build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

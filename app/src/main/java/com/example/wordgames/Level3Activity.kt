@@ -560,7 +560,7 @@ class Level3Activity: AppCompatActivity() {
 
     fun putScore(){
         val retrofit = Retrofit.Builder()
-            .baseUrl("https:192.168.1.9")
+            .baseUrl("https:bacabaca.online")
             .client(getUnsafeOkHttpClient().build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

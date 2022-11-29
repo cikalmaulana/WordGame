@@ -35,6 +35,7 @@ class LoginActivity: AppCompatActivity() {
     lateinit var usernameTextView: TextView
     lateinit var passwordTextView: TextView
     lateinit var wrongPassTextView:TextView
+    lateinit var atauTextView:TextView
 
     lateinit var usernameEditText:EditText
     lateinit var passwordEditText: EditText
@@ -50,6 +51,7 @@ class LoginActivity: AppCompatActivity() {
         usernameEditText = findViewById(R.id.usernameEditText)
         passwordEditText = findViewById(R.id.passwordEditText)
         wrongPassTextView = findViewById(R.id.wrongPassTextView)
+        atauTextView = findViewById(R.id.atauTextView)
     }
 
     private fun initListener(){
@@ -59,16 +61,17 @@ class LoginActivity: AppCompatActivity() {
         usernameTextView.setTypeface(playfull)
         passwordTextView.setTypeface(playfull)
         wrongPassTextView.setTypeface(playfull)
+        atauTextView.setTypeface(playfull)
 
         loginButton.setOnClickListener {
 //            if(usernameEditText.getText() =="")
-//            checkLogin()
-//            Log.e("CORRECT",correctPassword.toString())
-//            if(correctPassword){
+            checkLogin()
+            Log.e("CORRECT",correctPassword.toString())
+            if(correctPassword){
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
-//            }
+            }
         }
 
         registerButton.setOnClickListener {
@@ -110,7 +113,7 @@ class LoginActivity: AppCompatActivity() {
 
     fun getScoreLevel(username:String, nama:String){
         val retrofit = Retrofit.Builder()
-            .baseUrl("https:192.168.1.9")
+            .baseUrl("https:bacabaca.online")
             .client(getUnsafeOkHttpClient().build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -164,7 +167,7 @@ class LoginActivity: AppCompatActivity() {
 
     fun checkLogin(){
         val retrofit = Retrofit.Builder()
-            .baseUrl("https:192.168.1.9")
+            .baseUrl("https:bacabaca.online")
             .client(getUnsafeOkHttpClient().build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

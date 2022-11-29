@@ -481,6 +481,7 @@ class GameActivity: AppCompatActivity() {
                                     kataKataTextView.setText("Level 1 Telah Selesai!")
                                     level2Button.visibility = View.VISIBLE
                                     scoreLast = score.toString()
+                                    setLevel(2);
                                     putScore()
                                 }
                             }else{
@@ -601,7 +602,7 @@ class GameActivity: AppCompatActivity() {
 
     fun putScore(){
         val retrofit = Retrofit.Builder()
-            .baseUrl("https:192.168.1.9")
+            .baseUrl("https:bacabaca.online")
             .client(getUnsafeOkHttpClient().build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -619,6 +620,34 @@ class GameActivity: AppCompatActivity() {
 
                     Log.e("RETROFIT_ERROR", response.code().toString())
 
+                }
+            }
+        }
+    }
+
+    fun setLevel(levelBaru: Int){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https:bacabaca.online")
+            .client(getUnsafeOkHttpClient().build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        // Create Service
+        val service = retrofit.create(APIServicePut::class.java)
+
+        if(levelLast.toInt()<levelBaru){
+            levelLast = levelBaru.toString()
+            CoroutineScope(Dispatchers.IO).launch {
+                val response = service.updateLevel(username,levelBaru.toString())
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+
+                    } else {
+
+                        Log.e("RETROFIT_ERROR", response.code().toString())
+
+                    }
                 }
             }
         }
